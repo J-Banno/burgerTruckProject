@@ -3,11 +3,24 @@ var express = require("express");
 var path = require("path");
 var logger = require("morgan");
 
+var app = express();
+
 //Routes
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
 
-var app = express();
+//Mongoose : connection db
+const mongoose = require("mongoose");
+mongoose.connect(`mongodb:${process.env.DB_HOST}`, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
+
+//Variable d'environement Dotenv
+const result = dotenv.config();
+if (result.error) {
+  throw result.error;
+}
 
 //Middleware
 var cors = require("./middleware/cors");
@@ -18,6 +31,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
 
+//Url
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
 
