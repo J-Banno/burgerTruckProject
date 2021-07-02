@@ -1,0 +1,8 @@
+.navbar {
+  background-color: black;
+}
+
+/* when the page is active */
+.current {
+  color: brown;
+}
