@@ -3,7 +3,7 @@ import "./home.css";
 import Navbar from "../../components/navbar/navbar";
 import Footer from "../../components/footer/footer";
 
-export default function Home() {
+function HomePage() {
   return (
     <div>
       <Navbar />
@@ -11,3 +11,4 @@ export default function Home() {
     </div>
   );
 }
+export default HomePage;
