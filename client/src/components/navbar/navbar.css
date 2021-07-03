@@ -4,5 +4,37 @@
 
 /* when the page is active */
 .current {
-  color: brown;
+  border-bottom: solid 2px purple;
+}
+
+.navbar {
+  height: 100px;
+  display: flex;
+}
+
+.navbarLogoContainer {
+  display: flex;
+  align-items: center;
+  margin-left: 20px;
+}
+.navbarLogo {
+  width: 250px;
+}
+.navbarLink {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 100%;
+  margin-right: 20px;
+}
+.navbarLinkContainer {
+  text-decoration: none;
+  margin: 20px;
+}
+.navbarLinkItem {
+  list-style-type: none;
+  color: white;
+  text-align: center;
+  margin-bottom: 5px 0px 5px 0px;
+  font-size: 24px;
 }

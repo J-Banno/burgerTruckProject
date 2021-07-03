@@ -6,19 +6,34 @@ import Logo from "../../assets/images/Logo.png";
 function Navbar() {
   return (
     <nav className="navbar">
-      <div className="navbar--logo-holder">
+      <div className="navbarLogoContainer">
         <img src={Logo} alt="logo" className="navbarLogo" />
       </div>
       <ul className="navbarLink">
-        <NavLink exact activeClassName="current" to="/Home">
+        <NavLink
+          exact
+          activeClassName="current"
+          to="/"
+          className="navbarLinkContainer"
+        >
           <li className="navbarLinkItem">Home</li>
         </NavLink>
 
-        <NavLink exact activeClassName="current" to="/Order">
+        <NavLink
+          exact
+          activeClassName="current"
+          to="/Order"
+          className="navbarLinkContainer"
+        >
           <li className="navbarLinkItem">Notre Carte</li>
         </NavLink>
 
-        <NavLink exact activeClassName="current" to="/Contact">
+        <NavLink
+          exact
+          activeClassName="current"
+          to="/Contact"
+          className="navbarLinkContainer"
+        >
           <li className="navbarLinkItem">Contact</li>
         </NavLink>
       </ul>
