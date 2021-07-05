@@ -1,12 +1,12 @@
 .navbar {
-  height: 8vh;
+  height: 10vh;
   display: flex;
-  background-color: black;
+  background-color: #080c12;
 }
 
 /* when the page is active */
 .current {
-  border-bottom: solid 2px purple;
+  border-bottom: solid 2px #e4a619;
 }
 .current > li {
   font-size: 24px;
@@ -16,7 +16,7 @@
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  margin-left: 20px;
+  margin-left: 25px;
 }
 .navbarLogo {
   width: 250px;
@@ -26,7 +26,6 @@
   align-items: center;
   justify-content: flex-end;
   width: 100%;
-  margin-right: 20px;
 }
 .navbarLinkContainer {
   text-decoration: none;
@@ -35,18 +34,119 @@
 
 .navbarLinkItem {
   list-style-type: none;
-  color: white;
+  color: #f9fdfb;
   text-align: center;
   margin-bottom: 5px 0px 5px 0px;
   font-size: 20px;
   font-family: "Michroma";
 }
 .navbarCartContainer {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-right: 20px;
+  border-bottom: none;
 }
 .navbarCart {
+  display: block;
   width: 25px;
+}
+.navbarBurger {
+  width: 40px;
+  height: 40px;
+  background: transparent;
+  border: none;
+  color: inherit;
+}
+/*************
+Medias Queries
+**************/
+
+@media screen and (max-width: 1050px) {
+  .navbarLinkItem {
+    margin-bottom: 5px 0px 5px 0px;
+    font-size: 12px;
+  }
+  .current > li {
+    font-size: 16px;
+  }
+  .navbarLinkContainer {
+    margin: 15px;
+  }
+
+  .navbarLogo {
+    width: 200px;
+  }
+  .navbarCart {
+    width: 20px;
+  }
+}
+
+@media screen and (max-width: 750px) {
+  .navbarLink {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    right: -100vw;
+    bottom: 0;
+    height: 100vh;
+    padding: 5px;
+    background: #080c12;
+    transition: all 0.8s ease-in-out;
+  }
+  .navbarCart {
+    width: 70px;
+  }
+  .showNav .navbarLink {
+    right: 0;
+    width: 100vw;
+  }
+  .navbarLinkItem {
+    display: block;
+    padding: 10px;
+    font-size: 20px;
+  }
+  .current > li {
+    font-size: 26px;
+  }
+  .navbarBurger {
+    display: block;
+    position: fixed;
+    top: 5px;
+    right: 30px;
+  }
+  .navbarBurger:hover {
+    cursor: pointer;
+  }
+  .burgerLine,
+  .burgerLine::before,
+  .burgerLine::after {
+    display: block;
+    width: 40px;
+    height: 3px;
+    position: relative;
+    border-radius: 3px;
+    background-color: white;
+    transition: all 0.5s ease-in-out;
+  }
+  .burgerLine::before,
+  .burgerLine::after {
+    content: "";
+    position: absolute;
+    left: 0;
+  }
+
+  .burgerLine::before {
+    transform: translateY(-12px);
+  }
+  .burgerLine::after {
+    transform: translateY(12px);
+  }
+  .showNav .burgerLine {
+    background: transparent;
+    width: 0;
+  }
+  .showNav .burgerLine::before {
+    transform: rotate(45deg);
+  }
+  .showNav .burgerLine::after {
+    transform: rotate(-45deg);
+  }
 }

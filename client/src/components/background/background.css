@@ -1,6 +1,14 @@
 .background {
   background-image: url("../../assets/images/background.jpg");
-  height: 92vh;
-  background-size: cover;
+  height: 90vh;
   background-position: center;
+  background-repeat: no-repeat;
+  background-color: #080c12;
+}
+
+@media (max-width: 500px) {
+  .background {
+    background-size: auto 100vh;
+    background-position: center;
+  }
 }

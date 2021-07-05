@@ -1,12 +1,19 @@
 import React from "react";
+import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import "./navbar.css";
 import Logo from "../../assets/images/Logo.png";
 import Cart from "../../assets/images/cart.png";
 
 function Navbar() {
+  const [showLinks, setShowLinks] = useState(false);
+
+  const handleShowLinks = () => {
+    setShowLinks(!showLinks);
+  };
+
   return (
-    <nav className="navbar">
+    <nav className={`navbar ${showLinks ? "showNav" : "hideNav"}`}>
       {/***** Logo *****/}
       <div className="navbarLogoContainer">
         <img src={Logo} alt="logo" className="navbarLogo" />
@@ -48,15 +55,20 @@ function Navbar() {
         >
           <li className="navbarLinkItem ">Connection</li>
         </NavLink>
+        <NavLink
+          exact
+          activeClassName="current"
+          to="/"
+          className="navbarLinkContainer navbarCartContainer"
+        >
+          <img src={Cart} alt="cart" className="navbarLinkItem navbarCart" />
+        </NavLink>
       </ul>
-      <NavLink
-        exact
-        activeClassName="current"
-        to="/"
-        className="navbarCartContainer"
-      >
-        <img src={Cart} alt="cart" className="navbarCart" />
-      </NavLink>
+
+      {/***** Menu Burger *****/}
+      <button className="navbarBurger" onClick={handleShowLinks}>
+        <span className="burgerLine"></span>
+      </button>
     </nav>
   );
 }
