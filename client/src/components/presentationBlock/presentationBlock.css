@@ -1,0 +1,86 @@
+.titltePresentation {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-size: 30px;
+}
+
+.textPresBlock {
+  text-align: center;
+  font-size: 18px;
+  letter-spacing: 2px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+/***** Grid *****/
+
+.presBlock {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  margin: 15px;
+}
+.firstPresBlock {
+  grid-column: 1/2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.secondPresBlock {
+  grid-column: 2/2;
+  grid-row: 2/3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.thirdPresBlock {
+  grid-column: 1/2;
+  grid-row: 3/3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.firstImgPresBlock {
+  background-image: url("../../assets/images/image1.jpg");
+  margin: 15px;
+  grid-column: 1/2;
+  grid-row: 2/3;
+}
+.secondImgPresBlock {
+  background-image: url("../../assets/images/image3.jpg");
+  grid-column: 2/2;
+  grid-row: 1/2;
+  margin: 15px;
+}
+.thirdImgPresBlock {
+  background-image: url("../../assets/images/image2.jpg");
+  grid-column: 2/2;
+  grid-row: 3/3;
+  margin: 15px;
+}
+
+.imgPresBlock {
+  background-position: center;
+  background-repeat: no-repeat;
+
+  background-size: cover;
+  border-radius: 5px;
+  margin: 15px;
+  height: 280px;
+}
+
+/*************
+Medias Queries
+**************/
+
+@media screen and (max-width: 750px) {
+  .presBlock {
+    display: flex;
+    flex-direction: column;
+    margin: 30px;
+  }
+  .imgPresBlock {
+    height: 200px;
+  }
+}

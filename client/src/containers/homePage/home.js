@@ -2,6 +2,7 @@ import React from "react";
 import "./home.css";
 import Navbar from "../../components/navbar/navbar";
 import Background from "../../components/background/background";
+import Presentation from "../../components/presentationBlock/presentationBlock";
 import Footer from "../../components/footer/footer";
 
 function HomePage() {
@@ -9,6 +10,7 @@ function HomePage() {
     <div>
       <Navbar />
       <Background />
+      <Presentation />
       <Footer />
     </div>
   );
