@@ -1,4 +1,6 @@
 .navbar {
+  height: 8vh;
+  display: flex;
   background-color: black;
 }
 
@@ -6,15 +8,14 @@
 .current {
   border-bottom: solid 2px purple;
 }
-
-.navbar {
-  height: 100px;
-  display: flex;
+.current > li {
+  font-size: 24px;
 }
 
 .navbarLogoContainer {
   display: flex;
   align-items: center;
+  justify-content: flex-start;
   margin-left: 20px;
 }
 .navbarLogo {
@@ -31,10 +32,21 @@
   text-decoration: none;
   margin: 20px;
 }
+
 .navbarLinkItem {
   list-style-type: none;
   color: white;
   text-align: center;
   margin-bottom: 5px 0px 5px 0px;
-  font-size: 24px;
+  font-size: 20px;
+  font-family: "Michroma";
+}
+.navbarCartContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 20px;
+}
+.navbarCart {
+  width: 25px;
 }

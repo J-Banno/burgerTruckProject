@@ -5,3 +5,13 @@
   margin: 0;
   padding: 0;
 }
+@import url("https://fonts.googleapis.com/css2?family=Michroma&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Crimson+Text&display=swap");
+
+li,
+h1 {
+  font-family: "Michroma", sans-serif;
+}
+body {
+  font-family: "Crimson Text", serif;
+}
