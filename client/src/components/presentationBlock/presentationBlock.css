@@ -8,16 +8,16 @@
   text-align: center;
   font-size: 18px;
   letter-spacing: 2px;
-  margin-top: 15px;
-  margin-bottom: 15px;
+  margin: 15px;
 }
 /***** Grid *****/
 
 .presBlock {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: repeat(4, 1fr);
-  margin: 15px;
+  grid-template-rows: repeat(3, 1fr);
+
+  background-color: #d2dade;
 }
 .firstPresBlock {
   grid-column: 1/2;
@@ -70,6 +70,14 @@
   height: 280px;
 }
 
+.transitionBackground {
+  background-image: url("../../assets/images/transition.jpg");
+  background-size: cover;
+  background-attachment: fixed;
+  width: 100%;
+  height: 250px;
+}
+
 /*************
 Medias Queries
 **************/
@@ -78,7 +86,6 @@ Medias Queries
   .presBlock {
     display: flex;
     flex-direction: column;
-    margin: 30px;
   }
   .imgPresBlock {
     height: 200px;

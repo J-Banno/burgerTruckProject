@@ -3,6 +3,7 @@ import "./home.css";
 import Navbar from "../../components/navbar/navbar";
 import Background from "../../components/background/background";
 import Presentation from "../../components/presentationBlock/presentationBlock";
+import Offer from "../../components/offerBlock/offerBlock";
 import Footer from "../../components/footer/footer";
 
 function HomePage() {
@@ -11,6 +12,8 @@ function HomePage() {
       <Navbar />
       <Background />
       <Presentation />
+      <Offer />
+
       <Footer />
     </div>
   );
