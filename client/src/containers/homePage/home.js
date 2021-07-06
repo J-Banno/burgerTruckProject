@@ -4,6 +4,7 @@ import Navbar from "../../components/navbar/navbar";
 import Background from "../../components/background/background";
 import Presentation from "../../components/presentationBlock/presentationBlock";
 import Offer from "../../components/offerBlock/offerBlock";
+import Quality from "../../components/qualityBlock/qualityBlock";
 import Footer from "../../components/footer/footer";
 
 function HomePage() {
@@ -13,7 +14,7 @@ function HomePage() {
       <Background />
       <Presentation />
       <Offer />
-
+      <Quality />
       <Footer />
     </div>
   );

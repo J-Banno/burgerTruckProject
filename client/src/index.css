@@ -9,9 +9,18 @@
 @import url("https://fonts.googleapis.com/css2?family=Crimson+Text&display=swap");
 
 li,
-h1 {
+h1,
+h2 {
   font-family: "Michroma", sans-serif;
+  color: #e4a619;
 }
 body {
-  font-family: "Crimson Text", serif;
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+  color: #f9fdfb;
+  background: rgb(10, 13, 18);
+  background: linear-gradient(
+    189deg,
+    rgba(10, 13, 18, 1) 0%,
+    rgba(3, 90, 115, 1) 100%
+  );
 }

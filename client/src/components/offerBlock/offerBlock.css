@@ -2,13 +2,16 @@
   margin-top: 20px;
   margin-bottom: 20px;
   font-size: 30px;
+  color: #e4a619;
 }
 
 .offerBlockText {
   text-align: center;
-  font-size: 18px;
+  font-size: 20px;
   letter-spacing: 2px;
+  line-height: 35px;
   margin: 15px;
+  color: #eaf4f1;
 }
 .offerContainerImage {
   display: flex;
@@ -17,9 +20,6 @@
   margin: 25px 100px 25px 100px;
 }
 
-.offerImage:hover {
-  width: 450px;
-}
 .offerImage {
   height: 250px;
   width: 350px;
@@ -38,7 +38,6 @@
   display: grid;
   grid-template-columns: (3, 1fr);
   grid-template-rows: (2, 1fr);
-  background-color: #d2dade;
 }
 .offerBlockTextContent {
   grid-column: 2/3;
@@ -74,10 +73,24 @@ Medias Queries
     display: flex;
     flex-direction: column;
   }
+  .offerBlockText {
+    text-align: center;
+    font-size: 16px;
+    letter-spacing: 2px;
+    line-height: 17px;
+  }
 }
 
 @media screen and (max-width: 1300px) {
   .offerContainerImage {
     margin: 15px 30px 15px 30px;
+  }
+}
+@media screen and (max-width: 420px) {
+  .offerContainerImage {
+    margin: 15px;
+  }
+  .offerImage {
+    width: 300px;
   }
 }

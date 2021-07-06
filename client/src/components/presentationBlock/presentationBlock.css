@@ -2,13 +2,16 @@
   margin-top: 20px;
   margin-bottom: 20px;
   font-size: 30px;
+  color: #e4a619;
 }
 
 .textPresBlock {
   text-align: center;
-  font-size: 18px;
+  font-size: 20px;
+  color: #eaf4f1;
   letter-spacing: 2px;
-  margin: 15px;
+  line-height: 35px;
+  margin: 10px 100px 10px 100px;
 }
 /***** Grid *****/
 
@@ -16,8 +19,6 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: repeat(3, 1fr);
-
-  background-color: #d2dade;
 }
 .firstPresBlock {
   grid-column: 1/2;
@@ -63,12 +64,15 @@
 .imgPresBlock {
   background-position: center;
   background-repeat: no-repeat;
-
   background-size: cover;
-  border-radius: 5px;
-  margin: 15px;
-  height: 280px;
+  border-radius: 20px;
+  margin: 10px 50px 10px 50px;
+  height: 400px;
+  box-shadow: 5px 13px 50px 6px rgba(101, 74, 140, 0.75);
 }
+
+/* 
+Transition Background */
 
 .transitionBackground {
   background-image: url("../../assets/images/transition.jpg");
@@ -89,5 +93,17 @@ Medias Queries
   }
   .imgPresBlock {
     height: 200px;
+  }
+  .transitionBackground {
+    height: 200px;
+  }
+}
+@media screen and (max-width: 1200px) {
+  .textPresBlock {
+    text-align: center;
+    font-size: 16px;
+    letter-spacing: 2px;
+    line-height: 17px;
+    margin: 10px 50px 10px 50px;
   }
 }
