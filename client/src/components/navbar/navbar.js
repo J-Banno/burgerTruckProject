@@ -53,7 +53,7 @@ function Navbar() {
           to="/Login"
           className="navbarLinkContainer"
         >
-          <li className="navbarLinkItem ">Connection</li>
+          <li className="navbarLinkItem ">Connexion</li>
         </NavLink>
         <NavLink
           exact

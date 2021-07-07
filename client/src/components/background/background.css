@@ -6,6 +6,9 @@
   background-color: #080c12;
 }
 
+/*************
+Medias Queries
+**************/
 @media (max-width: 500px) {
   .background {
     background-size: auto 100vh;

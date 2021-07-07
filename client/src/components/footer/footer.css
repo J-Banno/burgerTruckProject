@@ -5,7 +5,7 @@
   display: flex;
   justify-content: center;
   padding-top: 20px;
-  padding-bottom: 70px;
+  padding-bottom: 25px;
 }
 .followContainer {
   display: flex;
@@ -16,13 +16,13 @@
   text-align: center;
   font-size: 25px;
   color: #010000;
-  padding: 50px;
+  padding: 25px;
 }
 .footerIcon {
   color: #010000;
   margin-left: 50px;
   margin-right: 50px;
-  font-size: 50px;
+  font-size: 40px;
   cursor: pointer;
 }
 .copyright {
@@ -43,7 +43,7 @@ Medias Queries
   .footerIcon {
     margin-left: 30px;
     margin-right: 30px;
-    font-size: 40px;
+    font-size: 30px;
   }
 }
 
@@ -61,6 +61,6 @@ Medias Queries
   .footerIcon {
     margin-left: 20px;
     margin-right: 20px;
-    font-size: 30px;
+    font-size: 25px;
   }
 }
