@@ -13,6 +13,8 @@ h1,
 h2 {
   font-family: "Michroma", sans-serif;
   color: #e4a619;
+  letter-spacing: 2px;
+  word-spacing: 5px;
 }
 body {
   font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;

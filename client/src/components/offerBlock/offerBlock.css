@@ -2,7 +2,6 @@
   margin-top: 20px;
   margin-bottom: 20px;
   font-size: 30px;
-  color: #e4a619;
 }
 
 .offerBlockText {
@@ -83,7 +82,10 @@ Medias Queries
 
 @media screen and (max-width: 1300px) {
   .offerContainerImage {
-    margin: 15px 30px 15px 30px;
+    margin: 15px;
+  }
+  .offerImage {
+    width: 300px;
   }
 }
 @media screen and (max-width: 420px) {

@@ -1,8 +1,7 @@
 .titltePresentation {
   margin-top: 20px;
-  margin-bottom: 20px;
+  margin-bottom: 40px;
   font-size: 30px;
-  color: #e4a619;
 }
 
 .textPresBlock {
@@ -68,7 +67,7 @@
   border-radius: 20px;
   margin: 10px 50px 10px 50px;
   height: 400px;
-  box-shadow: 5px 13px 50px 6px rgba(101, 74, 140, 0.75);
+  box-shadow: 5px 13px 50px 6px rgba(4, 149, 163, 0.75);
 }
 
 /* 

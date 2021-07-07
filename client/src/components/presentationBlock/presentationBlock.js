@@ -14,11 +14,6 @@ export default function PresentationBlock() {
             Food-Truck spécialisé dans les hamburgers, Gilles à la cuisine et
             Elsa à la vente s’évertuent à vous proposer une gamme d’hamburgers
             gourmets.
-            <br />
-            <br />
-            Tous nos plats sont élaborés dans notre camion avec des ingrédientsf
-            frais et de qualité renouvelé chaque jour. A l’heure du déjeuner
-            venez déguster nos burger maisons.
           </p>
         </div>
 
@@ -42,6 +37,11 @@ export default function PresentationBlock() {
           <p className="textPresBlock">
             Un espace détente est mis à votre disposition, pour profiter de vos
             amis et savourer vos plats.
+            <br />
+            <br />
+            Tous nos plats sont élaborés dans notre camion avec des ingrédients
+            frais et de qualité renouvelé chaque jour. A l’heure du déjeuner
+            venez déguster nos burger maisons.
           </p>
         </div>
 
