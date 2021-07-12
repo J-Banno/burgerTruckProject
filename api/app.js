@@ -11,16 +11,12 @@ var usersRouter = require("./routes/users");
 
 //Mongoose : connection db
 const mongoose = require("mongoose");
-mongoose.connect(`mongodb:${process.env.DB_HOST}`, {
+mongoose.connect(`mongodb://localhost:27017/burgerTruck`, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
 
-//Variable d'environement Dotenv
-const result = dotenv.config();
-if (result.error) {
-  throw result.error;
-}
+var loginRouter = require("./routes/login");
 
 //Middleware
 var cors = require("./middleware/cors");
@@ -34,6 +30,7 @@ app.use(express.static(path.join(__dirname, "public")));
 //Url
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
+app.use("/Login", loginRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

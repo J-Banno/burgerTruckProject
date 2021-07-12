@@ -1,0 +1,102 @@
+.fromRegistrationContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.inputFormRegistrationContainer {
+  border-radius: 10px;
+  width: 800px;
+  margin-top: 20px;
+  padding: 50px 100px 50px 100px;
+  background-color: rgba(8, 12, 18, 0.75);
+  box-shadow: 5px 13px 50px 6px rgba(234, 244, 241, 0.8);
+}
+.titleFormRegistration {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.inputRegistration {
+  padding: 20px;
+  width: 100%;
+  margin: 5px 0 5px 0;
+  border: none;
+  background-color: #ccf0e8;
+  border-radius: 4px;
+  opacity: 0.7;
+  cursor: pointer;
+}
+.inputTwoColumns {
+  display: flex;
+}
+.registrationRedirection {
+  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.registrationRedirectionLink:hover {
+  font-size: 18px;
+}
+.registrationRedirectionLink {
+  margin-top: 5px;
+  color: #e4a619;
+  text-decoration: none;
+}
+
+.inputRegistration[name="firstName"] {
+  margin-left: 10px;
+}
+.inputRegistration[type="tel"] {
+  margin-left: 10px;
+}
+.inputRegistration[type="submit"] {
+  font-weight: bold;
+  font-size: 18px;
+  color: #e4a619;
+}
+.inputRegistration[type="submit"]:hover {
+  background-color: rgb(66, 58, 93);
+  color: #ccf0e8;
+  transition: all 0.5s ease-out;
+}
+/*************
+  Medias Queries
+  **************/
+/* @media screen and (max-width: 750px) {
+  .inputFormContainer {
+    padding: 25px 50px 25px 50px;
+  }
+} */
+@media screen and (max-width: 450px) {
+  .inputFormContainer {
+    padding: 10px 0px 10px0px;
+    margin-top: 100px;
+  }
+
+  .titleFormRegistration {
+    margin-bottom: 20px;
+  }
+  .registrationRedirection {
+    margin-top: 15px;
+  }
+  .registrationRedirectionLink {
+    margin-top: 5px;
+  }
+}
+/* 
+  Height */
+
+@media screen and (max-height: 700px) {
+  .inputFormRegistrationContainer {
+    margin-top: 60px;
+  }
+}
+@media screen and (max-height: 580px) {
+  .inputFormRegistrationContainer {
+    margin-top: 10px;
+  }
+}

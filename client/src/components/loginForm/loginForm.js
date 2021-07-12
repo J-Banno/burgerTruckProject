@@ -54,11 +54,11 @@ export default function LoginForm(props) {
         <input
           className="loginInput"
           type="password"
-          name="pass"
+          name="password"
           autoComplete="off"
           required
           onChange={handleInput}
-          value={newConnection.pass}
+          value={newConnection.password}
           placeholder="Entrez votre mot de passe"
         />
         <input className="loginInput" type="submit" onClick={postloginData} />
