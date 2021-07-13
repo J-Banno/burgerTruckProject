@@ -90,7 +90,7 @@ export default function RegistrationForm(props) {
           />
         </div>
         {/* Adress */}
-        <div className="inputContainer">
+        <div>
           <input
             className="inputRegistration"
             type="text"

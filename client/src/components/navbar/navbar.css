@@ -90,6 +90,7 @@ Medias Queries
     padding: 5px;
     background: #080c12;
     transition: all 0.8s ease-in-out;
+    z-index: 1;
   }
   .navbarCart {
     width: 70px;
@@ -111,6 +112,7 @@ Medias Queries
     position: fixed;
     top: 5px;
     right: 30px;
+    z-index: 2;
   }
   .navbarBurger:hover {
     cursor: pointer;

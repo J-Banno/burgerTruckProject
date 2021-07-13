@@ -15,9 +15,9 @@ function Navbar() {
   return (
     <nav className={`navbar ${showLinks ? "showNav" : "hideNav"}`}>
       {/***** Logo *****/}
-      <div className="navbarLogoContainer">
+      <NavLink exact to="/" className="navbarLogoContainer">
         <img src={Logo} alt="logo" className="navbarLogo" />
-      </div>
+      </NavLink>
       <ul className="navbarLink">
         {/***** Home *****/}
         <NavLink
