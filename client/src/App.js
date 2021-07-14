@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Home from "./components/Home/home";
 import Login from "./components/Auth/Login/index";
-import Contact from "./components/Misc/Contact/contactBlock/contactBlock";
+import Contact from "./components/Misc/Contact/contact";
 import Order from "./components/Order/order";
 import Register from "./components/Auth/Register/index";
 import ErrorPage from "./components/Auth/errorPage/errorPage";

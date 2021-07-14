@@ -1,0 +1,92 @@
+.contactContainer {
+  background-image: url("../../../assets/images/background.jpg");
+  height: 90vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: #080c12;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.contactTitle {
+  text-align: center;
+  margin-top: 50px;
+  font-size: 32px;
+  color: rgb(234, 244, 241);
+}
+.blockTitle {
+  margin-bottom: 20px;
+  font-size: 22px;
+}
+.contactBoxContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 10px;
+  margin: auto;
+  width: 85%;
+  height: 75%;
+  background-color: rgba(8, 12, 18, 0.75);
+  box-shadow: 5px 13px 50px 6px rgba(234, 244, 241, 0.8);
+}
+.contactContent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 5%;
+}
+
+.textContact {
+  text-align: justify;
+  font-size: 18px;
+  line-height: 30px;
+}
+
+.contactSpan:hover {
+  color: rgb(66, 58, 93);
+  font-size: 25px;
+}
+.contactSpan {
+  font-size: 20px;
+  font-weight: bold;
+}
+.adressCompagny {
+  width: 400px;
+  height: 300px;
+  margin-top: 20px;
+  border: none;
+  box-shadow: 5px 13px 50px 6px rgba(4, 149, 163, 0.75);
+}
+
+/*************
+Medias Queries
+**************/
+@media screen and (max-width: 1120px) {
+  .textContact {
+    text-align: left;
+    font-size: 18px;
+    line-height: 30px;
+    word-spacing: 0;
+  }
+}
+@media screen and (max-width: 1000px) {
+  .adressCompagny {
+    width: 300px;
+    height: auto;
+    margin-top: 20px;
+    border: none;
+    box-shadow: 5px 13px 50px 6px rgba(4, 149, 163, 0.75);
+  }
+  .contactBoxContainer {
+    flex-direction: column;
+  }
+}
+@media screen and (max-width: 400px) {
+  .adressCompagny {
+    width: 200px;
+    height: 100px;
+    margin-top: 5px;
+  }
+}
