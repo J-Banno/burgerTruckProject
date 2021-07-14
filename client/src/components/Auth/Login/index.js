@@ -1,8 +1,8 @@
 import React from "react";
-import "./loginPage.css";
-import Navbar from "../../components/navbar/navbar";
-import Footer from "../../components/footer/footer";
-import Login from "../../components/loginForm/loginForm";
+import "./style.css";
+import Navbar from "../../Layout/Header/navbar";
+import Footer from "../../Layout/Footer/footer";
+import Login from "./loginForm/loginForm";
 
 export default function LoginPage() {
   return (

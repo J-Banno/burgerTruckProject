@@ -1,10 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./offerBlock.css";
-import burger1 from "../../assets/images/burger1.jpg";
-import burger2 from "../../assets/images/burger2.jpg";
-import burger3 from "../../assets/images/burger3.jpg";
-import burger4 from "../../assets/images/burger4.jpg";
+import burger1 from "../../../assets/images/burger1.jpg";
+import burger2 from "../../../assets/images/burger2.jpg";
+import burger3 from "../../../assets/images/burger3.jpg";
+import burger4 from "../../../assets/images/burger4.jpg";
 
 export default function OfferBlock() {
   return (

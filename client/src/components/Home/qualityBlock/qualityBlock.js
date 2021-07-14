@@ -1,6 +1,6 @@
 import React from "react";
 import "./qualityBlock.css";
-import charte from "../../assets/images/charte.jpeg";
+import charte from "../../../assets/images/charte.jpeg";
 
 export default function QualityBlock() {
   return (

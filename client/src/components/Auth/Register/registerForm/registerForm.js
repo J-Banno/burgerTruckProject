@@ -1,5 +1,5 @@
 import React from "react";
-import "./registrationForm.css";
+import "./registerForm.css";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
@@ -8,7 +8,12 @@ export default function RegistrationForm(props) {
   const history = useHistory();
   let [newRegistration, setRegistration] = useState({
     mail: "",
+    tel: "",
     password: "",
+    lastName: "",
+    firstName: "",
+    adress: "",
+    city: "",
   });
 
   // Takes UserLogin data //
@@ -22,7 +27,7 @@ export default function RegistrationForm(props) {
 
     // Waiting for the response from the api//
 
-    const response = await fetch("http://localhost:8000/login", options);
+    const response = await fetch("http://localhost:8000/registration", options);
     const responseData = await response.json();
     if (responseData.success === true) {
       localStorage.setItem("token", responseData.token);
@@ -52,7 +57,7 @@ export default function RegistrationForm(props) {
             required
             onChange={handleInput}
             value={newRegistration.lastName}
-            placeholder="Prénom"
+            placeholder="Nom"
           />
           <input
             type="text"
@@ -62,7 +67,7 @@ export default function RegistrationForm(props) {
             required
             onChange={handleInput}
             value={newRegistration.firstName}
-            placeholder="Nom"
+            placeholder="Prénom"
           />
         </div>
         {/* Contact information */}

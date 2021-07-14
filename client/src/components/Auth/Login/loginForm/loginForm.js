@@ -26,7 +26,7 @@ export default function LoginForm(props) {
     const responseData = await response.json();
     if (responseData.success === true) {
       localStorage.setItem("token", responseData.token);
-      history.push("/home");
+      history.push("/");
     }
     console.log(responseData.token);
   }
@@ -65,7 +65,7 @@ export default function LoginForm(props) {
 
         <p className="loginRedirection">
           Première visite
-          <Link className="loginRedirectionLink" to="/Registration">
+          <Link className="loginRedirectionLink" to="/register">
             S'inscrire
           </Link>
         </p>

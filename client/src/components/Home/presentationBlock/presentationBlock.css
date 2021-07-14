@@ -42,19 +42,19 @@
   align-items: center;
 }
 .firstImgPresBlock {
-  background-image: url("../../assets/images/image1.jpg");
+  background-image: url("../../../assets/images/image1.jpg");
   margin: 15px;
   grid-column: 1/2;
   grid-row: 2/3;
 }
 .secondImgPresBlock {
-  background-image: url("../../assets/images/image3.jpg");
+  background-image: url("../../../assets/images/image3.jpg");
   grid-column: 2/2;
   grid-row: 1/2;
   margin: 15px;
 }
 .thirdImgPresBlock {
-  background-image: url("../../assets/images/image2.jpg");
+  background-image: url("../../../assets/images/image2.jpg");
   grid-column: 2/2;
   grid-row: 3/3;
   margin: 15px;
@@ -74,7 +74,7 @@
 Transition Background */
 
 .transitionBackground {
-  background-image: url("../../assets/images/transition.jpg");
+  background-image: url("../../../assets/images/transition.jpg");
   background-size: cover;
   background-attachment: fixed;
   width: 100%;

@@ -1,20 +1,20 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import HomePage from "./containers/homePage/home";
-import LoginPage from "./containers/loginPage/loginPage";
-import Contact from "./containers/contactPage/contact";
-import OrderPage from "./containers/orderPage/orderPage";
-import RegistrationPage from "./containers//registrationPage/registrationPage";
-import ErrorPage from "./containers/errorPage/errorPage";
+import Home from "./components/Home/home";
+import Login from "./components/Auth/Login/index";
+import Contact from "./components/Misc/Contact/contactBlock/contactBlock";
+import Order from "./components/Order/order";
+import Register from "./components/Auth/Register/index";
+import ErrorPage from "./components/Auth/errorPage/errorPage";
 
 function App() {
   return (
     <Router>
       <Switch>
-        <Route path="/" exact component={HomePage} />
-        <Route path="/Contact" exact component={Contact} />
-        <Route path="/Order" exact component={OrderPage} />
-        <Route path="/Login" exact component={LoginPage} />
-        <Route path="/Registration" exact component={RegistrationPage} />
+        <Route path="/" exact component={Home} />
+        <Route path="/contact" exact component={Contact} />
+        <Route path="/order" exact component={Order} />
+        <Route path="/login" exact component={Login} />
+        <Route path="/register" exact component={Register} />
         <Route path="/" component={ErrorPage}></Route>
       </Switch>
     </Router>

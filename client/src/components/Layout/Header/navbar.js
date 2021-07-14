@@ -2,8 +2,8 @@ import React from "react";
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import "./navbar.css";
-import Logo from "../../assets/images/Logo.png";
-import Cart from "../../assets/images/cart.png";
+import Logo from "../../../assets/images/Logo.png";
+import Cart from "../../../assets/images/cart.png";
 
 function Navbar() {
   const [showLinks, setShowLinks] = useState(false);
