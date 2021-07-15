@@ -73,20 +73,51 @@ Medias Queries
 }
 @media screen and (max-width: 1000px) {
   .adressCompagny {
-    width: 300px;
+    width: 250px;
     height: auto;
-    margin-top: 20px;
-    border: none;
-    box-shadow: 5px 13px 50px 6px rgba(4, 149, 163, 0.75);
+    margin-top: 10px;
   }
   .contactBoxContainer {
     flex-direction: column;
   }
+  .contactBoxContainer {
+    margin-top: 10px;
+  }
+  .contactTitle {
+    margin-top: 15px;
+  }
+  .contactContent {
+    height: 100%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .contactTitle {
+    font-size: 21px;
+  }
+  .contactSpan {
+    font-size: 15px;
+  }
+  .textContact {
+    font-size: 14px;
+    line-height: 25px;
+    word-spacing: 0;
+  }
+  .blockTitle {
+    margin-bottom: 5px;
+    font-size: 16px;
+  }
+  .contactContent {
+    height: 100%;
+  }
 }
 @media screen and (max-width: 400px) {
   .adressCompagny {
-    width: 200px;
-    height: 100px;
     margin-top: 5px;
+  }
+  .adressCompagny {
+    width: 250px;
+    height: 150px;
+    margin-top: 10px;
   }
 }
