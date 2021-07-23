@@ -9,6 +9,7 @@ var app = express();
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
 var registerRouter = require("./routes/register");
+var productsRouter = require("./routes/products");
 
 //Mongoose : connection db
 const mongoose = require("mongoose");
@@ -33,6 +34,7 @@ app.use("/", indexRouter);
 app.use("/users", usersRouter);
 app.use("/login", loginRouter);
 app.use("/registration", registerRouter);
+app.use("/products", productsRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

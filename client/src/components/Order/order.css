@@ -1,0 +1,9 @@
+.titleProductCategory {
+  margin-top: 50px;
+  margin-bottom: 25px;
+}
+.blockCardProducts {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}

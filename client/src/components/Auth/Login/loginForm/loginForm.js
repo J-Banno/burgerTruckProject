@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
 
-export default function LoginForm(props) {
+export default function LoginForm() {
   const history = useHistory();
   let [newConnection, setConnection] = useState({
     mail: "",
@@ -32,7 +32,7 @@ export default function LoginForm(props) {
   }
 
   // Update users //
-  function handleInput(e) {
+  function handleLogin(e) {
     setConnection({ ...newConnection, [e.target.name]: e.target.value });
     console.log(e.target.value);
   }
@@ -47,7 +47,7 @@ export default function LoginForm(props) {
           className="loginInput"
           name="mail"
           required
-          onChange={handleInput}
+          onChange={handleLogin}
           value={newConnection.mail}
           placeholder="Entrez votre email"
         />
@@ -57,7 +57,7 @@ export default function LoginForm(props) {
           name="password"
           autoComplete="off"
           required
-          onChange={handleInput}
+          onChange={handleLogin}
           value={newConnection.password}
           placeholder="Entrez votre mot de passe"
         />
