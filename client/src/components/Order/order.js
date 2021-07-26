@@ -48,10 +48,17 @@ export default function Order() {
     <div className="Content">
       <Header />
       <section>
-        <h2 className="titleProductCategory">Burger : </h2>
+        <h2 className="titleProductCategory">Nos Burger : </h2>
         <div className="blockCardProducts">{displayBurger()}</div>
       </section>
-
+      <section>
+        <h2 className="titleProductCategory">Nos Boissons : </h2>
+        <div className="blockCardProducts">{displayDrinks()}</div>
+      </section>
+      <section>
+        <h2 className="titleProductCategory">Nos Desserts : </h2>
+        <div className="blockCardProducts">{displayDesserts()}</div>
+      </section>
       <Footer />
     </div>
   );

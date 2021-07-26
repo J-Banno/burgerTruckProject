@@ -1,12 +1,15 @@
 import React from "react";
 import "./cardProduct.css";
-import image from "../../../assets/images/burger3.jpg";
 
 export default function CardProduct(props) {
   return (
     <div className="cardProductContrainer">
-      <div>
-        <img className="imageCardProduct" src={image} alt="Orange" />
+      <div className="imageCardProductContainer">
+        <img
+          className="imageCardProduct"
+          src={"http://localhost:3000" + props.data.image}
+          alt="Orange"
+        />
       </div>
 
       <div className="cardBody">
@@ -18,7 +21,7 @@ export default function CardProduct(props) {
           <p>{props.data.description}</p>
         </div>
         <div className="priceCard">
-          <p>{props.data.price}</p>
+          <p>{props.data.price} €</p>
         </div>
       </div>
       <form action="" className="inputCardContainer">
