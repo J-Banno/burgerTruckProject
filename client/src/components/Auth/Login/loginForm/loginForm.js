@@ -26,7 +26,7 @@ export default function LoginForm() {
     const responseData = await response.json();
     if (responseData.success === true) {
       localStorage.setItem("token", responseData.token);
-      history.push("/");
+      history.push("/order");
     }
     console.log(responseData.token);
   }

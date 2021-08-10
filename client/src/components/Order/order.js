@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import "./order.css";
 import Footer from "../Layout/Footer/footer";
 import Header from "../Layout/Header/navbar";
+
 import CardProduct from "./cardProduct/cardProduct";
 
 export default function Order() {
@@ -44,6 +46,22 @@ export default function Order() {
       });
   }
 
+  const dispatch = useDispatch();
+  const { count } = useSelector((state) => ({
+    ...state.counterReducer,
+  }));
+
+  const addToCart = (e) => {
+    e.preventDefault();
+    const itemAdded = {
+      ...setProducts,
+      quantity: count,
+    };
+    dispatch({
+      type: "ADD_TO_CART",
+      payload: itemAdded,
+    });
+  };
   return (
     <div className="Content">
       <Header />

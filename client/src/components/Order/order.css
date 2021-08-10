@@ -1,6 +1,7 @@
 .titleProductCategory {
   margin-top: 50px;
-  margin-bottom: 25px;
+  margin-bottom: 70px;
+  text-align: center;
 }
 .blockCardProducts {
   display: flex;

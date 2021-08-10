@@ -58,7 +58,7 @@ function Navbar() {
         <NavLink
           exact
           activeClassName="current"
-          to="/"
+          to="/cart"
           className="navbarLinkContainer navbarCartContainer"
         >
           <img src={Cart} alt="cart" className="navbarLinkItem navbarCart" />

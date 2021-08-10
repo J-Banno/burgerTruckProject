@@ -30,7 +30,7 @@ const register = {
     });
     console.log(newUser);
 
-    //Sauvegarde User//
+    //Save User//
     newUser.save((error) => {
       if (error) {
         console.log(error);
