@@ -26,7 +26,7 @@ function Navbar() {
           to="/"
           className="navbarLinkContainer"
         >
-          <li className="navbarLinkItem">Acceuil</li>
+          <li className="navbarLinkItem">Accueil</li>
         </NavLink>
         {/***** Order *****/}
         <NavLink

@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "./order.css";
-import Footer from "../Layout/Footer/footer";
-import Header from "../Layout/Header/navbar";
+import Footer from "../../components/Layout/Footer/footer";
+import Header from "../../components/Layout/Header/navbar";
 
-import CardProduct from "./cardProduct/cardProduct";
+import CardProduct from "../../components/Order/cardProduct/cardProduct";
 
 export default function Order() {
   const [products, setProducts] = useState([]);

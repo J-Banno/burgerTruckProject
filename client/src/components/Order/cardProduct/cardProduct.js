@@ -37,7 +37,7 @@ export default function CardProduct(props) {
           <option value="9">9</option>
         </select>
 
-        <input className="submitProductCard" type="submit" value="Valider" />
+        <input className="submitProductCard" type="submit" value="Ajouter" />
       </form>
     </div>
   );

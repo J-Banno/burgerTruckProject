@@ -61,8 +61,12 @@ export default function LoginForm() {
           value={newConnection.password}
           placeholder="Entrez votre mot de passe"
         />
-        <input className="loginInput" type="submit" onClick={postloginData} />
-
+        <input
+          className="loginInput"
+          type="submit"
+          value="SE CONNECTER"
+          onClick={postloginData}
+        />
         <p className="loginRedirection">
           Première visite
           <Link className="loginRedirectionLink" to="/register">
