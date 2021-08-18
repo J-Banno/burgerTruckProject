@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import "./order.css";
 import Footer from "../../components/Layout/Footer/footer";
 import Header from "../../components/Layout/Header/navbar";
-
 import CardProduct from "../../components/Order/cardProduct/cardProduct";
 
 export default function Order() {
@@ -19,7 +18,6 @@ export default function Order() {
     const productsData = await response.json();
 
     setProducts(productsData);
-    console.log(productsData);
   }
 
   function displayBurger() {
@@ -45,23 +43,6 @@ export default function Order() {
         return <CardProduct data={products} />;
       });
   }
-
-  const dispatch = useDispatch();
-  const { count } = useSelector((state) => ({
-    ...state.counterReducer,
-  }));
-
-  const addToCart = (e) => {
-    e.preventDefault();
-    const itemAdded = {
-      ...setProducts,
-      quantity: count,
-    };
-    dispatch({
-      type: "ADD_TO_CART",
-      payload: itemAdded,
-    });
-  };
   return (
     <div className="Content">
       <Header />

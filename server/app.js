@@ -2,6 +2,7 @@ var createError = require("http-errors");
 var express = require("express");
 var path = require("path");
 var logger = require("morgan");
+const bodyParser = require("body-parser");
 
 var app = express();
 
@@ -10,18 +11,25 @@ var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
 var registerRouter = require("./routes/register");
 var productsRouter = require("./routes/products");
+var loginRouter = require("./routes/login");
+
+//Module db
+const dbConfig = require("./config/db.config");
 
 //Mongoose : connection db
 const mongoose = require("mongoose");
-mongoose.connect(`mongodb://localhost:27017/burgerTruck`, {
+mongoose.connect(`mongodb://${dbConfig.HOST}:${dbConfig.PORT}/${dbConfig.DB}`, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
 
-var loginRouter = require("./routes/login");
-
 //Middleware
 var cors = require("./middleware/cors");
+
+// parse requests of content-type - application/json
+app.use(bodyParser.json());
+// parse requests of content-type - application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(cors.handle);
 app.use(logger("dev"));

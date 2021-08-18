@@ -8,6 +8,10 @@ const UserSchema = new mongoose.Schema({
   adress: { type: String, required: true },
   city: { type: String, required: true },
   tel: { type: String, required: true },
+  roles: {
+    type: String,
+    required: true,
+  },
 });
 
 const User = mongoose.model("User", UserSchema);

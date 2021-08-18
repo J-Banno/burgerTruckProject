@@ -1,7 +1,60 @@
 import React from "react";
+import { useState, useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import * as actionTypes from "../../../Redux/constants/cartConstants";
 import "./cardProduct.css";
 
 export default function CardProduct(props) {
+  //Sate Quantity
+  const updateQuantity = (e) => {
+    setQuantityProduct(Number(e.target.value));
+  };
+  const [quantityProduct, setQuantityProduct] = useState(1);
+
+  //Local Storage
+  const { cart } = useSelector((state) => ({ ...state.cart }));
+  console.log(`votre panier : ${JSON.stringify(cart)}`);
+
+  //Message info client
+  const addingInfo = useRef();
+  let timerInfo;
+  let display = true;
+
+  //Add to cart
+  const dispatch = useDispatch();
+
+  const addToCart = (e) => {
+    e.preventDefault();
+
+    localStorage.setItem("cart", JSON.stringify(cart));
+
+    //Id click Product
+    const keyProduct = props.data._id;
+
+    //Add redux
+    const itemAdded = {
+      ...props.data,
+      quantity: quantityProduct,
+    };
+    console.log(itemAdded);
+
+    dispatch({
+      type: actionTypes.ADD_TO_CART,
+      payload: itemAdded,
+    });
+
+    //Message
+    addingInfo.current.innerText = "Ajouté au panier";
+
+    if (display) {
+      display = false;
+      timerInfo = setTimeout(() => {
+        addingInfo.current.innerText = " ";
+        display = true;
+      }, 1000);
+    }
+  };
+
   return (
     <div className="cardProductContrainer">
       <div className="imageCardProductContainer">
@@ -24,20 +77,22 @@ export default function CardProduct(props) {
           <p>{props.data.price} €</p>
         </div>
       </div>
-      <form action="" className="inputCardContainer">
-        <select className="selectProductCard">
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-          <option value="6">6</option>
-          <option value="7">7</option>
-          <option value="8">8</option>
-          <option value="9">9</option>
-        </select>
-
-        <input className="submitProductCard" type="submit" value="Ajouter" />
+      <form onSubmit={addToCart} className="inputCardContainer">
+        <div className="inputQuantity">
+          <label className="quantityLabel" htmlFor="quantity">
+            Quantités :
+          </label>
+          <input
+            value={props.data.quantity}
+            onChange={updateQuantity}
+            type="number"
+            min="1"
+            max="10"
+            className="selectProductCard"
+          ></input>
+        </div>
+        <span ref={addingInfo} className="addingInfo"></span>
+        <button className="submitProductCard">Ajouter au panier</button>
       </form>
     </div>
   );
