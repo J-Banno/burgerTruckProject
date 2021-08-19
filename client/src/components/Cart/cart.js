@@ -1,8 +1,9 @@
 import React from "react";
 import Navbar from "../Layout/Header/navbar";
 import Footer from "../Layout/Footer/footer";
+import * as actionTypes from "../../Redux/constants/cartConstants";
 import { useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import "./cart.css";
 
 export default function CartPage() {
@@ -10,6 +11,25 @@ export default function CartPage() {
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cart));
   }, []);
+
+  const dispatch = useDispatch();
+
+  //Change quantity product
+  const storeState = useSelector((state) => state);
+  const handleChange = (event, id) => {
+    const indexItem = storeState.cart.cart.findIndex((obj) => obj.ref === id);
+
+    const objUpdated = {
+      ...storeState.cart.cart[indexItem],
+      qty: Number(event.target.value),
+      total: Number(event.target.value * storeState.cart.cart[indexItem].price),
+    };
+
+    dispatch({
+      type: actionTypes.UPDATE_ITEM,
+      payload: objUpdated,
+    });
+  };
 
   return (
     <>
@@ -27,7 +47,19 @@ export default function CartPage() {
           <tr className="itemCartProduct" key={cart._id} {...cart}>
             <th width="200">{item.name}</th>
             <th width="150">{item.price} €</th>
-            <th width="150">{item.qty}</th>
+            <th width="150">
+              <div className="quantityCartInput">
+                <label htmlFor="quantityInput">Quantité</label>
+                <input
+                  onChange={(e) => handleChange(e, item.ref)}
+                  type="number"
+                  min="1"
+                  max="10"
+                  id="quantityInput"
+                  value={item.qty}
+                />
+              </div>
+            </th>
             <th width="200">{item.total} €</th>
           </tr>
         ))}

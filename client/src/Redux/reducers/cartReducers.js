@@ -25,6 +25,9 @@ export const cartReducer = (state = INITIAL_STATE, action) => {
         const updateQuantity = {
           ...state.cart[indexItemAdd],
           qty: state.cart[indexItemAdd].qty + action.payload.quantity,
+          total:
+            (state.cart[indexItemAdd].qty + action.payload.quantity) *
+            state.cart[indexItemAdd].price,
         };
 
         const newArr = [...state.cart];
@@ -38,6 +41,20 @@ export const cartReducer = (state = INITIAL_STATE, action) => {
           cart: [...state.cart, cartProduct],
         };
       }
+
+    case actionTypes.UPDATE_ITEM:
+      const indexItemUpdate = state.cart.findIndex(
+        (obj) => obj.ref === action.payload.ref
+      );
+
+      const newArr = [...state.cart];
+      newArr.splice(indexItemUpdate, 1, action.payload);
+
+      console.log(newArr);
+
+      return {
+        cart: newArr,
+      };
   }
   return state;
 };

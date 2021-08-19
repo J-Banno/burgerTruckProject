@@ -28,3 +28,13 @@
 
   text-align: right;
 }
+.quantityCartInput {
+  display: flex;
+}
+
+.quantityCartInput label {
+  margin-right: 10px;
+}
+.quantityCartInput input {
+  width: 25%;
+}
