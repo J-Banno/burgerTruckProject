@@ -1,0 +1,30 @@
+.tableCartHeader {
+  padding-bottom: 20px;
+  color: #e4a619;
+  font-weight: bold;
+  font-size: 21px;
+  display: flex;
+  justify-content: space-between;
+  text-align: right;
+  padding: 10px;
+}
+.cartTitle {
+  text-align: center;
+  margin-top: 40px;
+}
+.tableCart {
+  padding: 5%;
+  display: block;
+  background-color: rgba(245, 249, 255, 0.35);
+  box-shadow: 5px 13px 50px 6px rgba(66, 58, 93, 0.9);
+  margin: 50px;
+  border-radius: 10px;
+}
+.itemCartProduct {
+  letter-spacing: 1px;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+
+  text-align: right;
+}

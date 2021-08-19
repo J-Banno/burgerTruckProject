@@ -9,8 +9,6 @@ const INITIAL_STATE = {
 export const cartReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case actionTypes.ADD_TO_CART:
-      console.log(action.payload.price);
-
       const cartProduct = {
         name: action.payload.title,
         qty: action.payload.quantity,
@@ -18,13 +16,28 @@ export const cartReducer = (state = INITIAL_STATE, action) => {
         ref: action.payload._id,
         total: action.payload.quantity * action.payload.price,
       };
-      console.log(action.payload.quantity * action.payload.price);
-      return {
-        ...state,
-        cart: [...state.cart, cartProduct],
-      };
 
-    default:
-      return state;
+      const indexItemAdd = state.cart.findIndex(
+        (obj) => obj.ref === action.payload._id
+      );
+
+      if (indexItemAdd !== -1) {
+        const updateQuantity = {
+          ...state.cart[indexItemAdd],
+          qty: state.cart[indexItemAdd].qty + action.payload.quantity,
+        };
+
+        const newArr = [...state.cart];
+        newArr.splice(indexItemAdd, 1, updateQuantity);
+        return {
+          cart: newArr,
+        };
+      } else {
+        return {
+          ...state,
+          cart: [...state.cart, cartProduct],
+        };
+      }
   }
+  return state;
 };

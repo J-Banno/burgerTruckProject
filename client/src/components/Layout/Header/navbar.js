@@ -4,6 +4,7 @@ import { NavLink } from "react-router-dom";
 import "./navbar.css";
 import Logo from "../../../assets/images/Logo.png";
 import Cart from "../../../assets/images/cart.png";
+import { useSelector } from "react-redux";
 
 function Navbar() {
   const [showLinks, setShowLinks] = useState(false);
@@ -11,6 +12,14 @@ function Navbar() {
   const handleShowLinks = () => {
     setShowLinks(!showLinks);
   };
+
+  //Notification cart quantity :
+  const shoppingCart = useSelector((state) => state);
+
+  let totalItems = 0;
+  for (const item of shoppingCart.cart.cart) {
+    totalItems += item.qty;
+  }
 
   return (
     <nav className={`navbar ${showLinks ? "showNav" : "hideNav"}`}>
@@ -61,7 +70,16 @@ function Navbar() {
           to="/cart"
           className="navbarLinkContainer navbarCartContainer"
         >
-          <img src={Cart} alt="cart" className="navbarLinkItem navbarCart" />
+          <div className="floatingCart">
+            <div className="cartContainer">
+              <img
+                src={Cart}
+                alt="cart"
+                className="navbarLinkItem navbarCart"
+              />
+              <span className="notif">{totalItems}</span>
+            </div>
+          </div>
         </NavLink>
       </ul>
 
