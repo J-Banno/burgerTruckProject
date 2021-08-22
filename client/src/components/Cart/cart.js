@@ -13,9 +13,23 @@ export default function CartPage() {
   }, []);
 
   const dispatch = useDispatch();
+  const storeState = useSelector((state) => state);
+
+  //Remove Pruduct
+  const handleRemove = (event, id) => {
+    const indexItem = storeState.cart.cart.findIndex((obj) => obj.ref === id);
+
+    const objRemove = {
+      ...storeState.cart.cart[indexItem],
+    };
+    dispatch({
+      type: actionTypes.REMOVE_TO_CART,
+      payload: objRemove,
+    });
+  };
 
   //Change quantity product
-  const storeState = useSelector((state) => state);
+
   const handleChange = (event, id) => {
     const indexItem = storeState.cart.cart.findIndex((obj) => obj.ref === id);
 
@@ -31,6 +45,14 @@ export default function CartPage() {
     });
   };
 
+  //Total price cart
+  let totalPrice = 0;
+  if (storeState.cart.cart.length !== 0) {
+    for (const item of storeState.cart.cart) {
+      const itemPrice = item.price * item.qty;
+      totalPrice += itemPrice;
+    }
+  }
   return (
     <>
       <Navbar />
@@ -45,8 +67,11 @@ export default function CartPage() {
         </tr>
         {cart.map((item) => (
           <tr className="itemCartProduct" key={cart._id} {...cart}>
-            <th width="200">{item.name}</th>
-            <th width="150">{item.price} €</th>
+            <th width="200">
+              {item.name}
+              <button onClick={handleRemove}>X</button>
+            </th>
+            <th width="150">{item.price.toFixed(2)} € </th>
             <th width="150">
               <div className="quantityCartInput">
                 <label htmlFor="quantityInput">Quantité</label>
@@ -64,6 +89,10 @@ export default function CartPage() {
           </tr>
         ))}
       </table>
+      <div className="totalCartContainer">
+        <p className="totalPrice">Total : {totalPrice.toFixed(2)} €</p>
+        <button className="btnCart">Procéder au paiement</button>
+      </div>
 
       <Footer />
     </>

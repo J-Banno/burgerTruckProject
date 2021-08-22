@@ -30,6 +30,7 @@
 }
 .quantityCartInput {
   display: flex;
+  justify-content: flex-end;
 }
 
 .quantityCartInput label {
@@ -37,4 +38,25 @@
 }
 .quantityCartInput input {
   width: 25%;
+}
+.totalCartContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.totalPrice {
+  margin-top: 5px;
+  color: #e4a619;
+  text-decoration: none;
+  font-weight: bold;
+}
+.btnCart {
+  background-color: #e4a619;
+  color: aliceblue;
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  margin-top: 5px;
+  margin-bottom: 20px;
 }
