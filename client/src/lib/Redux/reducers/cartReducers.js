@@ -34,6 +34,7 @@ export const cartReducer = (state = INITIAL_STATE, action) => {
 
         const newArr = [...state.cart];
         newArr.splice(indexItemAdd, 1, updateQuantity);
+        localStorage.setItem("cart", JSON.stringify(newArr));
         return {
           cart: newArr,
         };
@@ -51,7 +52,7 @@ export const cartReducer = (state = INITIAL_STATE, action) => {
 
       const newArr = [...state.cart];
       newArr.splice(indexItemUpdate, 1, action.payload);
-
+      localStorage.setItem("cart", JSON.stringify(newArr));
       console.log(newArr);
 
       return {
@@ -66,7 +67,7 @@ export const cartReducer = (state = INITIAL_STATE, action) => {
       newCart.splice(indexItemRemove, 1);
 
       console.log(newCart);
-
+      localStorage.setItem("cart", JSON.stringify(newCart));
       return {
         cart: newCart,
       };

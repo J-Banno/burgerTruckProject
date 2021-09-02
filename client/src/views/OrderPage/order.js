@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import "./order.css";
 import Footer from "../../components/Layout/Footer/footer";
 import Header from "../../components/Layout/Header/navbar";

@@ -27,6 +27,7 @@ const register = {
       adress: req.body.adress,
       tel: req.body.tel,
       password: encryptedPass,
+      roles: "USER",
     });
     console.log(newUser);
 

@@ -1,7 +1,7 @@
 import React from "react";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import * as actionTypes from "../../../Redux/constants/cartConstants";
+import * as actionTypes from "../../../lib/Redux/constants/cartConstants";
 import "./cardProduct.css";
 
 export default function CardProduct(props) {
@@ -13,7 +13,10 @@ export default function CardProduct(props) {
 
   //Local Storage
   const { cart } = useSelector((state) => ({ ...state.cart }));
-  console.log(`votre panier : ${JSON.stringify(cart)}`);
+
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, []);
 
   //Message info client
   const addingInfo = useRef();
@@ -25,8 +28,6 @@ export default function CardProduct(props) {
 
   const addToCart = (e) => {
     e.preventDefault();
-
-    localStorage.setItem("cart", JSON.stringify(cart));
 
     //Id click Product
     const keyProduct = props.data._id;

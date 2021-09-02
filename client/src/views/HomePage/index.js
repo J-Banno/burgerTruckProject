@@ -1,5 +1,5 @@
 import React from "react";
-import "./home.css";
+import "./style.css";
 import Navbar from "../../components/Layout/Header/navbar";
 import Background from "../../components/Misc/Background/background";
 import Presentation from "../../components/Home/presentationBlock/presentationBlock";

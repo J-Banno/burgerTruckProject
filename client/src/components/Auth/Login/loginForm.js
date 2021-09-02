@@ -1,11 +1,17 @@
 import React from "react";
 import "./loginForm.css";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useHistory } from "react-router-dom";
-
+import Auth from "../../../lib/Contexts/auth";
+import { addItem } from "../../../services/localStorage";
 export default function LoginForm() {
+  //Context
+  const { isAuthenticated } = useContext(Auth);
+  console.log("Login : " + isAuthenticated);
+
   const history = useHistory();
+  //Sate
   let [newConnection, setConnection] = useState({
     mail: "",
     password: "",
@@ -14,21 +20,23 @@ export default function LoginForm() {
   // Takes UserLogin data //
   async function postloginData(e) {
     e.preventDefault();
-    const options = {
-      method: "POST",
-      body: JSON.stringify(newConnection),
-      headers: { "content-type": "application/json" },
-    };
-
-    // Waiting for the response from the api//
-
-    const response = await fetch("http://localhost:8000/login", options);
-    const responseData = await response.json();
-    if (responseData.success === true) {
-      localStorage.setItem("token", responseData.token);
-      history.push("/order");
+    try {
+      const options = {
+        method: "POST",
+        body: JSON.stringify(newConnection),
+        headers: { "content-type": "application/json" },
+      };
+      // Waiting for the response from the api//
+      const response = await fetch("http://localhost:8000/login", options);
+      const responseData = await response.json();
+      if (responseData.success === true) {
+        addItem("token", responseData.token);
+        window.location.reload(false);
+      }
+      console.log("Token : " + responseData.token);
+    } catch ({ response }) {
+      console.log(response);
     }
-    console.log(responseData.token);
   }
 
   // Update users //
@@ -36,6 +44,10 @@ export default function LoginForm() {
     setConnection({ ...newConnection, [e.target.name]: e.target.value });
     console.log(e.target.value);
   }
+  // Redirection loginPage
+  useEffect(() => {
+    if (isAuthenticated) history.replace("/history");
+  }, [history, isAuthenticated]);
 
   return (
     <form className="loginFomContainer" action="" method="POST">

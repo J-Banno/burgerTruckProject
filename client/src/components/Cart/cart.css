@@ -60,3 +60,10 @@
   margin-top: 5px;
   margin-bottom: 20px;
 }
+
+.cartTitleNull {
+  height: 30vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

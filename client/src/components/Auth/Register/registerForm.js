@@ -10,12 +10,14 @@ export default function RegistrationForm(props) {
     mail: "",
     tel: "",
     password: "",
+    passwordConfirm: "",
     lastName: "",
     firstName: "",
     adress: "",
     city: "",
   });
-
+  //Gestion error
+  const [message, setMessage] = useState("");
   // Takes UserLogin data //
   async function postloginData(e) {
     e.preventDefault();
@@ -31,6 +33,7 @@ export default function RegistrationForm(props) {
     const responseData = await response.json();
     if (responseData.success === true) {
       localStorage.setItem("token", responseData.token);
+      setMessage = responseData.Message;
       history.push("/home");
     }
     console.log(responseData.token);
@@ -130,13 +133,15 @@ export default function RegistrationForm(props) {
           <input
             className="inputRegistration"
             type="password"
-            name="password"
+            name="passwordConfirm"
             autoComplete="off"
             required
             onChange={handleInput}
-            value={newRegistration.password}
+            value={newRegistration.passwordConfirm}
             placeholder="Confirmez votre mot de passe"
           />
+          {/*Error*/}
+          <p>{message}</p>
           {/* Button */}
           <input
             className="inputRegistration"

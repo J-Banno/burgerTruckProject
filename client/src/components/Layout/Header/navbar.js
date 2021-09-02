@@ -1,10 +1,12 @@
 import React from "react";
-import { useState } from "react";
+import Auth from "../../../lib/Contexts/auth";
+import { useState, useContext } from "react";
 import { NavLink } from "react-router-dom";
 import "./navbar.css";
 import Logo from "../../../assets/images/Logo.png";
 import Cart from "../../../assets/images/cart.png";
 import { useSelector } from "react-redux";
+import { logout } from "../../../services/authApi";
 
 function Navbar() {
   const [showLinks, setShowLinks] = useState(false);
@@ -20,7 +22,13 @@ function Navbar() {
   for (const item of shoppingCart.cart.cart) {
     totalItems += item.qty;
   }
-
+  //Context User
+  const { isAuthenticated, setIsAuthenticated } = useContext(Auth);
+  //LogOut
+  const handleLogout = () => {
+    logout();
+    setIsAuthenticated(false);
+  };
   return (
     <nav className={`navbar ${showLinks ? "showNav" : "hideNav"}`}>
       {/***** Logo *****/}
@@ -55,15 +63,48 @@ function Navbar() {
         >
           <li className="navbarLinkItem">Contact</li>
         </NavLink>
-        {/***** Login *****/}
-        <NavLink
-          exact
-          activeClassName="current"
-          to="/Login"
-          className="navbarLinkContainer"
-        >
-          <li className="navbarLinkItem ">Connexion</li>
-        </NavLink>
+
+        {/********** User  **********/}
+
+        {(!isAuthenticated && (
+          <>
+            {/***** Login *****/}
+            <NavLink
+              exact
+              activeClassName="current"
+              to="/Login"
+              className="navbarLinkContainer"
+            >
+              <li className="navbarLinkItem ">Connexion</li>
+            </NavLink>
+          </>
+        )) || (
+          <>
+            {/***** History *****/}
+            <NavLink
+              exact
+              activeClassName="current"
+              to="/history"
+              className="navbarLinkContainer"
+            >
+              <li className="navbarLinkItem ">Mon compte</li>
+            </NavLink>
+
+            {/***** Logout *****/}
+
+            <li
+              className="navbarLinkContainer"
+              activeClassName="current"
+              onClick={handleLogout}
+              className="navbarLinkItem "
+            >
+              <boutton onClick={handleLogout} className="navbarLinkItem ">
+                Déconnexion
+              </boutton>
+            </li>
+          </>
+        )}
+
         <NavLink
           exact
           activeClassName="current"
