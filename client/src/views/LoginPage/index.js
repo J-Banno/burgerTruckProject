@@ -6,7 +6,7 @@ import Login from "../../components/Auth/Login/loginForm";
 
 export default function LoginPage() {
   return (
-    <div>
+    <>
       <Navbar />
 
       <div className="bagckroundLogin">
@@ -14,6 +14,6 @@ export default function LoginPage() {
       </div>
 
       <Footer />
-    </div>
+    </>
   );
 }

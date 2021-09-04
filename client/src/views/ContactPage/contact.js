@@ -33,7 +33,7 @@ export default function Contact() {
               className="adressCompagny"
               title="Adress BurgerTruck"
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2913.937054393264!2d6.018300615468554!3d43.084818679144945!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12c91ed75a911315%3A0xd43c7fde33472c5d!2s64%20Place%20des%20Oursini%C3%A8res%2C%2083220%20Le%20Pradet!5e0!3m2!1sfr!2sfr!4v1626278502753!5m2!1sfr!2sfr"
-              allowfullscreen=""
+              allowFullScreen
               loading="lazy"
             ></iframe>
           </div>

@@ -33,10 +33,9 @@ export default function RegistrationForm(props) {
     const responseData = await response.json();
     if (responseData.success === true) {
       localStorage.setItem("token", responseData.token);
-      setMessage = responseData.Message;
-      history.push("/home");
+      history.push("/");
     }
-    console.log(responseData.token);
+    console.log(responseData);
   }
 
   // Update users //

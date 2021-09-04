@@ -26,7 +26,9 @@ const login = {
       });
       res.json({ success: true, token });
     } else {
-      res.status(401).json({ success: false });
+      res
+        .status(401)
+        .json({ success: false, message: "Mot de passe non valide" });
     }
   },
 };

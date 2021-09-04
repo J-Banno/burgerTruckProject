@@ -29,6 +29,7 @@ export default function LoginForm() {
       // Waiting for the response from the api//
       const response = await fetch("http://localhost:8000/login", options);
       const responseData = await response.json();
+      console.log(responseData);
       if (responseData.success === true) {
         addItem("token", responseData.token);
         window.location.reload(false);

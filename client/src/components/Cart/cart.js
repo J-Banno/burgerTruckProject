@@ -1,4 +1,5 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
 import Navbar from "../Layout/Header/navbar";
 import Footer from "../Layout/Footer/footer";
 import * as actionTypes from "../../lib/Redux/constants/cartConstants";
@@ -7,6 +8,8 @@ import { useSelector, useDispatch } from "react-redux";
 import "./cart.css";
 
 export default function CartPage() {
+  const history = useHistory();
+
   const { cart } = useSelector((state) => ({ ...state.cart }));
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cart));
@@ -93,7 +96,12 @@ export default function CartPage() {
         </table>
         <div className="totalCartContainer">
           <p className="totalPrice">Total : {totalPrice.toFixed(2)} €</p>
-          <button className="btnCart">Procéder au paiement</button>
+          <button
+            onClick={() => history.push("/checkoutForm")}
+            className="btnCart"
+          >
+            Procéder au paiement
+          </button>
         </div>
 
         <Footer />

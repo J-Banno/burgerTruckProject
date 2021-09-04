@@ -93,6 +93,7 @@ export default function CardProduct(props) {
           ></input>
         </div>
         <span ref={addingInfo} className="addingInfo"></span>
+
         <button className="submitProductCard">Ajouter au panier</button>
       </form>
     </div>

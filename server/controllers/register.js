@@ -35,11 +35,12 @@ const register = {
     newUser.save((error) => {
       if (error) {
         console.log(error);
-        res.status(400).json({ Message: "Une erreur s'est produite" });
+        res.status(400).json({ Message: { error } });
       } else {
-        res
-          .status(200)
-          .json({ Message: "Votre inscription a été pris en compte." });
+        res.status(200).json({
+          success: true,
+          Message: "Votre inscription a été pris en compte.",
+        });
       }
     });
   },
