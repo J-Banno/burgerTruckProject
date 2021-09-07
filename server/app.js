@@ -12,6 +12,7 @@ var usersRouter = require("./routes/users");
 var registerRouter = require("./routes/register");
 var productsRouter = require("./routes/products");
 var loginRouter = require("./routes/login");
+var adminRouter = require("./routes/admin");
 
 //Module db
 const dbConfig = require("./config/db.config");
@@ -43,6 +44,7 @@ app.use("/users", usersRouter);
 app.use("/login", loginRouter);
 app.use("/registration", registerRouter);
 app.use("/products", productsRouter);
+app.use("/admin", adminRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

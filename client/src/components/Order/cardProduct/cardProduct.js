@@ -11,7 +11,7 @@ export default function CardProduct(props) {
   };
   const [quantityProduct, setQuantityProduct] = useState(1);
 
-  //Local Storage
+  //Cart State
   const { cart } = useSelector((state) => ({ ...state.cart }));
 
   useEffect(() => {
@@ -28,9 +28,6 @@ export default function CardProduct(props) {
 
   const addToCart = (e) => {
     e.preventDefault();
-
-    //Id click Product
-    const keyProduct = props.data._id;
 
     //Add redux
     const itemAdded = {

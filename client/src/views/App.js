@@ -16,6 +16,7 @@ import Register from "./RegisterPage/index";
 import CartPage from "../components/Cart/cart";
 import HistoryPage from "./HistoryPage/index";
 import CheckoutForm from "./CheckoutForm/checkoutForm";
+import AdminPage from "./AdminPage/index";
 
 import ErrorPage from "../components/Auth/errorPage/errorPage";
 
@@ -23,7 +24,6 @@ function App() {
   //Context
   const [isAuthenticated, setIsAuthenticated] = useState(hasAuthenticated());
   console.log("context :" + isAuthenticated);
-  console.log("Test auth :" + isAuthenticated);
 
   return (
     <Auth.Provider value={{ isAuthenticated, setIsAuthenticated }}>
@@ -35,6 +35,7 @@ function App() {
           <Route path="/login" exact component={Login} />
           <Route path="/register" exact component={Register} />
           <Route path="/cart" exact component={CartPage} />
+          <Route path="/dashboardAdmin" exact component={AdminPage} />
           <AuthenticatedRoute path="/history" component={HistoryPage} />
           <CheckoutRoute path="/checkoutForm" component={CheckoutForm} />
           <Route path="/" component={ErrorPage}></Route>

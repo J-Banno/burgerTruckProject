@@ -1,6 +1,6 @@
 import React from "react";
 import Auth from "../../../lib/Contexts/auth";
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import "./navbar.css";
 import Logo from "../../../assets/images/Logo.png";
@@ -9,8 +9,8 @@ import { useSelector } from "react-redux";
 import { logout } from "../../../services/authApi";
 
 function Navbar() {
+  //Private route
   const [showLinks, setShowLinks] = useState(false);
-
   const handleShowLinks = () => {
     setShowLinks(!showLinks);
   };
@@ -98,9 +98,9 @@ function Navbar() {
               onClick={handleLogout}
               className="navbarLinkItem "
             >
-              <boutton onClick={handleLogout} className="navbarLinkItem ">
+              <button onClick={handleLogout} className="navbarLinkItem ">
                 Déconnexion
-              </boutton>
+              </button>
             </li>
           </>
         )}

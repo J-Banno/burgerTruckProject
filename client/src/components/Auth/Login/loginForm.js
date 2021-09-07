@@ -1,11 +1,16 @@
 import React from "react";
 import "./loginForm.css";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useState, useEffect, useContext } from "react";
-import { useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import * as actionTypes from "../../../lib/Redux/constants/userConstants";
 import Auth from "../../../lib/Contexts/auth";
 import { addItem } from "../../../services/localStorage";
 export default function LoginForm() {
+  //Cart State
+  const { user } = useSelector((state) => ({ ...state.user }));
+  const dispatch = useDispatch();
+
   //Context
   const { isAuthenticated } = useContext(Auth);
   console.log("Login : " + isAuthenticated);
@@ -30,11 +35,20 @@ export default function LoginForm() {
       const response = await fetch("http://localhost:8000/login", options);
       const responseData = await response.json();
       console.log(responseData);
+
       if (responseData.success === true) {
-        addItem("token", responseData.token);
+        const userConnect = responseData.userConnect[0];
+        console.log(userConnect);
+        Auth._currentValue.isAuthenticated = true;
+        dispatch({
+          type: actionTypes.GET_USER_SUCCESS,
+          payload: userConnect,
+        });
+        addItem("user", responseData.token);
+
+        history.replace("/order");
         window.location.reload(false);
       }
-      console.log("Token : " + responseData.token);
     } catch ({ response }) {
       console.log(response);
     }

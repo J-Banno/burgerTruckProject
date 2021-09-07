@@ -30,9 +30,10 @@ export default function RegistrationForm(props) {
     // Waiting for the response from the api//
 
     const response = await fetch("http://localhost:8000/registration", options);
+    console.log(response);
     const responseData = await response.json();
     if (responseData.success === true) {
-      localStorage.setItem("token", responseData.token);
+      localStorage.setItem("user", responseData.token);
       history.push("/");
     }
     console.log(responseData);

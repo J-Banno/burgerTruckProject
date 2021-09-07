@@ -9,6 +9,8 @@ const login = {
 
     // Find user
     const user = await User.findOne({ mail: req.body.mail }).exec();
+    const userInfo = await User.find({ mail: req.body.mail }).exec();
+
     console.log(user);
     if (user instanceof Error) {
       res.status(500).json({ message: "erreur " });
@@ -18,17 +20,36 @@ const login = {
       res.status(500).json({ message: "User inconnu" });
       return;
     }
-
+    console.log(user.roles);
     if (bcrypt.compareSync(req.body.password, user.password)) {
       //Token Id//
       const token = jwt.sign({ userId: user._id }, "test", {
         expiresIn: "24h",
       });
-      res.json({ success: true, token });
-    } else {
-      res
-        .status(401)
-        .json({ success: false, message: "Mot de passe non valide" });
+
+      if (user.roles === "ROLE_ADMIN") {
+        res.json({
+          success: true,
+          userConnect: userInfo,
+          token,
+          admin: true,
+          user: true,
+          message: "Welcom admin",
+        });
+      } else if (user.roles === "ROLE_ADMIN") {
+        res.json({
+          success: true,
+          userConnect: userInfo,
+          token,
+          admin: false,
+          user: true,
+          message: "Welcom user",
+        });
+      } else {
+        res
+          .status(401)
+          .json({ success: false, message: "Mot de passe non valide" });
+      }
     }
   },
 };
