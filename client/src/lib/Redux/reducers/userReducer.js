@@ -31,8 +31,12 @@ export const userReducer = (state = INITIAL_STATE, action) => {
           user: [...state.user, newUser],
         };
       }
-    default: {
-      return state;
+
+    case actionTypes.RESET_USER: {
+      window.location.reload(false);
+      return { user: [] };
     }
+    default:
+      return state;
   }
 };

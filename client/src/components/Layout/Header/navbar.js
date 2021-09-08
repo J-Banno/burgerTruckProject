@@ -1,14 +1,25 @@
 import React from "react";
 import Auth from "../../../lib/Contexts/auth";
 import { useState, useContext, useEffect } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import "./navbar.css";
 import Logo from "../../../assets/images/Logo.png";
 import Cart from "../../../assets/images/cart.png";
-import { useSelector } from "react-redux";
-import { logout } from "../../../services/authApi";
+import { useSelector, useDispatch } from "react-redux";
+import { logout, isUser, isAdmin } from "../../../services/authApi";
+import * as actionTypes from "../../../lib/Redux/constants/userConstants";
 
 function Navbar() {
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const { user } = useSelector((state) => ({ ...state.user }));
+  const userConnect = user[0];
+  const userRole = isUser(userConnect);
+  const adminRole = isAdmin(userConnect);
+  console.log(userConnect);
+  console.log(userRole);
+  console.log(adminRole);
+
   //Private route
   const [showLinks, setShowLinks] = useState(false);
   const handleShowLinks = () => {
@@ -26,9 +37,18 @@ function Navbar() {
   const { isAuthenticated, setIsAuthenticated } = useContext(Auth);
   //LogOut
   const handleLogout = () => {
-    logout();
-    setIsAuthenticated(false);
+    // logout();
+    // setIsAuthenticated(false);
+    dispatch({
+      type: actionTypes.RESET_USER,
+    });
   };
+
+  // Redirection loginPage
+  // useEffect(() => {
+  //   if (userRole) history.replace("/history");
+  // }, [history, userRole]);
+
   return (
     <nav className={`navbar ${showLinks ? "showNav" : "hideNav"}`}>
       {/***** Logo *****/}
@@ -64,9 +84,25 @@ function Navbar() {
           <li className="navbarLinkItem">Contact</li>
         </NavLink>
 
+        {/********** Admin  **********/}
+
+        {adminRole && (
+          <>
+            {/***** Dasboard *****/}
+            <NavLink
+              exact
+              activeClassName="current"
+              to="/dashboardAdmin"
+              className="navbarLinkContainer"
+            >
+              <li className="navbarLinkItem ">Admin</li>
+            </NavLink>
+          </>
+        )}
+
         {/********** User  **********/}
 
-        {(!isAuthenticated && (
+        {(!userRole && (
           <>
             {/***** Login *****/}
             <NavLink
@@ -98,9 +134,9 @@ function Navbar() {
               onClick={handleLogout}
               className="navbarLinkItem "
             >
-              <button onClick={handleLogout} className="navbarLinkItem ">
+              <boutton onClick={handleLogout} className="navbarLinkItem ">
                 Déconnexion
-              </button>
+              </boutton>
             </li>
           </>
         )}

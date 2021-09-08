@@ -13,7 +13,6 @@ export default function LoginForm() {
 
   //Context
   const { isAuthenticated } = useContext(Auth);
-  console.log("Login : " + isAuthenticated);
 
   const history = useHistory();
   //Sate
@@ -38,7 +37,7 @@ export default function LoginForm() {
 
       if (responseData.success === true) {
         const userConnect = responseData.userConnect[0];
-        console.log(userConnect);
+        console.log(userConnect.roles);
         Auth._currentValue.isAuthenticated = true;
         dispatch({
           type: actionTypes.GET_USER_SUCCESS,
@@ -47,7 +46,7 @@ export default function LoginForm() {
         addItem("user", responseData.token);
 
         history.replace("/order");
-        window.location.reload(false);
+        // window.location.reload(false);
       }
     } catch ({ response }) {
       console.log(response);
@@ -57,12 +56,7 @@ export default function LoginForm() {
   // Update users //
   function handleLogin(e) {
     setConnection({ ...newConnection, [e.target.name]: e.target.value });
-    console.log(e.target.value);
   }
-  // Redirection loginPage
-  useEffect(() => {
-    if (isAuthenticated) history.replace("/history");
-  }, [history, isAuthenticated]);
 
   return (
     <form className="loginFomContainer" action="" method="POST">

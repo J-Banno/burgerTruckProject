@@ -14,3 +14,18 @@ export function logout() {
   removeItem("token");
   removeItem("user");
 }
+
+//Gestion role
+export function isUser(user) {
+  if (user?.roles === "ROLE_USER" || user?.roles === "ROLE_ADMIN") {
+    return true;
+  }
+  return false;
+}
+
+export function isAdmin(user) {
+  if (user?.roles === "ROLE_ADMIN") {
+    return true;
+  }
+  return false;
+}

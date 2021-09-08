@@ -23,7 +23,6 @@ import ErrorPage from "../components/Auth/errorPage/errorPage";
 function App() {
   //Context
   const [isAuthenticated, setIsAuthenticated] = useState(hasAuthenticated());
-  console.log("context :" + isAuthenticated);
 
   return (
     <Auth.Provider value={{ isAuthenticated, setIsAuthenticated }}>
