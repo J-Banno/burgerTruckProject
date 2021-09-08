@@ -7,6 +7,7 @@ import Auth from "../lib/Contexts/auth";
 //Private Route
 import AuthenticatedRoute from "../components/ProtectedRoutes/authenticatedRoute";
 import CheckoutRoute from "../components/ProtectedRoutes/checkoutRoute";
+import AdminRoute from "../components/ProtectedRoutes/adminRoute";
 //Views
 import Home from "./HomePage";
 import Login from "../views/LoginPage/index";
@@ -21,7 +22,6 @@ import AdminPage from "./AdminPage/index";
 import ErrorPage from "../components/Auth/errorPage/errorPage";
 
 function App() {
-  //Context
   const [isAuthenticated, setIsAuthenticated] = useState(hasAuthenticated());
 
   return (
@@ -34,7 +34,7 @@ function App() {
           <Route path="/login" exact component={Login} />
           <Route path="/register" exact component={Register} />
           <Route path="/cart" exact component={CartPage} />
-          <Route path="/dashboardAdmin" exact component={AdminPage} />
+          <AdminRoute path="/dashboardAdmin" component={AdminPage} />
           <AuthenticatedRoute path="/history" component={HistoryPage} />
           <CheckoutRoute path="/checkoutForm" component={CheckoutForm} />
           <Route path="/" component={ErrorPage}></Route>
