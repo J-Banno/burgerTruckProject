@@ -10,8 +10,26 @@ import {
 //Stripe
 import { Elements } from "@stripe/react-stripe-js";
 import { stripePromise } from "../../lib/Stripe/elementsProvider";
+import { loadStripe } from "@stripe/stripe-js";
 
 export default function CheckoutForm() {
+  const processPayment = async (e, order) => {
+    let stripePromise = loadStripe(
+      "pk_test_51JVXspIur9FHorho2S740fuKgE54fb0hav2QoEhYn5SgvtjwDZUD3m1APqFwx8D6fz0Oj2pGk6pN2y6eGnLcBUK6008ry3tZFL"
+    );
+    const stripe = await stripePromise;
+    e.preventDefault();
+    const options = {
+      method: "POST",
+      body: JSON.stringify(order),
+      headers: { "content-type": "application/json" },
+    };
+
+    const response = await fetch("http://localhost:8000/checkout", options);
+    const responseData = await response.json();
+    console.dir(responseData);
+  };
+
   return (
     <>
       <Navbar />
@@ -49,7 +67,7 @@ export default function CheckoutForm() {
               hidePostalCode: true,
             }}
           />
-          <button className="submitCheckout" type="submit">
+          <button className="submitCheckout" onClick={processPayment}>
             Valider le paiement
           </button>
         </form>

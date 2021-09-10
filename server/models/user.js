@@ -1,5 +1,15 @@
 const mongoose = require("mongoose");
 
+const OrderSchema = new mongoose.Schema({
+  title: String,
+  description: String,
+  price: Number,
+  category: String,
+  date: Date,
+  statut: String,
+  idUserOriginal: String,
+});
+
 const UserSchema = new mongoose.Schema({
   lastName: { type: String, unique: true },
   firstName: { type: String, unique: true },
@@ -12,6 +22,7 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  order: [OrderSchema],
 });
 
 const User = mongoose.model("User", UserSchema);
