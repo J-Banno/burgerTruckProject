@@ -1,35 +1,8 @@
-.containerCheckOut {
-  margin: 50px auto 50px auto;
+.conatianerSubmitCheckout {
+  margin: 10px 0 10px 0;
   display: flex;
   justify-content: center;
-  flex-direction: column;
   align-items: center;
-  width: 70%;
-  border-radius: 10px;
-  padding: 50px 50px 50px 50px;
-  background-color: rgba(8, 12, 18, 0.75);
-  box-shadow: 5px 13px 50px 6px rgba(42, 100, 83, 0.8);
-}
-.checkoutTitle {
-  margin-top: 50px;
-  text-align: center;
-}
-.cardCheckoutTitle {
-  font-size: 14px;
-  text-align: center;
-  margin-bottom: 25px;
-}
-.labelCardFrom {
-  margin-top: 10px;
-  text-align: start;
-}
-.cardInfo {
-  background-color: #ccf0e8;
-  margin: 5px;
-  padding: 7px;
-  border-radius: 3px;
-  width: 100%;
-  max-width: 400px;
 }
 .submitCheckout {
   margin-top: 5px;

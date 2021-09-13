@@ -71,6 +71,10 @@ export const cartReducer = (state = INITIAL_STATE, action) => {
       return {
         cart: newCart,
       };
+    case actionTypes.CART_RESET:
+      return {
+        cart: [],
+      };
   }
   return state;
 };

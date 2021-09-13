@@ -1,11 +1,13 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
-import Navbar from "../Layout/Header/navbar";
-import Footer from "../Layout/Footer/footer";
+import Navbar from "../../components/Layout/Header/navbar";
+import Footer from "../../components/Layout/Footer/footer";
 import * as actionTypes from "../../lib/Redux/constants/cartConstants";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import CheckoutFrom from "../../components/Checkout/CheckoutForm/checkoutForm.js";
 import "./cart.css";
+import CheckoutSuccess from "../../components/Checkout/checkoutSuccess";
 
 export default function CartPage() {
   const history = useHistory();
@@ -96,14 +98,8 @@ export default function CartPage() {
         </table>
         <div className="totalCartContainer">
           <p className="totalPrice">Total : {totalPrice.toFixed(2)} €</p>
-          <button
-            onClick={() => history.push("/checkoutForm")}
-            className="btnCart"
-          >
-            Procéder au paiement
-          </button>
         </div>
-
+        <CheckoutFrom />
         <Footer />
       </>
     );

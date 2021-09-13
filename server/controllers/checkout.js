@@ -6,26 +6,28 @@ const domain = process.env.DB_HOST;
 const checkout = {
   createSession: async (req, res) => {
     try {
+      cartProducts = req.body;
+      const cartPrice = [];
+
+      for (let i = 0; i < req.body.length; i++) {
+        cartPrice.push(req.body[i].total);
+        const reducer = (previousValue, currentValue) =>
+          previousValue + currentValue;
+        totalPrice = cartPrice.reduce(reducer);
+      }
+      console.log(cartProducts);
+      console.log(`Prix total : ${totalPrice}`);
+
       const session = await stripe.checkout.sessions.create({
-        line_items: [
-          {
-            price_data: {
-              currency: "usd",
-              product_data: {
-                name: "T-shirt",
-              },
-              unit_amount: 2000,
-            },
-            quantity: 1,
-          },
-        ],
+        line_items: cartProducts,
         payment_method_types: ["card"],
         mode: "payment",
-        success_url: `${domain}/success.html`,
-        cancel_url: `${domain}/cancel.html`,
+        success_url: `${domain}success.html`,
+        cancel_url: `${domain}cancel.html`,
       });
       res.json({ id: session.id, message: "Payment is accepted" });
     } catch (err) {
+      console.log(err);
       return res.status(500).send(`error payment ${err}`);
     }
   },

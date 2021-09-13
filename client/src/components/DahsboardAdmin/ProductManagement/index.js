@@ -50,7 +50,7 @@ export default function ProductManagement() {
   return (
     <>
       <h2 className="addProductTitle">Ajouter un produit</h2>
-      <form className="loginFomContainer">
+      <form className="loginFomContainer" enctype="multipart/form-data">
         <label htmlFor="title" className="labelAddProduct">
           Dessignation
         </label>
