@@ -14,9 +14,9 @@ import Login from "../views/LoginPage/index";
 import Contact from "../views/ContactPage/contact";
 import Order from "../views/OrderPage/order";
 import Register from "./RegisterPage/index";
-import CartPage from "../components/Cart/cart";
+import CartPage from "./Cart/cart";
 import HistoryPage from "./HistoryPage/index";
-import CheckoutForm from "./CheckoutForm/checkoutForm";
+import CheckoutForm from "../components/Checkout/CheckoutForm/checkoutForm";
 import Success from "../components/Checkout/checkoutSuccess/index";
 import Cancel from "../components/Checkout/checkoutCancel/index";
 

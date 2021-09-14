@@ -14,6 +14,7 @@ var productsRouter = require("./routes/products");
 var loginRouter = require("./routes/login");
 var adminRouter = require("./routes/admin");
 var checkoutRouter = require("./routes/stripe");
+var orderRouter = require("./routes/order");
 
 //Module db
 const dbConfig = require("./config/db.config");
@@ -47,6 +48,7 @@ app.use("/registration", registerRouter);
 app.use("/products", productsRouter);
 app.use("/admin", adminRouter);
 app.use("/checkout", checkoutRouter);
+app.use("/order", orderRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
