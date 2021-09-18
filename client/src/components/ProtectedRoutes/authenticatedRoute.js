@@ -7,7 +7,7 @@ const AuthenticatedRoute = ({ path, component }) => {
   const userRole = isUser(userConnect);
   const userAdmin = isAdmin(userConnect);
 
-  return userAdmin ? (
+  return userRole ? (
     <Route exact path={path} component={component} />
   ) : (
     <Redirect to="/login" />

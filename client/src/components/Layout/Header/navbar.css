@@ -8,9 +8,6 @@
 .current {
   border-bottom: solid 2px #e4a619;
 }
-.current > li {
-  font-size: 20px;
-}
 
 .navbarLogoContainer {
   display: flex;

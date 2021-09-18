@@ -1,12 +1,11 @@
 import React from "react";
-import Auth from "../../../lib/Contexts/auth";
 import { useState, useContext, useEffect } from "react";
 import { NavLink, useHistory } from "react-router-dom";
 import "./navbar.css";
 import Logo from "../../../assets/images/Logo.png";
 import Cart from "../../../assets/images/cart.png";
 import { useSelector, useDispatch } from "react-redux";
-import { logout, isUser, isAdmin } from "../../../services/authApi";
+import { isUser, isAdmin } from "../../../services/authApi";
 import * as actionTypes from "../../../lib/Redux/constants/userConstants";
 
 function Navbar() {
@@ -17,8 +16,8 @@ function Navbar() {
   const userRole = isUser(userConnect);
   const adminRole = isAdmin(userConnect);
   console.log(userConnect);
-  console.log(userRole);
-  console.log(adminRole);
+  console.log(`Role user : ${userRole}`);
+  console.log(`Role admin : ${adminRole}`);
 
   //Private route
   const [showLinks, setShowLinks] = useState(false);
@@ -33,21 +32,12 @@ function Navbar() {
   for (const item of shoppingCart.cart.cart) {
     totalItems += item.qty;
   }
-  //Context User
-  const { isAuthenticated, setIsAuthenticated } = useContext(Auth);
   //LogOut
   const handleLogout = () => {
-    // logout();
-    // setIsAuthenticated(false);
     dispatch({
       type: actionTypes.RESET_USER,
     });
   };
-
-  // Redirection loginPage
-  // useEffect(() => {
-  //   if (userRole) history.replace("/history");
-  // }, [history, userRole]);
 
   function adminRoute() {
     if (adminRole === true) {
@@ -58,7 +48,7 @@ function Navbar() {
           to="/dashboardAdmin"
           className="navbarLinkContainer"
         >
-          <li className="navbarLinkItem ">Admin</li>
+          <li className="navbarLinkItem ">Produits</li>
         </NavLink>
       );
     }
@@ -74,7 +64,11 @@ function Navbar() {
             to="/history"
             className="navbarLinkContainer"
           >
-            <li className="navbarLinkItem ">Mon compte</li>
+            {adminRole === true ? (
+              <li className="navbarLinkItem ">Commandes</li>
+            ) : (
+              <li className="navbarLinkItem ">Mon compte</li>
+            )}
           </NavLink>
 
           <li
@@ -139,12 +133,10 @@ function Navbar() {
         </NavLink>
 
         {/********** Admin  **********/}
-
         {adminRoute()}
-        {userRoute()}
 
         {/********** User  **********/}
-
+        {userRoute()}
         <NavLink
           exact
           activeClassName="current"

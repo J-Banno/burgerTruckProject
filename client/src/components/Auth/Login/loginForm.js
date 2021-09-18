@@ -46,7 +46,6 @@ export default function LoginForm() {
         addItem("user", responseData.token);
 
         history.replace("/order");
-        // window.location.reload(false);
       }
     } catch ({ response }) {
       console.log(response);
