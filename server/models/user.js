@@ -11,9 +11,9 @@ const OrderSchema = new mongoose.Schema({
 });
 
 const UserSchema = new mongoose.Schema({
-  lastName: { type: String, unique: true },
-  firstName: { type: String, unique: true },
-  mail: { type: String, unique: true },
+  lastName: { type: String, required: true },
+  firstName: { type: String, required: true },
+  mail: { type: String, required: true, unique: true },
   password: { type: String, required: true },
   adress: { type: String, required: true },
   city: { type: String, required: true },
@@ -22,7 +22,7 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  order: [OrderSchema],
+  // order: [OrderSchema],
 });
 
 const User = mongoose.model("User", UserSchema);

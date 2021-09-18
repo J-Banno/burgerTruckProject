@@ -35,6 +35,8 @@ export default function RegistrationForm(props) {
     if (responseData.success === true) {
       localStorage.setItem("user", responseData.token);
       history.push("/");
+    } else {
+      setMessage(responseData.message);
     }
     console.log(responseData);
   }

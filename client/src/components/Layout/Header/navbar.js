@@ -49,6 +49,60 @@ function Navbar() {
   //   if (userRole) history.replace("/history");
   // }, [history, userRole]);
 
+  function adminRoute() {
+    if (adminRole === true) {
+      return (
+        <NavLink
+          exact
+          activeClassName="current"
+          to="/dashboardAdmin"
+          className="navbarLinkContainer"
+        >
+          <li className="navbarLinkItem ">Admin</li>
+        </NavLink>
+      );
+    }
+  }
+
+  function userRoute() {
+    if (userRole === true) {
+      return (
+        <>
+          <NavLink
+            exact
+            activeClassName="current"
+            to="/history"
+            className="navbarLinkContainer"
+          >
+            <li className="navbarLinkItem ">Mon compte</li>
+          </NavLink>
+
+          <li
+            className="navbarLinkContainer"
+            activeClassName="current"
+            onClick={handleLogout}
+            className="navbarLinkItem "
+          >
+            <boutton onClick={handleLogout} className="navbarLinkItem ">
+              Déconnexion
+            </boutton>
+          </li>
+        </>
+      );
+    } else {
+      return (
+        <NavLink
+          exact
+          activeClassName="current"
+          to="/Login"
+          className="navbarLinkContainer"
+        >
+          <li className="navbarLinkItem ">Connexion</li>
+        </NavLink>
+      );
+    }
+  }
+
   return (
     <nav className={`navbar ${showLinks ? "showNav" : "hideNav"}`}>
       {/***** Logo *****/}
@@ -86,60 +140,10 @@ function Navbar() {
 
         {/********** Admin  **********/}
 
-        {adminRole && (
-          <>
-            {/***** Dasboard *****/}
-            <NavLink
-              exact
-              activeClassName="current"
-              to="/dashboardAdmin"
-              className="navbarLinkContainer"
-            >
-              <li className="navbarLinkItem ">Admin</li>
-            </NavLink>
-          </>
-        )}
+        {adminRoute()}
+        {userRoute()}
 
         {/********** User  **********/}
-
-        {(!userRole && (
-          <>
-            {/***** Login *****/}
-            <NavLink
-              exact
-              activeClassName="current"
-              to="/Login"
-              className="navbarLinkContainer"
-            >
-              <li className="navbarLinkItem ">Connexion</li>
-            </NavLink>
-          </>
-        )) || (
-          <>
-            {/***** History *****/}
-            <NavLink
-              exact
-              activeClassName="current"
-              to="/history"
-              className="navbarLinkContainer"
-            >
-              <li className="navbarLinkItem ">Mon compte</li>
-            </NavLink>
-
-            {/***** Logout *****/}
-
-            <li
-              className="navbarLinkContainer"
-              activeClassName="current"
-              onClick={handleLogout}
-              className="navbarLinkItem "
-            >
-              <boutton onClick={handleLogout} className="navbarLinkItem ">
-                Déconnexion
-              </boutton>
-            </li>
-          </>
-        )}
 
         <NavLink
           exact

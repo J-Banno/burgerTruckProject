@@ -7,12 +7,12 @@ const admin = {
     //Role User ?
 
     //Admin Data
-    const productData = req.body;
-    console.log(productData);
+    const productData = req.body.product;
+    console.log(req.body.imageProduct);
 
     if (productData) {
       let createProduct = new Products({
-        image: productData.image,
+        image: "",
         title: productData.title,
         description: productData.description,
         price: productData.price,

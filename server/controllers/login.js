@@ -36,7 +36,7 @@ const login = {
           user: true,
           message: "Welcom admin",
         });
-      } else if (user.roles === "ROLE_ADMIN") {
+      } else if (user.roles === "ROLE_USER") {
         res.json({
           success: true,
           userConnect: userInfo,

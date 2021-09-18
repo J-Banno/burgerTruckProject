@@ -7,22 +7,17 @@ const orders = {
     //Création du document à partir du modèle//
 
     const userData = await User.findOne({ _id: req.body.decodedToken.userId });
-    console.log(userData.mail);
 
     const newOrder = new Order({
       dateCreation: new Date(),
       statut: "inPreparation",
+      isFinalize: false,
       user: {
         mail: userData.mail,
         id: userData._id,
       },
       items: req.body.cart.cart,
     });
-    console.log(newOrder);
-    // const cart = req.body.cart.cart;
-    // const userToken = req.body.userToken;
-
-    console.log(req.body.cart.cart);
 
     //Save Order//
     newOrder.save((error) => {
@@ -36,6 +31,17 @@ const orders = {
         });
       }
     });
+  },
+
+  getOrders: async (req, res) => {
+    try {
+      const order = await Order.find({ isFinalize: false });
+
+      res.status(200).json({ order, success: true });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: "Server Error" });
+    }
   },
 };
 

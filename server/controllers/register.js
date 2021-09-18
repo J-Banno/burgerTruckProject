@@ -32,17 +32,25 @@ const register = {
     console.log(newUser);
 
     //Save User//
-    newUser.save((error) => {
-      if (error) {
-        console.log(error);
-        res.status(400).json({ Message: { error } });
-      } else {
-        res.status(200).json({
-          success: true,
-          Message: "Votre inscription a été pris en compte.",
-        });
-      }
-    });
+
+    if (req.body.password != req.body.passwordConfirm) {
+      res.status(400).json({
+        success: false,
+        message: "Les mots de pass ne sont pas similaires",
+      });
+    } else {
+      newUser.save((error) => {
+        if (error) {
+          console.log(error);
+          res.status(400).json({ message: { error } });
+        } else {
+          res.status(200).json({
+            success: true,
+            Message: "Votre inscription a été pris en compte.",
+          });
+        }
+      });
+    }
   },
 };
 

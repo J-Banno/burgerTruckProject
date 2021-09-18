@@ -6,34 +6,45 @@ export default function ProductManagement() {
   const token = getItem("user");
 
   //Sate Message add product
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState();
+  //State Image
+  const [imageProduct, setImageProduct] = useState();
+  console.log(imageProduct);
   // State Product
   const [product, setProduct] = useState({
     title: "",
     description: "",
     price: "",
-    category: "",
-    image: "",
+    category: "burger",
   });
+
   // Update Product
   function handleProduct(e) {
     setProduct({ ...product, [e.target.id]: e.target.value });
   }
 
+  //Upload Image
+  function fileSelectHandler(e) {
+    setImageProduct(e.target.files[0]);
+  }
+
   //Request
   async function postProductData(e) {
     e.preventDefault();
-    console.log(product);
+
+    const imageData = new FormData();
+    imageData.append("file", imageProduct);
+    console.dir(imageData.file);
     try {
       const options = {
         method: "POST",
-        body: JSON.stringify(product),
+
+        body: JSON.stringify({ imageProduct, product }),
         headers: { "content-type": "application/json" },
       };
       console.log(options);
       // Waiting for the response from the api//
       const response = await fetch("http://localhost:8000/admin", options);
-      console.log(response);
       const responseData = await response.json();
       console.log(responseData);
 
@@ -50,7 +61,7 @@ export default function ProductManagement() {
   return (
     <>
       <h2 className="addProductTitle">Ajouter un produit</h2>
-      <form className="loginFomContainer" enctype="multipart/form-data">
+      <form enctype="multipart/form-data" className="loginFomContainer">
         <label htmlFor="title" className="labelAddProduct">
           Dessignation
         </label>
@@ -102,13 +113,7 @@ export default function ProductManagement() {
         <label htmlFor="image" className="labelAddProduct">
           Image produit
         </label>
-        <input
-          type="file"
-          id="image"
-          accept="image/png, image/jpeg"
-          value={product.image}
-          onChange={handleProduct}
-        />
+        <input type="file" id="image" required onChange={fileSelectHandler} />
         <button className="btnAddProduct" onClick={postProductData}>
           Valider
         </button>
