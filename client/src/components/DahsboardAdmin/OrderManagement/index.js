@@ -1,8 +1,23 @@
 import React, { useState, useEffect } from "react";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import IconButton from "@mui/material/IconButton";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Typography from "@mui/material/Typography";
+import Paper from "@mui/material/Paper";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Switch from "@mui/material/Switch";
+import Box from "@mui/material/Box";
+import Collapse from "@mui/material/Collapse";
 
 export default function OrdersManagement() {
   const [orders, setOrders] = useState([]);
-  const [isSuccess, setIsSuccess] = useState(false);
+  const [open, setOpen] = useState(false);
   useEffect(() => {
     getOrders();
     console.log(orders);
@@ -14,64 +29,124 @@ export default function OrdersManagement() {
 
     const response = await fetch("http://localhost:8000/order", options);
     const ordersData = await response.json();
-
-    setIsSuccess(ordersData.success);
     setOrders(ordersData.order);
     console.log();
   }
 
-  function displayOrderProcduct() {
-    if (isSuccess === true) {
-      return orders.map((i) => {
-        const cartProducts = i.items[0].cart;
-        return cartProducts.map((i) => {
-          console.log(i.name);
-        });
-      });
-    } else {
-      // displayOrderProcduct();
-      console.log("Loading");
-    }
-  }
-
-  function OrderProcduct() {
-    isSuccess === true
-      ? orders.map((i) => {
-          return <h1>{i.user.mail}</h1>;
-          // <tr className="itemCartProduct" key={orders._id}>
-          //   <th width="200">{i.user.mail}</th>
-          //   <th width="150">{i.user.date} </th>
-
-          // </tr>;
-
-          // const cartProducts = i.items[0].orders;
-          // return cartProducts.map((i) => {
-          //   console.log(i.name);
-          // });
-        })
-      : // displayOrderProcduct();
-        console.log("bonjour");
+  function buttonArrow() {
+    return (
+      <TableCell>
+        <IconButton
+          aria-label="expand row"
+          size="small"
+          onClick={() => setOpen(!open)}
+        >
+          {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+        </IconButton>
+      </TableCell>
+    );
   }
 
   return (
-    <div>
-      {" "}
-      {isSuccess === true
-        ? orders.map((i) => {
-            return <h1>{i.user.mail}</h1>;
-            // <tr className="itemCartProduct" key={orders._id}>
-            //   <th width="200">{i.user.mail}</th>
-            //   <th width="150">{i.user.date} </th>
+    <>
+      <h2>Mes Commandes</h2>
+      <TableContainer component={Paper}>
+        <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
+          <TableHead>
+            <TableRow>
+              <TableCell />
+              <TableCell>Date</TableCell>
+              <TableCell align="right">Email</TableCell>
+              <TableCell align="right">Statut</TableCell>
+              <TableCell align="right">Référence</TableCell>
+            </TableRow>
+          </TableHead>
 
-            // </tr>;
-
-            // const cartProducts = i.items[0].orders;
-            // return cartProducts.map((i) => {
-            //   console.log(i.name);
-            // });
-          })
-        : // displayOrderProcduct();
-          console.log("bonjour")}
-    </div>
+          <TableBody>
+            {" "}
+            {orders.map((row) => (
+              <React.Fragment>
+                <TableRow
+                  sx={{
+                    "& > *": {
+                      borderBottom: "unset",
+                      borderColor: "secondary.main",
+                    },
+                  }}
+                >
+                  {" "}
+                  {buttonArrow()}
+                  <TableCell>{row.dateCreation}</TableCell>
+                  <TableCell align="right">{row.user.mail}</TableCell>
+                  <TableCell align="right">
+                    {" "}
+                    {row.isFinalize === false ? (
+                      <FormControlLabel
+                        value="start"
+                        control={<Switch color="primary" />}
+                        label="En préparation"
+                        labelPlacement="start"
+                      />
+                    ) : (
+                      <FormControlLabel
+                        value="start"
+                        control={<Switch color="primary" />}
+                        label="Terminé"
+                        labelPlacement="end"
+                      />
+                    )}
+                  </TableCell>
+                  <TableCell align="right">{row._id}</TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell
+                    style={{ paddingBottom: 0, paddingTop: 0 }}
+                    colSpan={6}
+                  >
+                    <Collapse in={open} timeout="auto" unmountOnExit>
+                      <Box sx={{ margin: 1 }}>
+                        <Typography variant="h6" gutterBottom component="div">
+                          Articles commandés
+                        </Typography>
+                        <Table size="small" aria-label="purchases">
+                          <TableHead>
+                            <TableRow>
+                              <TableCell>Nom</TableCell>
+                              <TableCell>Quantité</TableCell>
+                              <TableCell align="right">
+                                Prix unitaire (€)
+                              </TableCell>
+                              <TableCell align="right">
+                                Total price (€)
+                              </TableCell>
+                            </TableRow>
+                          </TableHead>
+                          <TableBody>
+                            {row.items[0].cart.map((historyRow) => (
+                              <TableRow key={historyRow._id}>
+                                <TableCell>{historyRow.name}</TableCell>
+                                <TableCell component="th" scope="row">
+                                  {historyRow.qty}
+                                </TableCell>
+                                <TableCell align="right">
+                                  {historyRow.price}
+                                </TableCell>
+                                <TableCell align="right">
+                                  {historyRow.total}
+                                </TableCell>
+                              </TableRow>
+                            ))}
+                          </TableBody>
+                        </Table>
+                      </Box>
+                    </Collapse>
+                  </TableCell>
+                </TableRow>
+              </React.Fragment>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </>
   );
 }
