@@ -7,7 +7,6 @@ import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import CheckoutFrom from "../../components/Checkout/CheckoutForm/checkoutForm.js";
 import "./cart.css";
-import CheckoutSuccess from "../../components/Checkout/checkoutSuccess";
 
 export default function CartPage() {
   const history = useHistory();

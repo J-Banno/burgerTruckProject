@@ -4,23 +4,20 @@ var jwt = require("jsonwebtoken");
 
 const login = {
   toLogIn: async (req, res) => {
-    console.log("Mail : " + req.body.mail);
-    console.log("Mot de passe : " + req.body.password);
-
     // Find user
     const user = await User.findOne({ mail: req.body.mail }).exec();
     const userInfo = await User.find({ mail: req.body.mail }).exec();
 
-    console.log(user);
     if (user instanceof Error) {
-      res.status(500).json({ message: "erreur " });
+      res.status(500).json({ message: "Connexion impossible" });
       return;
     }
     if (!user) {
-      res.status(500).json({ message: "User inconnu" });
+      res
+        .status(500)
+        .json({ message: "Email ou mot de mot de passe invalide." });
       return;
     }
-    console.log(user.roles);
     if (bcrypt.compareSync(req.body.password, user.password)) {
       //Token Id//
       const token = jwt.sign({ userId: user._id }, "test", {
@@ -46,9 +43,10 @@ const login = {
           message: "Welcom user",
         });
       } else {
-        res
-          .status(401)
-          .json({ success: false, message: "Mot de passe non valide" });
+        res.status(401).json({
+          success: false,
+          message: "Email ou mot de mot de passe invalide.",
+        });
       }
     }
   },

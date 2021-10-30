@@ -15,12 +15,14 @@ import Switch from "@mui/material/Switch";
 import Box from "@mui/material/Box";
 import Collapse from "@mui/material/Collapse";
 
+import { formatDate } from "../../../services/utils";
+
 export default function OrdersManagement() {
   const [orders, setOrders] = useState([]);
   const [open, setOpen] = useState(false);
+  const [statut, setStatut] = useState(false);
   useEffect(() => {
     getOrders();
-    console.log(orders);
   }, []);
   async function getOrders() {
     const options = {
@@ -30,20 +32,17 @@ export default function OrdersManagement() {
     const response = await fetch("http://localhost:8000/order", options);
     const ordersData = await response.json();
     setOrders(ordersData.order);
-    console.log();
   }
 
   function buttonArrow() {
     return (
-      <TableCell>
-        <IconButton
-          aria-label="expand row"
-          size="small"
-          onClick={() => setOpen(!open)}
-        >
-          {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-        </IconButton>
-      </TableCell>
+      <IconButton
+        aria-label="expand row"
+        size="small"
+        onClick={() => setOpen(!open)}
+      >
+        {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+      </IconButton>
     );
   }
 
@@ -54,8 +53,8 @@ export default function OrdersManagement() {
         <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
           <TableHead>
             <TableRow>
-              <TableCell />
-              <TableCell>Date</TableCell>
+              <TableCell>{buttonArrow()}</TableCell>
+              <TableCell align="left">Date</TableCell>
               <TableCell align="right">Email</TableCell>
               <TableCell align="right">Statut</TableCell>
               <TableCell align="right">Référence</TableCell>
@@ -63,23 +62,21 @@ export default function OrdersManagement() {
           </TableHead>
 
           <TableBody>
-            {" "}
             {orders.map((row) => (
               <React.Fragment>
                 <TableRow
+                  color="secondary"
                   sx={{
                     "& > *": {
                       borderBottom: "unset",
-                      borderColor: "secondary.main",
+                      borderColor: "secondary",
                     },
                   }}
                 >
-                  {" "}
-                  {buttonArrow()}
-                  <TableCell>{row.dateCreation}</TableCell>
+                  <TableCell />
+                  <TableCell>{formatDate(row.dateCreation)}</TableCell>
                   <TableCell align="right">{row.user.mail}</TableCell>
                   <TableCell align="right">
-                    {" "}
                     {row.isFinalize === false ? (
                       <FormControlLabel
                         value="start"

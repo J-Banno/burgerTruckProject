@@ -1,19 +1,15 @@
 import React from "react";
 import "./loginForm.css";
 import { Link, useHistory } from "react-router-dom";
-import { useState, useEffect, useContext } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
 import * as actionTypes from "../../../lib/Redux/constants/userConstants";
 import Auth from "../../../lib/Contexts/auth";
 import { addItem } from "../../../services/localStorage";
 export default function LoginForm() {
-  //Cart State
-  const { user } = useSelector((state) => ({ ...state.user }));
   const dispatch = useDispatch();
-
-  //Context
-  const { isAuthenticated } = useContext(Auth);
-
+  //Gestion error
+  const [message, setMessage] = useState("");
   const history = useHistory();
   //Sate
   let [newConnection, setConnection] = useState({
@@ -33,11 +29,10 @@ export default function LoginForm() {
       // Waiting for the response from the api//
       const response = await fetch("http://localhost:8000/login", options);
       const responseData = await response.json();
-      console.log(responseData);
 
       if (responseData.success === true) {
         const userConnect = responseData.userConnect[0];
-        console.log(userConnect.roles);
+
         Auth._currentValue.isAuthenticated = true;
         dispatch({
           type: actionTypes.GET_USER_SUCCESS,
@@ -46,6 +41,8 @@ export default function LoginForm() {
         addItem("user", responseData.token);
 
         history.replace("/order");
+      } else {
+        setMessage(responseData.message);
       }
     } catch ({ response }) {
       console.log(response);
@@ -58,7 +55,7 @@ export default function LoginForm() {
   }
 
   return (
-    <form className="loginFomContainer" action="" method="POST">
+    <form className="loginFomContainer" onSubmit={postloginData}>
       <div className="inputFormContainer">
         <h2 className="titleForm">S'identifier</h2>
 
@@ -81,12 +78,9 @@ export default function LoginForm() {
           value={newConnection.password}
           placeholder="Entrez votre mot de passe"
         />
-        <input
-          className="loginInput"
-          type="submit"
-          value="SE CONNECTER"
-          onClick={postloginData}
-        />
+        {/*Error*/}
+        <p>{message}</p>
+        <input className="loginInput" type="submit" value="SE CONNECTER" />
         <p className="loginRedirection">
           Première visite
           <Link className="loginRedirectionLink" to="/register">

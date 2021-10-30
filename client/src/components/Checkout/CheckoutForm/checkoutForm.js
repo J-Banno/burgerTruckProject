@@ -1,17 +1,14 @@
 import React from "react";
 import "./style.css";
 //Redux
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 //Stripe
-import { Elements } from "@stripe/react-stripe-js";
-import { stripePromise } from "../../../lib/Stripe/elementsProvider";
+
 import { loadStripe } from "@stripe/stripe-js";
 
 export default function CheckoutForm() {
   //Redux store
   const { cart } = useSelector((state) => ({ ...state.cart }));
-  const storeState = useSelector((state) => state);
-  const user = storeState.user;
 
   //Format stripe
   const processItem = (item) => ({

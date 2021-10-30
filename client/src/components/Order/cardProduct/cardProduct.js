@@ -34,7 +34,6 @@ export default function CardProduct(props) {
       ...props.data,
       quantity: quantityProduct,
     };
-    console.log(itemAdded);
 
     dispatch({
       type: actionTypes.ADD_TO_CART,

@@ -1,45 +1,53 @@
 //Import
 const Products = require("../models/products");
+const multer = require("multer");
+const upload = multer({
+  limits: { fileSize: 1000000 },
+}).single("myImage");
 
 const admin = {
   ///Create product///
   addProduct: async (req, res) => {
     //Role User ?
-
+    console.log("Request ---", req.body);
+    console.log("Request file ---", req.file);
+    if (!err) {
+      return res.send(200).end();
+    }
     //Admin Data
-    const productData = req.body.product;
-    console.log(req.body.imageProduct);
+    // const productData = req.body.product;
+    // console.log(req.body.imageProduct);
 
-    if (productData) {
-      let createProduct = new Products({
-        image: "",
-        title: productData.title,
-        description: productData.description,
-        price: productData.price,
-        category: productData.category,
-      });
+    // if (productData) {
+    //   let createProduct = new Products({
+    //     image: "",
+    //     title: productData.title,
+    //     description: productData.description,
+    //     price: productData.price,
+    //     category: productData.category,
+    //   });
 
-      console.log(createProduct);
-      const newProduct = await createProduct.save();
-      if (newProduct instanceof Products) {
-        res.json({
-          success: true,
-          data: newProduct,
-          message: "Produit enregistré",
-        });
-      } else {
-        res
-          .status(500)
-          .json({ success: false, message: "Une erreur s'est produite!" });
-      }
-    }
-    //If data not complete
-    else {
-      res.status(400).json({
-        success: false,
-        message: "Données insuffisantes pour créer un produit",
-      });
-    }
+    //   console.log(createProduct);
+    //   const newProduct = await createProduct.save();
+    //   if (newProduct instanceof Products) {
+    //     res.json({
+    //       success: true,
+    //       data: newProduct,
+    //       message: "Produit enregistré",
+    //     });
+    //   } else {
+    //     res
+    //       .status(500)
+    //       .json({ success: false, message: "Une erreur s'est produite!" });
+    //   }
+    // }
+    // //If data not complete
+    // else {
+    //   res.status(400).json({
+    //     success: false,
+    //     message: "Données insuffisantes pour créer un produit",
+    //   });
+    // }
   },
   ///Remove product///
   removeProduct: async (req, res) => {

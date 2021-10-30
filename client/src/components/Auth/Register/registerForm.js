@@ -48,7 +48,7 @@ export default function RegistrationForm(props) {
   }
 
   return (
-    <form className="fromRegistrationContainer" method="POST">
+    <form className="fromRegistrationContainer" onSubmit={postloginData}>
       <div className="inputFormRegistrationContainer">
         <h2 className="titleFormRegistration">S'inscrire</h2>
 
@@ -149,7 +149,6 @@ export default function RegistrationForm(props) {
             className="inputRegistration"
             type="submit"
             value="S'INSCRIRE"
-            onClick={postloginData}
           />
 
           <p className="registrationRedirection">

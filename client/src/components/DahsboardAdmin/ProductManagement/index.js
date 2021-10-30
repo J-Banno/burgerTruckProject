@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { getItem } from "../../../services/localStorage";
+import { regex } from "../../../services/utils";
 
 export default function ProductManagement() {
   const token = getItem("user");
@@ -8,7 +9,7 @@ export default function ProductManagement() {
   //Sate Message add product
   const [message, setMessage] = useState();
   //State Image
-  const [imageProduct, setImageProduct] = useState();
+  const [imageProduct, setImageProduct] = useState(null);
   console.log(imageProduct);
   // State Product
   const [product, setProduct] = useState({
@@ -25,28 +26,46 @@ export default function ProductManagement() {
 
   //Upload Image
   function fileSelectHandler(e) {
-    setImageProduct(e.target.files[0]);
+    setImageProduct({
+      /* contains the preview, if you want to show the picture to the user
+           you can access it with this.state.currentPicture
+       */
+      picturePreview: URL.createObjectURL(e.target.files[0]),
+      /* this contains the file we want to send */
+      pictureAsFile: e.target.files[0],
+    });
   }
 
   //Request
   async function postProductData(e) {
     e.preventDefault();
+    const formData = new FormData();
+    formData.append("file", imageProduct.pictureAsFile);
+    formData.append("title", product.title);
+    formData.append(
+      "path",
+      `${regex(product.category)}_${regex(
+        product.title
+      )}${imageProduct.pictureAsFile.type.replace("image/", ".")}`
+    );
 
-    const imageData = new FormData();
-    imageData.append("file", imageProduct);
-    console.dir(imageData.file);
+    console.log(imageProduct.pictureAsFile);
+
+    for (var key of formData.entries()) {
+      console.log(key[0] + ", " + key[1]);
+    }
     try {
       const options = {
         method: "POST",
-
-        body: JSON.stringify({ imageProduct, product }),
-        headers: { "content-type": "application/json" },
+        body: formData,
+        headers: {
+          "Content-Type": "multipart/form-data; ",
+        },
       };
-      console.log(options);
+
       // Waiting for the response from the api//
       const response = await fetch("http://localhost:8000/admin", options);
       const responseData = await response.json();
-      console.log(responseData);
 
       if (responseData.success === true) {
         setMessage(responseData.message);

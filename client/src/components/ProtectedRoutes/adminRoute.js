@@ -4,7 +4,6 @@ import { useSelector } from "react-redux";
 const AdminRoute = ({ path, component }) => {
   const { user } = useSelector((state) => ({ ...state.user }));
   const userConnect = user[0];
-  const userRole = isUser(userConnect);
   const userAdmin = isAdmin(userConnect);
 
   return userAdmin ? (

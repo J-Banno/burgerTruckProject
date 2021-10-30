@@ -15,9 +15,6 @@ function Navbar() {
   const userConnect = user[0];
   const userRole = isUser(userConnect);
   const adminRole = isAdmin(userConnect);
-  console.log(userConnect);
-  console.log(`Role user : ${userRole}`);
-  console.log(`Role admin : ${adminRole}`);
 
   //Private route
   const [showLinks, setShowLinks] = useState(false);
