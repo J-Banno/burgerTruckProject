@@ -9,14 +9,18 @@ export default function Order() {
   useEffect(getProducts, []);
 
   async function getProducts() {
-    const options = {
-      method: "GET",
-    };
+    try {
+      const options = {
+        method: "GET",
+      };
 
-    const response = await fetch("http://localhost:8000/products", options);
-    const productsData = await response.json();
+      const response = await fetch("http://localhost:8000/products", options);
+      const productsData = await response.json();
 
-    setProducts(productsData);
+      setProducts(productsData);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   function displayBurger() {

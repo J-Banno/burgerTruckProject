@@ -29,7 +29,7 @@ export function regex(string) {
       /[`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi,
       ""
     );
-    let newString = stringRegex.toLowerCase();
+    let newString = stringRegex.toLowerCase().split(" ").join("-");
     return newString;
   }
   return "";

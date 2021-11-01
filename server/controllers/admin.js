@@ -1,54 +1,68 @@
 //Import
 const Products = require("../models/products");
-const multer = require("multer");
-const upload = multer({
-  limits: { fileSize: 1000000 },
-}).single("myImage");
+require("dotenv").config();
+const aws = require("aws-sdk");
+
+//AWS
+const bucketName = process.env.AWS_BUCKET_NAME;
+const region = process.env.AWS_BUCKET_REGION;
+const accesKeyID = process.env.AWS_KEY;
+const accesSecretKey = process.env.AWS_SECRET_KEY;
 
 const admin = {
   ///Create product///
   addProduct: async (req, res) => {
-    //Role User ?
-    console.log("Request ---", req.body);
-    console.log("Request file ---", req.file);
-    if (!err) {
-      return res.send(200).end();
+    // const product = new Products({
+    //   ...productObject,
+    //   image: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`,
+    // });
+    console.log(req.body);
+    aws.config.setPromisesDependency();
+    aws.config.update({
+      region: region,
+      accessKeyId: accesKeyID,
+      secretAccessKey: accesSecretKey,
+    });
+    const s3 = new aws.S3();
+
+    const response = await s3
+      .listObjectsV2({
+        Bucket: bucketName,
+      })
+      .promise();
+
+    const productData = req.body;
+    if (productData) {
+      let createProduct = new Products({
+        image: productData.urlImage,
+        title: productData.title,
+        description: productData.description,
+        price: productData.price,
+        category: productData.category,
+      });
+
+      const newProduct = await createProduct.save();
+      if (newProduct instanceof Products) {
+        res.json({
+          success: true,
+          data: newProduct,
+          message: "Produit enregistré",
+        });
+      } else {
+        res
+          .status(500)
+          .json({ success: false, message: "Une erreur s'est produite!" });
+      }
     }
-    //Admin Data
-    // const productData = req.body.product;
-    // console.log(req.body.imageProduct);
-
-    // if (productData) {
-    //   let createProduct = new Products({
-    //     image: "",
-    //     title: productData.title,
-    //     description: productData.description,
-    //     price: productData.price,
-    //     category: productData.category,
-    //   });
-
-    //   console.log(createProduct);
-    //   const newProduct = await createProduct.save();
-    //   if (newProduct instanceof Products) {
-    //     res.json({
-    //       success: true,
-    //       data: newProduct,
-    //       message: "Produit enregistré",
-    //     });
-    //   } else {
-    //     res
-    //       .status(500)
-    //       .json({ success: false, message: "Une erreur s'est produite!" });
-    //   }
-    // }
-    // //If data not complete
-    // else {
-    //   res.status(400).json({
-    //     success: false,
-    //     message: "Données insuffisantes pour créer un produit",
-    //   });
-    // }
+    //If data not complete
+    else {
+      res.status(400).json({
+        success: false,
+        message: "Données insuffisantes pour créer un produit",
+      });
+    }
   },
+
   ///Remove product///
   removeProduct: async (req, res) => {
     //Role User ?
