@@ -32,9 +32,13 @@ const admin = {
       .promise();
 
     const productData = req.body;
+    const name = productData.nameFile.split(" ").join("-");
+    const url = productData.urlImage + name;
+    console.log(url);
+
     if (productData) {
       let createProduct = new Products({
-        image: productData.urlImage,
+        image: url,
         title: productData.title,
         description: productData.description,
         price: productData.price,

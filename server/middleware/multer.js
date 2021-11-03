@@ -44,7 +44,9 @@ const upload = multer({
     // },
     key: function (req, file, cb) {
       console.log(file);
-      cb(null, new Date().toISOString() + "-" + file.originalname);
+      const name = file.originalname.split(" ").join("-");
+      const extension = MIME_TYPE[file.mimetype];
+      cb(null, name);
     },
   }),
 });

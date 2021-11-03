@@ -53,7 +53,7 @@ export default function ProductManagement() {
 
     const name = regex(product.image.name);
 
-    const urlImage = `https://burger-truck-bocal.s3.eu-west-1.amazonaws.com/${name}`;
+    const urlImage = `https://burger-truck-bocal.s3.eu-west-1.amazonaws.com/`;
     console.log(urlImage);
 
     const formData = new FormData();
@@ -63,6 +63,7 @@ export default function ProductManagement() {
     formData.append("price", product.price);
     formData.append("category", product.category);
     formData.append("urlImage", urlImage);
+    formData.append("nameFile", product.image.name);
 
     try {
       if (isNaN(product.price) === true) {
@@ -102,7 +103,7 @@ export default function ProductManagement() {
   };
   return (
     <>
-      <Button onClick={handleOpen}>Open modal</Button>
+      <Button onClick={handleOpen}>CREER UN NOUVEAU PRODUIT</Button>
       <Modal open={open} onClose={handleClose}>
         <Box className="containerModalAdmin" sx={style}>
           <h2>Ajouter un produit</h2>
@@ -139,6 +140,7 @@ export default function ProductManagement() {
                 <input
                   className="buttonUploadImage"
                   type="file"
+                  accept=".jpg, .jpeg, .png"
                   id="image"
                   name="image"
                   required

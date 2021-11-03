@@ -55,11 +55,7 @@ export default function CardProduct(props) {
   return (
     <div className="cardProductContrainer">
       <div className="imageCardProductContainer">
-        <img
-          className="imageCardProduct"
-          src={"http://localhost:3000" + props.data.image}
-          alt="Orange"
-        />
+        <img className="imageCardProduct" src={props.data.image} alt="Orange" />
       </div>
 
       <div className="cardBody">
