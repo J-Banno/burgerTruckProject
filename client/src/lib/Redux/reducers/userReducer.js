@@ -1,4 +1,5 @@
 import * as actionTypes from "../constants/userConstants";
+import { removeItem, getItem } from "../../../services/localStorage";
 
 const INITIAL_STATE = {
   user: [],
@@ -16,7 +17,9 @@ export const userReducer = (state = INITIAL_STATE, action) => {
         adress: action.payload.adress,
         tel: action.payload.tel,
         roles: action.payload.roles,
+        token: getItem("token"),
       };
+      console.log(newUser);
 
       if (state.user === []) {
         // state.user.splice(0, state.user.length);
@@ -33,7 +36,12 @@ export const userReducer = (state = INITIAL_STATE, action) => {
       }
 
     case actionTypes.RESET_USER: {
+      removeItem("token");
+      removeItem("roles");
+      removeItem("userId");
+
       window.location.reload(false);
+
       return { user: [] };
     }
     default:

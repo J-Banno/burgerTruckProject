@@ -13,6 +13,7 @@ export const addToCart = () => async (dispatch) => {
       adress: data.adress,
       tel: data.tel,
       roles: data.roles,
+      token: data.token,
     },
   });
 };

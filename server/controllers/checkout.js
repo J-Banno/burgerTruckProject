@@ -16,7 +16,9 @@ const checkout = {
         cancel_url: `${domain}cancel.html`,
       });
       res.json({ id: session.id, message: "Payment is accepted" });
+      console.log("OK");
     } catch (err) {
+      console.log(err);
       return res.status(500).send(`error payment ${err}`);
     }
   },

@@ -19,32 +19,37 @@ export default function RegistrationForm(props) {
   //Gestion error
   const [message, setMessage] = useState("");
   // Takes UserLogin data //
+
   async function postloginData(e) {
-    e.preventDefault();
-    const options = {
-      method: "POST",
-      body: JSON.stringify(newRegistration),
-      headers: { "content-type": "application/json" },
-    };
+    try {
+      e.preventDefault();
+      const options = {
+        method: "POST",
+        body: JSON.stringify(newRegistration),
+        headers: { "content-type": "application/json" },
+      };
 
-    // Waiting for the response from the api//
+      // Waiting for the response from the api//
 
-    const response = await fetch("http://localhost:8000/registration", options);
-    console.log(response);
-    const responseData = await response.json();
-    if (responseData.success === true) {
-      localStorage.setItem("user", responseData.token);
-      history.push("/");
-    } else {
-      setMessage(responseData.message);
+      const response = await fetch(
+        "http://localhost:8000/registration",
+        options
+      );
+      const responseData = await response.json();
+      if (responseData.success === true) {
+        localStorage.setItem("user", responseData.token);
+        history.push("/");
+      } else {
+        setMessage(responseData.message);
+      }
+    } catch (error) {
+      console.log(error);
     }
-    console.log(responseData);
   }
 
   // Update users //
   function handleInput(e) {
     setRegistration({ ...newRegistration, [e.target.name]: e.target.value });
-    console.log(e.target.value);
   }
 
   return (

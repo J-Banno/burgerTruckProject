@@ -6,22 +6,22 @@ import CardProduct from "../../components/Order/cardProduct/cardProduct";
 
 export default function Order() {
   const [products, setProducts] = useState([]);
-  useEffect(getProducts, []);
+  useEffect(() => {
+    async function getProducts() {
+      try {
+        const options = {
+          method: "GET",
+        };
+        const response = await fetch("http://localhost:8000/products", options);
+        const productsData = await response.json();
 
-  async function getProducts() {
-    try {
-      const options = {
-        method: "GET",
-      };
-
-      const response = await fetch("http://localhost:8000/products", options);
-      const productsData = await response.json();
-
-      setProducts(productsData);
-    } catch (error) {
-      console.log(error);
+        setProducts(productsData);
+      } catch (error) {
+        console.log(error);
+      }
     }
-  }
+    getProducts();
+  }, []);
 
   function displayBurger() {
     return products

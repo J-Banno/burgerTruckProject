@@ -8,17 +8,14 @@ import IconButton from "@mui/material/IconButton";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-
 import Box from "@mui/material/Box";
 import Collapse from "@mui/material/Collapse";
-
 //Services
 import { formatDate, totalPrice } from "../../services/utils";
-
+import { getItem } from "../../services/localStorage";
 //Redux
 import { useSelector } from "react-redux";
 
@@ -31,17 +28,28 @@ export default function UserOrders() {
     getOrders();
   }, []);
 
-  async function getOrders() {
-    if (user != null) {
-      const options = {
-        method: "POST",
-        body: JSON.stringify(user),
-        headers: { "content-type": "application/json" },
-      };
+  const userId = getItem("userId");
+  const token = getItem("token");
+  console.log(userId);
 
-      const response = await fetch("http://localhost:8000/ordersUser", options);
-      const ordersData = await response.json();
-      setOrders(ordersData.myOrders);
+  async function getOrders() {
+    try {
+      if (token != null) {
+        const options = {
+          method: "POST",
+          body: JSON.stringify({ userId }),
+          headers: { "content-type": "application/json" },
+        };
+
+        const response = await fetch(
+          "http://localhost:8000/ordersUser",
+          options
+        );
+        const ordersData = await response.json();
+        setOrders(ordersData.myOrders);
+      }
+    } catch (error) {
+      console.log(error);
     }
   }
 
@@ -66,7 +74,6 @@ export default function UserOrders() {
           >
             {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
           </IconButton>
-
           <TableCell align="left">{row.idOrder}</TableCell>
           <TableCell align="right">{formatDate(row.dateCreation)}</TableCell>
           <TableCell align="right">
@@ -97,7 +104,7 @@ export default function UserOrders() {
                   </TableHead>
                   <TableBody>
                     {row.items.map((historyRow) => (
-                      <TableRow key={historyRow._id}>
+                      <TableRow key={historyRow.name}>
                         <TableCell>{historyRow.name}</TableCell>
                         <TableCell component="th" scope="row">
                           {historyRow.qty}

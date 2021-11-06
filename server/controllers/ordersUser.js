@@ -3,7 +3,7 @@ const User = require("../models/user");
 const ordersUser = {
   getOrdersUser: async (req, res) => {
     try {
-      const userId = req.body[0]?.userId;
+      const userId = req.body.userId;
 
       const ordersInfo = await Order.find({ "user.id": userId });
 

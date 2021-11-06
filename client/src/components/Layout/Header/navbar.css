@@ -81,12 +81,27 @@
   border: none;
   color: inherit;
 }
+.navbarBouttonLogout {
+  background-color: #080c12;
+  border: none;
+  color: #eaf4f1;
+  text-align: center;
+  margin-bottom: 5px 0px 5px 0px;
+  font-size: 16px;
+  font-family: "Michroma";
+  cursor: pointer;
+  letter-spacing: 2px;
+}
 /*************
 Medias Queries
 **************/
 
 @media screen and (max-width: 1050px) {
   .navbarLinkItem {
+    margin-bottom: 5px 0px 5px 0px;
+    font-size: 12px;
+  }
+  .navbarBouttonLogout {
     margin-bottom: 5px 0px 5px 0px;
     font-size: 12px;
   }
@@ -130,6 +145,11 @@ Medias Queries
     display: block;
     padding: 10px;
     font-size: 20px;
+  }
+  .navbarBouttonLogout {
+    padding: 10px;
+    font-size: 20px;
+    display: block;
   }
   .current > li {
     font-size: 26px;

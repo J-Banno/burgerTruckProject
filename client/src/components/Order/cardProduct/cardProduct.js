@@ -53,7 +53,7 @@ export default function CardProduct(props) {
   };
 
   return (
-    <div className="cardProductContrainer">
+    <div key={props.data._id} className="cardProductContrainer">
       <div className="imageCardProductContainer">
         <img className="imageCardProduct" src={props.data.image} alt="Orange" />
       </div>

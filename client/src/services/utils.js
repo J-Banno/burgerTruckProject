@@ -25,10 +25,7 @@ export function totalPrice(price) {
 
 export function regex(string) {
   if (string != null) {
-    let stringRegex = string.replace(
-      /[`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi,
-      ""
-    );
+    let stringRegex = string.replace(/([.?*+^$[\]\\(){}|-])/g, "\\$1");
     let newString = stringRegex.toLowerCase().split(" ").join("-");
     return newString;
   }

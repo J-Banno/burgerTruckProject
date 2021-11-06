@@ -3,10 +3,7 @@
   color: #e4a619;
   font-weight: bold;
   font-size: 21px;
-  display: flex;
-  justify-content: space-between;
-  text-align: right;
-  padding: 10px;
+  text-align: end;
 }
 .cartTitle {
   text-align: center;
@@ -14,30 +11,29 @@
 }
 .tableCart {
   padding: 5%;
-  display: block;
   background-color: rgba(245, 249, 255, 0.35);
   box-shadow: 5px 13px 50px 6px rgba(66, 58, 93, 0.9);
   margin: 50px;
   border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.containerItemCartProduct {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 .itemCartProduct {
   letter-spacing: 1px;
-  padding: 10px;
-  display: flex;
-  justify-content: space-between;
-
-  text-align: right;
+  text-align: end;
 }
+
 .quantityCartInput {
   display: flex;
+  align-items: flex-end;
   justify-content: flex-end;
-}
-
-.quantityCartInput label {
-  margin-right: 10px;
-}
-.quantityCartInput input {
-  width: 25%;
 }
 .totalCartContainer {
   display: flex;
@@ -46,7 +42,6 @@
   flex-direction: column;
 }
 .totalPrice {
-  margin-top: 5px;
   color: #e4a619;
   text-decoration: none;
   font-weight: bold;
@@ -67,4 +62,24 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.iconCartProduct {
+  cursor: pointer;
+}
+
+@media (max-width: 700px) {
+  table td {
+    font-size: 10px;
+  }
+  table th {
+    font-size: 11px;
+  }
+  .cartTitle {
+    text-align: center;
+    font-size: 18px;
+  }
+  .totalPrice {
+    font-size: 14px;
+  }
 }

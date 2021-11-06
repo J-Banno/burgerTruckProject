@@ -16,7 +16,7 @@ const admin = {
     //   ...productObject,
     //   image: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`,
     // });
-    console.log(req.body);
+
     aws.config.setPromisesDependency();
     aws.config.update({
       region: region,
@@ -34,7 +34,6 @@ const admin = {
     const productData = req.body;
     const name = productData.nameFile.split(" ").join("-");
     const url = productData.urlImage + name;
-    console.log(url);
 
     if (productData) {
       let createProduct = new Products({

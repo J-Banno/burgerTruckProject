@@ -4,7 +4,6 @@ import { Link, useHistory } from "react-router-dom";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import * as actionTypes from "../../../lib/Redux/constants/userConstants";
-import Auth from "../../../lib/Contexts/auth";
 import { addItem } from "../../../services/localStorage";
 export default function LoginForm() {
   const dispatch = useDispatch();
@@ -31,16 +30,18 @@ export default function LoginForm() {
       const responseData = await response.json();
 
       if (responseData.success === true) {
-        const userConnect = responseData.userConnect[0];
+        addItem("token", responseData.token);
+        addItem("roles", responseData.userConnect?.roles);
+        addItem("userId", responseData.userConnect?.userId);
+        const userConnect = responseData.userConnect;
 
-        Auth._currentValue.isAuthenticated = true;
         dispatch({
           type: actionTypes.GET_USER_SUCCESS,
           payload: userConnect,
         });
-        addItem("user", responseData.token);
 
         history.replace("/order");
+        window.location.reload(false);
       } else {
         setMessage(responseData.message);
       }

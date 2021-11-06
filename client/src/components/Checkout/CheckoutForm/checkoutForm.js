@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./style.css";
 //Redux
 import { useSelector } from "react-redux";
@@ -9,7 +9,9 @@ import { loadStripe } from "@stripe/stripe-js";
 export default function CheckoutForm() {
   //Redux store
   const { cart } = useSelector((state) => ({ ...state.cart }));
-
+  const { user } = useSelector((state) => ({ ...state.user }));
+  const [message, setMessage] = useState(null);
+  console.log(user);
   //Format stripe
   const processItem = (item) => ({
     price_data: {
@@ -19,34 +21,41 @@ export default function CheckoutForm() {
     },
     quantity: item.qty,
   });
+
+  //Constant
   const order = cart.map(processItem);
-  console.log(order);
+  const token = user[0]?.token;
 
   //Request
   const processPayment = async (e) => {
-    try {
-      let stripePromise = loadStripe(
-        "pk_test_51JVXspIur9FHorho2S740fuKgE54fb0hav2QoEhYn5SgvtjwDZUD3m1APqFwx8D6fz0Oj2pGk6pN2y6eGnLcBUK6008ry3tZFL"
-      );
-      const stripe = await stripePromise;
-      e.preventDefault();
-      const options = {
-        method: "POST",
-        body: JSON.stringify(order),
-        headers: { "content-type": "application/json" },
-      };
+    if (token != null) {
+      try {
+        let stripePromise = loadStripe(
+          "pk_test_51JVXspIur9FHorho2S740fuKgE54fb0hav2QoEhYn5SgvtjwDZUD3m1APqFwx8D6fz0Oj2pGk6pN2y6eGnLcBUK6008ry3tZFL"
+        );
+        const stripe = await stripePromise;
+        e.preventDefault();
+        const options = {
+          method: "POST",
+          body: JSON.stringify(order),
+          headers: { "content-type": "application/json" },
+        };
 
-      const response = await fetch("http://localhost:8000/checkout", options);
-      const responseData = await response.json();
-      console.log(responseData.id);
-      return stripe.redirectToCheckout({ sessionId: responseData.id });
-    } catch (error) {
-      console.log(error);
+        const response = await fetch("http://localhost:8000/checkout", options);
+        const responseData = await response.json();
+
+        return stripe.redirectToCheckout({ sessionId: responseData.id });
+      } catch (error) {
+        console.log(error);
+      }
+    } else {
+      setMessage("Veuillez vous identifier pour valider votre panier.");
     }
   };
 
   return (
     <div className="conatianerSubmitCheckout">
+      <span>{message}</span>
       <button className="submitCheckout" onClick={processPayment}>
         Valider le paiement
       </button>

@@ -2,9 +2,6 @@ import React from "react";
 import { useState } from "react";
 //CSS
 import "./style.css";
-//Services
-import { getItem } from "../../../services/localStorage";
-import { regex } from "../../../services/utils";
 //Core MUI
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
@@ -16,7 +13,6 @@ import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
 
 export default function ProductManagement() {
-  const token = getItem("user");
   //Sate Message add product
   const [message, setMessage] = useState("");
   // State Product
@@ -27,12 +23,6 @@ export default function ProductManagement() {
     category: "",
     image: null,
   });
-  //Type
-  const MIME_TYPE = {
-    "image/jpg": "jpg",
-    "image/jpeg": "jpg",
-    "image/png": "png",
-  };
 
   //Modal
   const [open, setOpen] = useState(false);
@@ -51,10 +41,7 @@ export default function ProductManagement() {
   async function postProductData(e) {
     e.preventDefault();
 
-    const name = regex(product.image.name);
-
     const urlImage = `https://burger-truck-bocal.s3.eu-west-1.amazonaws.com/`;
-    console.log(urlImage);
 
     const formData = new FormData();
     formData.append("file", product.image);

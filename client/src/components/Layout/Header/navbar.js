@@ -1,6 +1,6 @@
 import React from "react";
-import { useState, useContext, useEffect } from "react";
-import { NavLink, useHistory } from "react-router-dom";
+import { useState } from "react";
+import { NavLink } from "react-router-dom";
 import "./navbar.css";
 import Logo from "../../../assets/images/Logo.png";
 import Cart from "../../../assets/images/cart.png";
@@ -10,7 +10,6 @@ import * as actionTypes from "../../../lib/Redux/constants/userConstants";
 
 function Navbar() {
   const dispatch = useDispatch();
-  const history = useHistory();
   const { user } = useSelector((state) => ({ ...state.user }));
   const userConnect = user[0];
   const userRole = isUser(userConnect);
@@ -70,13 +69,12 @@ function Navbar() {
 
           <li
             className="navbarLinkContainer"
-            activeClassName="current"
             onClick={handleLogout}
             className="navbarLinkItem "
           >
-            <boutton onClick={handleLogout} className="navbarLinkItem ">
+            <button onClick={handleLogout} className="navbarBouttonLogout ">
               Déconnexion
-            </boutton>
+            </button>
           </li>
         </>
       );
