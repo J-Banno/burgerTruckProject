@@ -14,22 +14,7 @@ const s3 = new aws.S3({
   secretAccessKey: accesSecretKey,
 });
 
-const MIME_TYPE = {
-  "image/jpg": "jpg",
-  "image/jpeg": "jpg",
-  "image/png": "png",
-};
-
-const storage = multer.diskStorage({
-  destination: (req, file, callback) => {
-    callback(null, "../public/images");
-  },
-  filename: (req, file, callback) => {
-    const name = file.originalname.split(" ").join("-");
-    const extension = MIME_TYPE[file.mimetype];
-    callback(null, name + Date.now + "." + extension);
-  },
-});
+console.log();
 
 const upload = multer({
   storage: multerS3({
@@ -37,13 +22,12 @@ const upload = multer({
     bucket: bucketName,
     acl: "public-read",
     contentType: multerS3.AUTO_CONTENT_TYPE,
-    // metadata: function (req, file, cb) {
-    //   cb(null, { fieldName: file.fieldname });
-    //   console.log(file);
-    // },
+    metadata: function (req, file, cb) {
+      cb(null, { fieldName: file.fieldname });
+    },
     key: function (req, file, cb) {
-      const name = file.originalname.split(" ").join("-");
-      const extension = MIME_TYPE[file.mimetype];
+      const name = new Date().toISOString();
+      req.url = name;
       cb(null, name);
     },
   }),

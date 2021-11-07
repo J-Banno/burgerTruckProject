@@ -8,7 +8,6 @@ var app = express();
 
 //Routes
 var indexRouter = require("./routes/index");
-var usersRouter = require("./routes/users");
 var registerRouter = require("./routes/register");
 var productsRouter = require("./routes/products");
 var loginRouter = require("./routes/login");
@@ -29,6 +28,8 @@ mongoose.connect(`mongodb://${dbConfig.HOST}:${dbConfig.PORT}/${dbConfig.DB}`, {
 
 //Middleware
 var cors = require("./middleware/cors");
+var auth = require("./middleware/auth");
+var checkingPermissions = require("./middleware/checkingPermissions");
 
 // parse requests of content-type - application/json
 app.use(bodyParser.json());
@@ -43,14 +44,18 @@ app.use(express.static(path.join(__dirname, "public")));
 
 //Url
 app.use("/", indexRouter);
-app.use("/users", usersRouter);
 app.use("/login", loginRouter);
 app.use("/registration", registerRouter);
 app.use("/products", productsRouter);
-app.use("/admin", adminRouter);
-app.use("/checkout", checkoutRouter);
+app.use("/admin", auth, checkingPermissions("ROLE_ADMIN"), adminRouter);
+app.use("/checkout", auth, checkingPermissions("ROLE_USER"), checkoutRouter);
 app.use("/order", orderRouter);
-app.use("/ordersUser", ordersUserRouter);
+app.use(
+  "/ordersUser",
+  auth,
+  checkingPermissions("ROLE_USER"),
+  ordersUserRouter
+);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

@@ -19,7 +19,7 @@ const UserSchema = new mongoose.Schema({
   city: { type: String, required: true },
   tel: { type: String, required: true },
   roles: {
-    type: String,
+    type: Array,
     required: true,
   },
   // order: [OrderSchema],

@@ -38,7 +38,7 @@ const login = {
 
       console.log(newUser);
 
-      if (user.roles === "ROLE_ADMIN") {
+      if (user.roles.includes("ROLE_ADMIN")) {
         res.json({
           success: true,
           userConnect: newUser,
@@ -47,7 +47,7 @@ const login = {
           user: true,
           message: "Welcom admin",
         });
-      } else if (user.roles === "ROLE_USER") {
+      } else if (user.roles.includes("ROLE_USER")) {
         res.json({
           success: true,
           userConnect: newUser,
