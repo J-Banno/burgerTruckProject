@@ -12,23 +12,19 @@ export function logout() {
 
 //Gestion role
 export function isUser(user) {
-  if (
-    (isToken && user?.roles === "ROLE_USER") ||
-    user?.roles === "ROLE_ADMIN" ||
-    role === "ROLE_ADMIN" ||
-    role === "ROLE_USER"
-  ) {
-    console.log(true);
-    return true;
+  if (isToken && role != null) {
+    if (role?.includes("ROLE_ADMIN") || role.includes("ROLE_USER")) {
+      console.log(true);
+      return true;
+    }
+  } else {
+    console.log(false);
+    return false;
   }
-  console.log(false);
-  return false;
 }
 
 export function isAdmin(user) {
-  if (isToken && user?.roles === "ROLE_ADMIN") {
-    return true;
-  } else if (isToken && role === "ROLE_ADMIN") {
+  if (role != null && role.includes("ROLE_ADMIN")) {
     return true;
   } else {
     return false;

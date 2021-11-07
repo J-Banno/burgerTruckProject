@@ -11,6 +11,8 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
+//Services
+import { getItem } from "../../../services/localStorage";
 
 export default function ProductManagement() {
   //Sate Message add product
@@ -37,6 +39,7 @@ export default function ProductManagement() {
     setProduct({ ...product, image: e.target.files[0] });
   }
 
+  const token = getItem("token");
   //Request
   async function postProductData(e) {
     e.preventDefault();
@@ -51,7 +54,8 @@ export default function ProductManagement() {
     formData.append("category", product.category);
     formData.append("urlImage", urlImage);
     formData.append("nameFile", product.image.name);
-
+    console.log(formData);
+    console.log(product);
     try {
       if (isNaN(product.price) === true) {
         setMessage("Veuillez saisir un nombre");
@@ -59,6 +63,10 @@ export default function ProductManagement() {
         const options = {
           method: "POST",
           body: formData,
+          headers: {
+            Accept: "application/json",
+            Authorization: `Bearer ${token}`,
+          },
         };
         // Waiting for the response from the api//
         const response = await fetch("http://localhost:8000/admin", options);

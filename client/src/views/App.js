@@ -52,7 +52,7 @@ function App() {
         <AuthenticatedRoute path="/history" component={HistoryPage} />
         <CheckoutRoute path="/checkoutForm" component={CheckoutForm} />
 
-        <Route path="/" component={ErrorPage}></Route>
+        <Route path="*" component={Home}></Route>
       </Switch>
     </Router>
   );

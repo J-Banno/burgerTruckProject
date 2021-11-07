@@ -25,7 +25,7 @@ export default function Order() {
 
   function displayBurger() {
     return products
-      .filter((products) => products.category.includes("burger"))
+      .filter((products) => products?.category?.includes("burger"))
       .map(function (products) {
         return <CardProduct key={products._id} data={products} />;
       });
@@ -33,7 +33,7 @@ export default function Order() {
 
   function displayDrinks() {
     return products
-      .filter((products) => products.category.includes("drinks"))
+      .filter((products) => products?.category?.includes("drinks"))
       .map(function (products) {
         return <CardProduct key={products._id} data={products} />;
       });
@@ -41,7 +41,7 @@ export default function Order() {
 
   function displayDesserts() {
     return products
-      .filter((products) => products.category.includes("desserts"))
+      .filter((products) => products?.category?.includes("desserts"))
       .map(function (products) {
         return <CardProduct key={products._id} data={products} />;
       });

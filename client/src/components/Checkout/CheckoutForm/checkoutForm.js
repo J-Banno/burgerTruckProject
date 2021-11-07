@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import "./style.css";
 //Redux
 import { useSelector } from "react-redux";
+//Services
+import { getItem } from "../../../services/localStorage";
 //Stripe
-
 import { loadStripe } from "@stripe/stripe-js";
 
 export default function CheckoutForm() {
@@ -24,7 +25,7 @@ export default function CheckoutForm() {
 
   //Constant
   const order = cart.map(processItem);
-  const token = user[0]?.token;
+  const token = getItem("token");
 
   //Request
   const processPayment = async (e) => {
@@ -38,7 +39,10 @@ export default function CheckoutForm() {
         const options = {
           method: "POST",
           body: JSON.stringify(order),
-          headers: { "content-type": "application/json" },
+          headers: {
+            "content-type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
         };
 
         const response = await fetch("http://localhost:8000/checkout", options);

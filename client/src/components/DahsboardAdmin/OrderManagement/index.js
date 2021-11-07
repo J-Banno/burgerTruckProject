@@ -14,19 +14,24 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
 import Box from "@mui/material/Box";
 import Collapse from "@mui/material/Collapse";
-
+//Services
+import { getItem } from "../../../services/localStorage";
 import { formatDate } from "../../../services/utils";
 
 export default function OrdersManagement() {
   const [orders, setOrders] = useState([]);
   const [open, setOpen] = useState(false);
   const [statut, setStatut] = useState(false);
+  const token = getItem("token");
   useEffect(() => {
     getOrders();
   }, []);
   async function getOrders() {
     const options = {
       method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
     };
 
     const response = await fetch("http://localhost:8000/order", options);

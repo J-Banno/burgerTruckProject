@@ -16,12 +16,9 @@ import Collapse from "@mui/material/Collapse";
 //Services
 import { formatDate, totalPrice } from "../../services/utils";
 import { getItem } from "../../services/localStorage";
-//Redux
-import { useSelector } from "react-redux";
 
 export default function UserOrders() {
   //Store
-  const { user } = useSelector((state) => ({ ...state.user }));
   const [orders, setOrders] = useState([]);
 
   useEffect(() => {
@@ -38,7 +35,10 @@ export default function UserOrders() {
         const options = {
           method: "POST",
           body: JSON.stringify({ userId }),
-          headers: { "content-type": "application/json" },
+          headers: {
+            "content-type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
         };
 
         const response = await fetch(
@@ -150,9 +150,8 @@ export default function UserOrders() {
           </TableHead>
 
           <TableBody>
-            {orders.map((row) => (
-              <OrderLIst key={row.name} row={row} />
-            ))}
+            {orders != null &&
+              orders.map((row) => <OrderLIst key={row.idOrder} row={row} />)}
           </TableBody>
         </Table>
       </TableContainer>
