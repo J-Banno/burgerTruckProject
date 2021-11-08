@@ -21,16 +21,16 @@ export default function RegistrationForm(props) {
   // Takes UserLogin data //
 
   async function postloginData(e) {
+    e.preventDefault();
+    const options = {
+      method: "POST",
+      body: JSON.stringify(newRegistration),
+      headers: { "content-type": "application/json" },
+    };
+
+    // Waiting for the response from the api//
+
     try {
-      e.preventDefault();
-      const options = {
-        method: "POST",
-        body: JSON.stringify(newRegistration),
-        headers: { "content-type": "application/json" },
-      };
-
-      // Waiting for the response from the api//
-
       const response = await fetch(
         "http://localhost:8000/registration",
         options

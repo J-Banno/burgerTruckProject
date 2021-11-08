@@ -33,10 +33,13 @@ export default function OrdersManagement() {
         Authorization: `Bearer ${token}`,
       },
     };
-
-    const response = await fetch("http://localhost:8000/order", options);
-    const ordersData = await response.json();
-    setOrders(ordersData.order);
+    try {
+      const response = await fetch("http://localhost:8000/order", options);
+      const ordersData = await response.json();
+      setOrders(ordersData.order);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   function buttonArrow() {

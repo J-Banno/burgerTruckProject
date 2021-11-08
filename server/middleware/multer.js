@@ -14,8 +14,6 @@ const s3 = new aws.S3({
   secretAccessKey: accesSecretKey,
 });
 
-console.log();
-
 const upload = multer({
   storage: multerS3({
     s3: s3,

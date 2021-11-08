@@ -17,11 +17,9 @@ const register = {
       adress: req.body.adress,
       tel: req.body.tel,
       password: encryptedPass,
-      roles: "ROLE_USER",
+      roles: ["ROLE_USER"],
     });
 
-    try {
-    } catch (error) {}
     //Save User//
     try {
       if (req.body.password != req.body.passwordConfirm) {
@@ -32,17 +30,19 @@ const register = {
       } else {
         newUser.save((error) => {
           if (error) {
-            res.status(400).json({ message: { error } });
+            res.status(400).json({
+              message: "Votre inscription a échoué, vous avez déjà un compte.",
+            });
           } else {
             res.status(200).json({
               success: true,
-              Message: "Votre inscription a été pris en compte.",
+              message: "Votre inscription a été pris en compte.",
             });
           }
         });
       }
     } catch (error) {
-      res.status(500).json({ message: { error } });
+      res.status(500).json({ message: error });
     }
   },
 };
