@@ -3,6 +3,13 @@ import { useState, useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as actionTypes from "../../../lib/Redux/constants/cartConstants";
 import "./cardProduct.css";
+//Modal
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
+import Modal from "@mui/material/Modal";
+
+//Services
 import { getItem } from "../../../services/localStorage";
 
 export default function CardProduct(props) {
@@ -10,12 +17,11 @@ export default function CardProduct(props) {
   const updateQuantity = (e) => {
     setQuantityProduct(Number(e.target.value));
   };
-
+  const token = getItem("token");
   const role = getItem("roles");
   const isAdmin = role?.includes("ROLE_ADMIN") ? true : false;
   const [quantityProduct, setQuantityProduct] = useState(1);
-
-  //  console.log(isAdmin);
+  const [message, setMessage] = useState("");
 
   //Cart State
   const { cart } = useSelector((state) => ({ ...state.cart }));
@@ -57,6 +63,45 @@ export default function CardProduct(props) {
       }, 1000);
     }
   };
+  //Delete product
+  async function deleteProduct(e) {
+    e.preventDefault();
+    try {
+      const options = {
+        method: "DELETE",
+        body: JSON.stringify(props.data),
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "content-type": "application/json",
+        },
+      };
+      // Waiting for the response from the api//
+      const response = await fetch("http://localhost:8000/admin", options);
+      const responseData = await response.json();
+      setMessage(responseData?.message);
+      if (responseData?.success) {
+        setTimeout(function () {
+          window.location.reload(1);
+        }, 2000);
+      }
+    } catch ({ response }) {
+      console.log(response);
+    }
+  }
+  //Modal
+  const style = {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: 400,
+    bgcolor: "background.paper",
+    border: "2px solid #000",
+    boxShadow: 24,
+    p: 4,
+  };
+  const [open, setOpen] = useState(false);
+  const handleClose = () => setOpen(false);
 
   return (
     <div key={props.data._id} className="cardProductContrainer">
@@ -95,7 +140,48 @@ export default function CardProduct(props) {
           Ajouter au panier
         </button>
         {isAdmin && (
-          <button className="removeProductCard">Supprimer Produit</button>
+          <>
+            <button
+              onClick={(e) => {
+                setOpen(true);
+                e.preventDefault();
+              }}
+              className="removeProductCard"
+            >
+              Supprimer Produit
+            </button>
+            <Modal
+              open={open}
+              onClose={handleClose}
+              aria-labelledby="modal-modal-title"
+              aria-describedby="modal-modal-description"
+            >
+              <Box sx={style}>
+                <Typography
+                  align="center"
+                  id="modal-modal-title"
+                  variant="h6"
+                  component="h2"
+                >
+                  Confirmer la suppression ?
+                </Typography>
+                <Button
+                  variant="contained"
+                  color="warning"
+                  onClick={deleteProduct}
+                  fullWidth
+                >
+                  OUI
+                </Button>
+                <Typography
+                  className="errorMessageProductRemove"
+                  align="center"
+                >
+                  {message}
+                </Typography>
+              </Box>
+            </Modal>
+          </>
         )}
       </form>
     </div>

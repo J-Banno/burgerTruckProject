@@ -24,10 +24,3 @@ const checkout = {
 };
 
 module.exports = checkout;
-
-// const cartPrice = [];
-// for (let i = 0; i < req.body.length; i++) {
-//   cartPrice.push(req.body[i].total);
-//   const reducer = (previousValue, currentValue) => previousValue + currentValue;
-//   totalPrice = cartPrice.reduce(reducer);
-// }

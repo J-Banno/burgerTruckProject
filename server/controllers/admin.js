@@ -19,7 +19,7 @@ const admin = {
       console.log(createProduct);
       const newProduct = await createProduct.save();
       if (newProduct instanceof Products) {
-        res.json({
+        res.status(200).json({
           success: true,
           data: newProduct,
           message: "Produit enregistré",
@@ -43,14 +43,14 @@ const admin = {
   removeProduct: async (req, res) => {
     //Admin Data
     const productData = req.body;
+
     if (productData._id) {
-      const result = await OffreModel.deleteOne({ _id: productData._id });
-      if (result instanceof OffreModel) {
-        res.json({ success: true, message: "Produit supprimer" });
-      }
+      const result = await Products.deleteOne({ _id: productData._id });
+
+      res.status(200).json({ success: true, message: "Produit supprimer" });
     } else {
       res
-        .status(500)
+        .status(400)
         .json({ success: false, message: "Une erreur s'est produite!" });
     }
   },
