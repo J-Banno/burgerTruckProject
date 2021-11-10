@@ -5,15 +5,13 @@ import "./navbar.css";
 import Logo from "../../../assets/images/Logo.png";
 import Cart from "../../../assets/images/cart.png";
 import { useSelector, useDispatch } from "react-redux";
-import { isUser, isAdmin } from "../../../services/authApi";
+import { getItem } from "../../../services/localStorage";
 import * as actionTypes from "../../../lib/Redux/constants/userConstants";
 
 function Navbar() {
   const dispatch = useDispatch();
-  const { user } = useSelector((state) => ({ ...state.user }));
-  const userConnect = user[0];
-  const userRole = isUser(userConnect);
-  const adminRole = isAdmin(userConnect);
+  const role = getItem("roles");
+  const token = getItem("token");
 
   //Private route
   const [showLinks, setShowLinks] = useState(false);
@@ -36,22 +34,33 @@ function Navbar() {
   };
 
   function adminRoute() {
-    if (adminRole === true) {
+    if (role?.includes("ROLE_ADMIN")) {
       return (
-        <NavLink
-          exact
-          activeClassName="current"
-          to="/dashboardAdmin"
-          className="navbarLinkContainer"
-        >
-          <li className="navbarLinkItem ">Produits</li>
-        </NavLink>
+        <>
+          <NavLink
+            exact
+            activeClassName="current"
+            to="/dashboardAdmin"
+            className="navbarLinkContainer"
+          >
+            <li className="navbarLinkItem ">Mes commandes</li>
+          </NavLink>
+          <li
+            className="navbarLinkContainer"
+            onClick={handleLogout}
+            className="navbarLinkItem "
+          >
+            <button onClick={handleLogout} className="navbarBouttonLogout ">
+              Déconnexion
+            </button>
+          </li>
+        </>
       );
     }
   }
 
   function userRoute() {
-    if (userRole === true) {
+    if (!role?.includes("ROLE_ADMIN") && role?.includes("ROLE_USER")) {
       return (
         <>
           <NavLink
@@ -60,11 +69,7 @@ function Navbar() {
             to="/history"
             className="navbarLinkContainer"
           >
-            {adminRole === true ? (
-              <li className="navbarLinkItem ">Commandes</li>
-            ) : (
-              <li className="navbarLinkItem ">Mon compte</li>
-            )}
+            <li className="navbarLinkItem ">Mon compte</li>
           </NavLink>
 
           <li
@@ -77,17 +82,6 @@ function Navbar() {
             </button>
           </li>
         </>
-      );
-    } else {
-      return (
-        <NavLink
-          exact
-          activeClassName="current"
-          to="/Login"
-          className="navbarLinkContainer"
-        >
-          <li className="navbarLinkItem ">Connexion</li>
-        </NavLink>
       );
     }
   }
@@ -132,6 +126,17 @@ function Navbar() {
 
         {/********** User  **********/}
         {userRoute()}
+
+        {!token && (
+          <NavLink
+            exact
+            activeClassName="current"
+            to="/Login"
+            className="navbarLinkContainer"
+          >
+            <li className="navbarLinkItem ">Connexion</li>
+          </NavLink>
+        )}
         <NavLink
           exact
           activeClassName="current"

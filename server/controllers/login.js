@@ -7,7 +7,6 @@ const login = {
     // Find user
     const user = await User.findOne({ mail: req.body.mail }).exec();
     const userInfo = await User.find({ mail: req.body.mail }).exec();
-    console.log(userInfo[0]);
 
     if (user instanceof Error) {
       res.status(500).json({ message: "Connexion impossible" });
@@ -35,8 +34,6 @@ const login = {
         roles: userInfo[0].roles,
         token: token,
       };
-
-      console.log(newUser);
 
       if (user.roles.includes("ROLE_ADMIN")) {
         res.json({

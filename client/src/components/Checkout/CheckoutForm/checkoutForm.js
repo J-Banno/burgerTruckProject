@@ -12,7 +12,7 @@ export default function CheckoutForm() {
   const { cart } = useSelector((state) => ({ ...state.cart }));
   const { user } = useSelector((state) => ({ ...state.user }));
   const [message, setMessage] = useState(null);
-  console.log(user);
+
   //Format stripe
   const processItem = (item) => ({
     price_data: {

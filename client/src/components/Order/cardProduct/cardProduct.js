@@ -3,13 +3,19 @@ import { useState, useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as actionTypes from "../../../lib/Redux/constants/cartConstants";
 import "./cardProduct.css";
+import { getItem } from "../../../services/localStorage";
 
 export default function CardProduct(props) {
   //Sate Quantity
   const updateQuantity = (e) => {
     setQuantityProduct(Number(e.target.value));
   };
+
+  const role = getItem("roles");
+  const isAdmin = role?.includes("ROLE_ADMIN") ? true : false;
   const [quantityProduct, setQuantityProduct] = useState(1);
+
+  //  console.log(isAdmin);
 
   //Cart State
   const { cart } = useSelector((state) => ({ ...state.cart }));
@@ -70,7 +76,7 @@ export default function CardProduct(props) {
           <p>{props.data.price} €</p>
         </div>
       </div>
-      <form onSubmit={addToCart} className="inputCardContainer">
+      <form className="inputCardContainer">
         <div className="inputQuantity">
           <label className="quantityLabel" htmlFor="quantity">
             Quantités :
@@ -85,8 +91,12 @@ export default function CardProduct(props) {
           ></input>
         </div>
         <span ref={addingInfo} className="addingInfo"></span>
-
-        <button className="submitProductCard">Ajouter au panier</button>
+        <button onClick={addToCart} className="submitProductCard">
+          Ajouter au panier
+        </button>
+        {isAdmin && (
+          <button className="removeProductCard">Supprimer Produit</button>
+        )}
       </form>
     </div>
   );

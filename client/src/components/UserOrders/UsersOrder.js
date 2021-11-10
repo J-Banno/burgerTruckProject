@@ -27,7 +27,6 @@ export default function UserOrders() {
 
   const userId = getItem("userId");
   const token = getItem("token");
-  console.log(userId);
 
   async function getOrders() {
     try {

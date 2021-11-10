@@ -128,7 +128,7 @@ export default function OrdersManagement() {
                           </TableHead>
                           <TableBody>
                             {row.items[0].cart.map((historyRow) => (
-                              <TableRow key={historyRow._id}>
+                              <TableRow key={historyRow.name}>
                                 <TableCell>{historyRow.name}</TableCell>
                                 <TableCell component="th" scope="row">
                                   {historyRow.qty}
