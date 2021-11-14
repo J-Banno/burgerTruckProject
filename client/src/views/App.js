@@ -16,16 +16,11 @@ import CheckoutForm from "../components/Checkout/CheckoutForm/checkoutForm";
 import Success from "../components/Checkout/checkoutSuccess/index";
 import Cancel from "../components/Checkout/checkoutCancel/index";
 import AdminPage from "./AdminPage/index";
-import ErrorPage from "../components/Auth/errorPage/errorPage";
 import { getItem } from "../services/localStorage";
 import * as actionTypes from "../lib/Redux/constants/userConstants";
 import { useDispatch } from "react-redux";
 
 function App() {
-  const roleUser = getItem("roles");
-  const token = getItem("token");
-  console.log(roleUser);
-  console.log(token);
   const dispatch = useDispatch();
   const user = {
     roles: getItem("roles"),

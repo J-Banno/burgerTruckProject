@@ -5,7 +5,6 @@ const getProducts = async (req, res) => {
     const products = await Products.find({});
     res.json(products);
   } catch (error) {
-    console.error(error);
     res.status(500).json({ message: "Server Error" });
   }
 };
@@ -16,7 +15,6 @@ const getProductById = async (req, res) => {
 
     res.json(product);
   } catch (error) {
-    console.error(error);
     res.status(500).json({ message: "Server Error" });
   }
 };

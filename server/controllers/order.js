@@ -12,7 +12,7 @@ const orders = {
 
       const newOrder = new Order({
         dateCreation: new Date(),
-        statut: "inPreparation",
+        statut: "En préparation",
         isFinalize: false,
         user: {
           mail: userData.mail,
@@ -33,18 +33,16 @@ const orders = {
         }
       });
     } catch (error) {
-      console.error(error);
       res.status(error).json({ message: error });
     }
   },
 
   getOrders: async (req, res) => {
     try {
-      const order = await Order.find({ isFinalize: false });
+      const order = await Order.find();
 
       res.status(200).json({ order, success: true });
     } catch (error) {
-      console.error(error);
       res.status(500).json({ message: "Server Error" });
     }
   },

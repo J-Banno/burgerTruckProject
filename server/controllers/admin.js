@@ -1,5 +1,6 @@
 //Import
 const Products = require("../models/products");
+const Order = require("../models/order");
 require("dotenv").config();
 
 const admin = {
@@ -16,7 +17,7 @@ const admin = {
         price: productData.price,
         category: productData.category,
       });
-      console.log(createProduct);
+
       const newProduct = await createProduct.save();
       if (newProduct instanceof Products) {
         res.status(200).json({
@@ -48,6 +49,31 @@ const admin = {
       const result = await Products.deleteOne({ _id: productData._id });
 
       res.status(200).json({ success: true, message: "Produit supprimer" });
+    } else {
+      res
+        .status(400)
+        .json({ success: false, message: "Une erreur s'est produite!" });
+    }
+  }, ///Remove product///
+  updateStatutProduct: async (req, res) => {
+    //Admin Data
+    const idOrder = req.body?.orderId;
+    const statutOrder = req.body?.statut;
+
+    if (idOrder) {
+      if (statutOrder) {
+        const result = await Order.updateOne(
+          { _id: idOrder },
+          { isFinalize: statutOrder, statut: "Commande prêtes" }
+        );
+      } else if (statutOrder === false) {
+        const result = await Order.updateOne(
+          { _id: idOrder },
+          { isFinalize: statutOrder, statut: "En préparation" }
+        );
+      }
+
+      res.status(200).json({ success: true, message: "Statut modifié" });
     } else {
       res
         .status(400)

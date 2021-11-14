@@ -1,5 +1,5 @@
 import { Redirect, Route } from "react-router-dom";
-import { isUser, isAdmin } from "../../services/authApi";
+import { isAdmin } from "../../services/authApi";
 import { useSelector } from "react-redux";
 const AdminRoute = ({ path, component }) => {
   const { user } = useSelector((state) => ({ ...state.user }));

@@ -5,5 +5,6 @@ const multer = require("../middleware/multer");
 
 router.post("/", multer, admin.addProduct);
 router.delete("/", admin.removeProduct);
+router.put("/", admin.updateStatutProduct);
 
 module.exports = router;

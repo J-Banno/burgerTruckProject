@@ -11,7 +11,6 @@ module.exports = async function auth(req, res, next) {
     if (!token) return res.status(403).send("Access denied.");
     const decoded = jwt.verify(token, "test");
     const user = await User.findOne({ _id: decoded.userId }).exec();
-
     req.user = user;
 
     next();

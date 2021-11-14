@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const OrderSchema = new mongoose.Schema({
   dateCreation: { type: Date, default: new Date() },
-  statut: { type: String, default: "inPreparation" },
+  statut: { type: String, default: "En préparation" },
   isFinalize: { type: Boolean, default: false },
   user: {
     mail: { type: String },

@@ -19,7 +19,6 @@ export const userReducer = (state = INITIAL_STATE, action) => {
         roles: action.payload.roles,
         token: getItem("token"),
       };
-      console.log(newUser);
 
       if (state.user === []) {
         // state.user.splice(0, state.user.length);

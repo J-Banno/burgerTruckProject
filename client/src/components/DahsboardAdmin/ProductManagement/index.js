@@ -54,8 +54,6 @@ export default function ProductManagement() {
     formData.append("category", product.category);
     formData.append("urlImage", urlImage);
     formData.append("nameFile", product.image.name);
-    console.log(formData);
-    console.log(product);
     try {
       if (isNaN(product.price) === true) {
         setMessage("Veuillez saisir un nombre");
@@ -98,7 +96,13 @@ export default function ProductManagement() {
   };
   return (
     <>
-      <Button onClick={handleOpen}>CREER UN NOUVEAU PRODUIT</Button>
+      <Button
+        className="buttonUploadImageForm"
+        variant="contained"
+        onClick={handleOpen}
+      >
+        CREER UN NOUVEAU PRODUIT
+      </Button>
       <Modal open={open} onClose={handleClose}>
         <Box className="containerModalAdmin" sx={style}>
           <h2>Ajouter un produit</h2>
@@ -174,12 +178,6 @@ export default function ProductManagement() {
                 </Select>
               </FormControl>
               <Button
-                style={{
-                  color: "aliceblue",
-                  backgroundColor: "#e4a619",
-                  marginTop: 10,
-                  padding: 15,
-                }}
                 className="buttonUploadImage"
                 variant="contained"
                 type="submit"

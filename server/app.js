@@ -49,7 +49,7 @@ app.use("/registration", registerRouter);
 app.use("/products", productsRouter);
 app.use("/admin", auth, checkingPermissions("ROLE_ADMIN"), adminRouter);
 app.use("/checkout", auth, checkingPermissions("ROLE_USER"), checkoutRouter);
-app.use("/order", orderRouter);
+app.use("/order", auth, checkingPermissions("ROLE_USER"), orderRouter);
 app.use(
   "/ordersUser",
   auth,

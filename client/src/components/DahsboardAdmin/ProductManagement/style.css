@@ -21,8 +21,18 @@
 }
 
 .buttonUploadImage {
-  color: #777777;
   width: 100%;
+  color: aliceblue;
+  background-color: #e4a619;
+  margin-top: 10;
+  padding: 15;
+}
+.buttonUploadImageForm {
+  width: 100%;
+  color: aliceblue;
+  background-color: #e4a619;
+  margin-top: 100;
+  padding: 15;
 }
 input[type="file"] {
   display: none;

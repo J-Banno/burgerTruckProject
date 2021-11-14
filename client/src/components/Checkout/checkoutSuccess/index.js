@@ -36,12 +36,14 @@ export default function CheckoutSuccess() {
       const options = {
         method: "POST",
         body: JSON.stringify({ cart, decodedToken }),
-        headers: { "content-type": "application/json" },
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "content-type": "application/json",
+        },
       };
 
       // Waiting for the response from the api//
       const response = await fetch("http://localhost:8000/order", options);
-      const responseData = await response.json();
     } catch (error) {
       console.log(error);
     }

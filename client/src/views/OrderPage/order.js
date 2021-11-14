@@ -3,9 +3,15 @@ import "./order.css";
 import Footer from "../../components/Layout/Footer/footer";
 import Header from "../../components/Layout/Header/navbar";
 import CardProduct from "../../components/Order/cardProduct/cardProduct";
+import ProductManagement from "../../components/DahsboardAdmin/ProductManagement/index";
+
+//Services
+import { getItem } from "../../services/localStorage";
 
 export default function Order() {
   const [products, setProducts] = useState([]);
+  const role = getItem("roles");
+  const isAdmin = role?.includes("ROLE_ADMIN") ? true : false;
   useEffect(() => {
     async function getProducts() {
       try {
@@ -49,6 +55,8 @@ export default function Order() {
   return (
     <div className="Content">
       <Header />
+
+      {isAdmin && <ProductManagement />}
       <section>
         <h2 className="titleProductCategory">Nos Burger : </h2>
         <div className="blockCardProducts">{displayBurger()}</div>
