@@ -5,6 +5,8 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import * as actionTypes from "../../../lib/Redux/constants/userConstants";
 import { addItem } from "../../../services/localStorage";
+import { Config } from "../../../config/config";
+
 export default function LoginForm() {
   const dispatch = useDispatch();
   //Gestion error
@@ -26,7 +28,7 @@ export default function LoginForm() {
         headers: { "content-type": "application/json" },
       };
       // Waiting for the response from the api//
-      const response = await fetch("http://localhost:8000/login", options);
+      const response = await fetch(Config.apiUrl + "login", options);
       const responseData = await response.json();
 
       if (responseData.success === true) {

@@ -16,6 +16,7 @@ import Collapse from "@mui/material/Collapse";
 //Services
 import { formatDate, totalPrice } from "../../services/utils";
 import { getItem } from "../../services/localStorage";
+import { Config } from "../../config/config";
 
 export default function UserOrders() {
   //Store
@@ -35,10 +36,7 @@ export default function UserOrders() {
       };
       async function fetchData() {
         try {
-          const response = await fetch(
-            "http://localhost:8000/ordersUser",
-            options
-          );
+          const response = await fetch(Config.apiUrl + "ordersUser", options);
           const ordersData = await response.json();
           setOrders(ordersData.myOrders);
         } catch (error) {
@@ -127,32 +125,43 @@ export default function UserOrders() {
   return (
     <>
       <h2>Mes Commandes</h2>
-      <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
-          <TableHead>
-            <TableRow>
-              <TableCell />
-              <TableCell align="left">
-                <strong>Numéro de comande</strong>
-              </TableCell>
-              <TableCell align="left">
-                <strong>Date</strong>
-              </TableCell>
-              <TableCell align="left">
-                <strong>Statut</strong>
-              </TableCell>
-              <TableCell align="left">
-                <strong>Total</strong>
-              </TableCell>
-            </TableRow>
-          </TableHead>
+      <section
+        style={{
+          paddingTop: "30px",
+          height: "90vh",
+          display: "flex",
+          alignItems: "center",
+          flexDirection: "column",
+          justifyContent: "flex-start",
+        }}
+      >
+        <TableContainer component={Paper}>
+          <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
+            <TableHead>
+              <TableRow>
+                <TableCell />
+                <TableCell align="left">
+                  <strong>Numéro de comande</strong>
+                </TableCell>
+                <TableCell align="left">
+                  <strong>Date</strong>
+                </TableCell>
+                <TableCell align="left">
+                  <strong>Statut</strong>
+                </TableCell>
+                <TableCell align="left">
+                  <strong>Total</strong>
+                </TableCell>
+              </TableRow>
+            </TableHead>
 
-          <TableBody>
-            {orders != null &&
-              orders.map((row) => <OrderLIst key={row.idOrder} row={row} />)}
-          </TableBody>
-        </Table>
-      </TableContainer>
+            <TableBody>
+              {orders != null &&
+                orders.map((row) => <OrderLIst key={row.idOrder} row={row} />)}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </section>
     </>
   );
 }

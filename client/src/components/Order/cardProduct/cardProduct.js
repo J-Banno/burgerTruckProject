@@ -10,6 +10,7 @@ import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 //Services
 import { getItem } from "../../../services/localStorage";
+import { Config } from "../../../config/config";
 
 export default function CardProduct(props) {
   //Sate Quantity
@@ -21,6 +22,7 @@ export default function CardProduct(props) {
   const isAdmin = role?.includes("ROLE_ADMIN") ? true : false;
   const [quantityProduct, setQuantityProduct] = useState(1);
   const [message, setMessage] = useState("");
+  const [success, setSuccess] = useState(false);
 
   //Cart State
   const { cart } = useSelector((state) => ({ ...state.cart }));
@@ -31,7 +33,6 @@ export default function CardProduct(props) {
 
   //Message info client
   const addingInfo = useRef();
-  let timerInfo;
   let display = true;
 
   //Add to cart
@@ -56,12 +57,13 @@ export default function CardProduct(props) {
 
     if (display) {
       display = false;
-      timerInfo = setTimeout(() => {
-        addingInfo.current.innerText = " ";
+      setTimeout(() => {
+        addingInfo.current.innerText = "";
         display = true;
-      }, 1000);
+      }, 500);
     }
   };
+
   //Delete product
   async function deleteProduct(e) {
     e.preventDefault();
@@ -75,10 +77,12 @@ export default function CardProduct(props) {
         },
       };
       // Waiting for the response from the api//
-      const response = await fetch("http://localhost:8000/admin", options);
+      const response = await fetch(Config.apiUrl + "admin", options);
       const responseData = await response.json();
-      setMessage(responseData?.message);
+
       if (responseData?.success) {
+        setMessage(responseData?.message);
+        setSuccess(true);
         setTimeout(function () {
           window.location.reload(1);
         }, 2000);
@@ -143,6 +147,7 @@ export default function CardProduct(props) {
             <button
               onClick={(e) => {
                 setOpen(true);
+                setSuccess(false);
                 e.preventDefault();
               }}
               className="removeProductCard"
@@ -164,14 +169,17 @@ export default function CardProduct(props) {
                 >
                   Confirmer la suppression ?
                 </Typography>
-                <Button
-                  variant="contained"
-                  color="warning"
-                  onClick={deleteProduct}
-                  fullWidth
-                >
-                  OUI
-                </Button>
+                {!success && (
+                  <Button
+                    variant="contained"
+                    color="warning"
+                    onClick={deleteProduct}
+                    fullWidth
+                  >
+                    OUI
+                  </Button>
+                )}
+
                 <Typography
                   className="errorMessageProductRemove"
                   align="center"

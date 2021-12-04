@@ -7,20 +7,20 @@ import ProductManagement from "../../components/DahsboardAdmin/ProductManagement
 
 //Services
 import { getItem } from "../../services/localStorage";
+import { Config } from "../../config/config";
 
 export default function Order() {
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState(null);
   const role = getItem("roles");
   const isAdmin = role?.includes("ROLE_ADMIN") ? true : false;
   useEffect(() => {
     async function getProducts() {
+      const options = {
+        method: "GET",
+      };
       try {
-        const options = {
-          method: "GET",
-        };
-        const response = await fetch("http://localhost:8000/products", options);
+        const response = await fetch(Config.apiUrl + "products", options);
         const productsData = await response.json();
-
         setProducts(productsData);
       } catch (error) {
         console.log(error);
@@ -30,45 +30,73 @@ export default function Order() {
   }, []);
 
   function displayBurger() {
-    return products
-      .filter((products) => products?.category?.includes("burger"))
-      .map(function (products) {
-        return <CardProduct key={products._id} data={products} />;
-      });
+    if (products) {
+      return products
+        .filter((products) => products.category?.includes("burger"))
+        .map(function (products) {
+          return <CardProduct key={products._id} data={products} />;
+        });
+    }
   }
 
   function displayDrinks() {
-    return products
-      .filter((products) => products?.category?.includes("drinks"))
-      .map(function (products) {
-        return <CardProduct key={products._id} data={products} />;
-      });
+    if (products) {
+      return products
+        .filter((products) => products.category?.includes("drinks"))
+        .map(function (products) {
+          return <CardProduct key={products._id} data={products} />;
+        });
+    }
   }
 
   function displayDesserts() {
-    return products
-      .filter((products) => products?.category?.includes("desserts"))
-      .map(function (products) {
-        return <CardProduct key={products._id} data={products} />;
-      });
+    if (products) {
+      return products
+        .filter((products) => products.category?.includes("desserts"))
+        .map(function (products) {
+          return <CardProduct key={products._id} data={products} />;
+        });
+    }
   }
+
   return (
     <div className="Content">
       <Header />
-
       {isAdmin && <ProductManagement />}
-      <section>
-        <h2 className="titleProductCategory">Nos Burger : </h2>
-        <div className="blockCardProducts">{displayBurger()}</div>
-      </section>
-      <section>
-        <h2 className="titleProductCategory">Nos Boissons : </h2>
-        <div className="blockCardProducts">{displayDrinks()}</div>
-      </section>
-      <section>
-        <h2 className="titleProductCategory">Nos Desserts : </h2>
-        <div className="blockCardProducts">{displayDesserts()}</div>
-      </section>
+      {products ? (
+        <>
+          <section>
+            <h2 className="titleProductCategory">
+              {products ? "Nos Burger : " : ""}
+            </h2>
+            <div className="blockCardProducts">{displayBurger()}</div>
+          </section>
+          <section>
+            <h2 className="titleProductCategory">
+              {products ? "Nos Boissons : " : ""}
+            </h2>
+            <div className="blockCardProducts">{displayDrinks()}</div>
+          </section>
+          <section>
+            <h2 className="titleProductCategory">
+              {products ? "Nos Desserts : " : ""}
+            </h2>
+            <div className="blockCardProducts">{displayDesserts()}</div>
+          </section>
+        </>
+      ) : (
+        <h1
+          style={{
+            height: "100vh",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          Burger Truck
+        </h1>
+      )}
+
       <Footer />
     </div>
   );

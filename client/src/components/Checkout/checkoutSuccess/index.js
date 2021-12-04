@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import * as actionTypes from "../../../lib/Redux/constants/cartConstants";
 import { getItem } from "../../../services/localStorage";
 import jwt_decode from "jwt-decode";
+import { Config } from "../../../config/config";
 
 export default function CheckoutSuccess() {
   //Sate
@@ -34,7 +35,7 @@ export default function CheckoutSuccess() {
 
     // Waiting for the response from the api//
     try {
-      const response = await fetch("http://localhost:8000/order", options);
+      const response = await fetch(Config.apiUrl + "order", options);
       if (response.status === 200) {
         dispatch({
           type: actionTypes.CART_RESET,

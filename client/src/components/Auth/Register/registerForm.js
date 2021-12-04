@@ -3,6 +3,7 @@ import "./registerForm.css";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
+import { Config } from "../../../config/config";
 
 export default function RegistrationForm(props) {
   const history = useHistory();
@@ -31,10 +32,7 @@ export default function RegistrationForm(props) {
     // Waiting for the response from the api//
 
     try {
-      const response = await fetch(
-        "http://localhost:8000/registration",
-        options
-      );
+      const response = await fetch(Config.apiUrl + "registration", options);
       const responseData = await response.json();
       if (responseData.success === true) {
         localStorage.setItem("user", responseData.token);

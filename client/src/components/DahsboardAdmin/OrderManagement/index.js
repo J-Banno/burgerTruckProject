@@ -17,6 +17,7 @@ import Collapse from "@mui/material/Collapse";
 //Services
 import { getItem } from "../../../services/localStorage";
 import { formatDate } from "../../../services/utils";
+import { Config } from "../../../config/config";
 
 export default function OrdersManagement() {
   const [orders, setOrders] = useState([]);
@@ -34,7 +35,7 @@ export default function OrdersManagement() {
       },
     };
     try {
-      const response = await fetch("http://localhost:8000/order", options);
+      const response = await fetch(Config.apiUrl + "order", options);
       const ordersData = await response.json();
       setOrders(ordersData.order);
     } catch (error) {
@@ -71,7 +72,7 @@ export default function OrdersManagement() {
         },
       };
       try {
-        const response = await fetch("http://localhost:8000/admin", options);
+        const response = await fetch(Config.apiUrl + "admin", options);
         if (response.status === 200) {
           getOrders();
         }
@@ -99,9 +100,9 @@ export default function OrdersManagement() {
               {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
             </IconButton>
           </TableCell>
-          <TableCell align="right">{formatDate(row.dateCreation)}</TableCell>
-          <TableCell align="right">{row.user?.mail}</TableCell>
-          <TableCell align="right">
+          <TableCell align="left">{formatDate(row.dateCreation)}</TableCell>
+          <TableCell align="left">{row.user?.mail}</TableCell>
+          <TableCell align="left">
             <FormControlLabel
               control={<Switch color="success" />}
               label={updateOrder.statut ? "Terminé" : "En préparation"}
@@ -110,7 +111,7 @@ export default function OrdersManagement() {
               checked={updateOrder.statut}
             />
           </TableCell>
-          <TableCell align="right">{row._id}</TableCell>
+          <TableCell align="left">{row._id}</TableCell>
         </TableRow>
         <TableRow>
           <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
@@ -124,8 +125,8 @@ export default function OrdersManagement() {
                     <TableRow>
                       <TableCell>Nom</TableCell>
                       <TableCell>Quantité</TableCell>
-                      <TableCell align="right">Prix unitaire (€)</TableCell>
-                      <TableCell align="right">Total price (€)</TableCell>
+                      <TableCell align="left">Prix unitaire (€)</TableCell>
+                      <TableCell align="left">Total price (€)</TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
@@ -135,8 +136,8 @@ export default function OrdersManagement() {
                         <TableCell component="th" scope="row">
                           {historyRow.qty}
                         </TableCell>
-                        <TableCell align="right">{historyRow.price}</TableCell>
-                        <TableCell align="right">{historyRow.total}</TableCell>
+                        <TableCell align="left">{historyRow.price}</TableCell>
+                        <TableCell align="left">{historyRow.total}</TableCell>
                       </TableRow>
                     ))}
                   </TableBody>
@@ -150,17 +151,17 @@ export default function OrdersManagement() {
   }
 
   return (
-    <>
+    <div style={{ height: "100vh" }}>
       <h2>Mes Commandes cours</h2>
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
           <TableHead>
             <TableRow>
               <TableCell></TableCell>
-              <TableCell align="right">Date</TableCell>
-              <TableCell align="right">Email</TableCell>
-              <TableCell align="right">Statut</TableCell>
-              <TableCell align="right">Référence</TableCell>
+              <TableCell align="left">Date</TableCell>
+              <TableCell align="left">Email</TableCell>
+              <TableCell align="left">Statut</TableCell>
+              <TableCell align="left">Référence</TableCell>
             </TableRow>
           </TableHead>
 
@@ -180,10 +181,10 @@ export default function OrdersManagement() {
           <TableHead>
             <TableRow>
               <TableCell></TableCell>
-              <TableCell align="right">Date</TableCell>
-              <TableCell align="right">Email</TableCell>
-              <TableCell align="right">Statut</TableCell>
-              <TableCell align="right">Référence</TableCell>
+              <TableCell align="left">Date</TableCell>
+              <TableCell align="left">Email</TableCell>
+              <TableCell align="left">Statut</TableCell>
+              <TableCell align="left">Référence</TableCell>
             </TableRow>
           </TableHead>
 
@@ -196,6 +197,6 @@ export default function OrdersManagement() {
           </TableBody>
         </Table>
       </TableContainer>
-    </>
+    </div>
   );
 }

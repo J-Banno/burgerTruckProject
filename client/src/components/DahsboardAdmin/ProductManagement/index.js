@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+import { useHistory } from "react-router-dom";
 //CSS
 import "./style.css";
 //Core MUI
@@ -13,8 +14,10 @@ import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
 //Services
 import { getItem } from "../../../services/localStorage";
+import { Config } from "../../../config/config";
 
 export default function ProductManagement() {
+  const history = useHistory();
   //Sate Message add product
   const [message, setMessage] = useState("");
   // State Product
@@ -30,6 +33,7 @@ export default function ProductManagement() {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
   // Update Product
   function handleProduct(e) {
     setProduct({ ...product, [e.target.name]: e.target.value });
@@ -67,12 +71,12 @@ export default function ProductManagement() {
           },
         };
         // Waiting for the response from the api//
-        const response = await fetch("http://localhost:8000/admin", options);
+        const response = await fetch(Config.apiUrl + "admin", options);
         const responseData = await response.json();
 
-        setMessage("Le produit est crée");
         if (responseData.success === true) {
           setMessage(responseData.message);
+          history.push("/order");
         } else {
           setMessage(responseData.message);
         }
@@ -107,7 +111,7 @@ export default function ProductManagement() {
         <Box className="containerModalAdmin" sx={style}>
           <h2>Ajouter un produit</h2>
           <form
-            enctype="multipart/form-data"
+            encType="multipart/form-data"
             className="loginFomContainer"
             onSubmit={postProductData}
           >

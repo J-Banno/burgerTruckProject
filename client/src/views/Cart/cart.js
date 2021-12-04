@@ -61,57 +61,66 @@ export default function CartPage() {
     return (
       <>
         <Navbar />
-
-        <h2 className="cartTitle">Détail de votre panier</h2>
-        <table className="tableCart">
-          <thead className="tableCartBody">
-            <tr className="tableCartHeader">
-              <th width="100"></th>
-              <th width="200">Produit</th>
-              <th width="150">Prix</th>
-              <th width="150">Quantités</th>
-              <th width="200">Total</th>
-            </tr>
-          </thead>
-          <tbody className="containerItemCartProduct">
-            {cart.map((item) => (
-              <tr className="itemCartProduct" key={item.name}>
-                <td data-label="icon" width="100">
-                  <DeleteIcon
-                    fontSize="small"
-                    onClick={handleRemove}
-                    className="iconCartProduct"
-                  />
-                </td>
-                <td data-label="name" width="200">
-                  {item.name}
-                </td>
-                <td data-label="price" width="150">
-                  {item.price.toFixed(2)} €{" "}
-                </td>
-                <td data-label="quantity" width="150">
-                  <div className="quantityCartInput">
-                    <input
-                      onChange={(e) => handleChange(e, item.ref)}
-                      type="number"
-                      min="1"
-                      max="10"
-                      id="quantityInput"
-                      value={item.qty}
-                    />
-                  </div>
-                </td>
-                <td data-label="total" width="200">
-                  {item.total.toFixed(2)} €
-                </td>
+        <div
+          style={{
+            height: "90vh",
+            display: "flex",
+            alignItems: "center",
+            flexDirection: "column",
+            justifyContent: "center",
+          }}
+        >
+          <h2 className="cartTitle">Détail de votre panier</h2>
+          <table className="tableCart">
+            <thead className="tableCartBody">
+              <tr className="tableCartHeader">
+                <th width="100"></th>
+                <th width="200">Produit</th>
+                <th width="150">Prix</th>
+                <th width="150">Quantités</th>
+                <th width="200">Total</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
-        <div className="totalCartContainer">
-          <p className="totalPrice">Total : {totalPrice.toFixed(2)} €</p>
+            </thead>
+            <tbody className="containerItemCartProduct">
+              {cart.map((item) => (
+                <tr className="itemCartProduct" key={item.name}>
+                  <td data-label="icon" width="100">
+                    <DeleteIcon
+                      fontSize="small"
+                      onClick={handleRemove}
+                      className="iconCartProduct"
+                    />
+                  </td>
+                  <td data-label="name" width="200">
+                    {item.name}
+                  </td>
+                  <td data-label="price" width="150">
+                    {item.price.toFixed(2)} €{" "}
+                  </td>
+                  <td data-label="quantity" width="150">
+                    <div className="quantityCartInput">
+                      <input
+                        onChange={(e) => handleChange(e, item.ref)}
+                        type="number"
+                        min="1"
+                        max="10"
+                        id="quantityInput"
+                        value={item.qty}
+                      />
+                    </div>
+                  </td>
+                  <td data-label="total" width="200">
+                    {item.total.toFixed(2)} €
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          <div className="totalCartContainer">
+            <p className="totalPrice">Total : {totalPrice.toFixed(2)} €</p>
+          </div>
+          <CheckoutFrom />
         </div>
-        <CheckoutFrom />
         <Footer />
       </>
     );
@@ -119,8 +128,17 @@ export default function CartPage() {
     return (
       <>
         <Navbar />
-
-        <h2 className="cartTitle cartTitleNull">Panier vide</h2>
+        <div
+          style={{
+            height: "90vh",
+            display: "flex",
+            alignItems: "center",
+            flexDirection: "column",
+            justifyContent: "center",
+          }}
+        >
+          <h2 className="cartTitle cartTitleNull">Panier vide</h2>
+        </div>
 
         <Footer />
       </>

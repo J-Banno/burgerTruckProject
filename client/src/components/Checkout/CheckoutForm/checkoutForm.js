@@ -4,6 +4,7 @@ import "./style.css";
 import { useSelector } from "react-redux";
 //Services
 import { getItem } from "../../../services/localStorage";
+import { Config } from "../../../config/config";
 //Stripe
 import { loadStripe } from "@stripe/stripe-js";
 
@@ -44,7 +45,7 @@ export default function CheckoutForm() {
           },
         };
 
-        const response = await fetch("http://localhost:8000/checkout", options);
+        const response = await fetch(Config.apiUrl + "checkout", options);
         const responseData = await response.json();
 
         return stripe.redirectToCheckout({ sessionId: responseData.id });
