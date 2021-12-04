@@ -19,7 +19,7 @@ export function totalPrice(price) {
     price.forEach((element) => {
       total += element.total;
     });
-    return total;
+    return total.toFixed(2);
   }
 }
 

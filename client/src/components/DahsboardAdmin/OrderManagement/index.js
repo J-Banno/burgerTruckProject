@@ -20,9 +20,7 @@ import { formatDate } from "../../../services/utils";
 
 export default function OrdersManagement() {
   const [orders, setOrders] = useState([]);
-
   const token = getItem("token");
-
   useEffect(() => {
     getOrders();
   }, []);
@@ -32,7 +30,7 @@ export default function OrdersManagement() {
     const options = {
       method: "GET",
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${getItem("token")}`,
       },
     };
     try {
@@ -43,7 +41,6 @@ export default function OrdersManagement() {
       console.log(error);
     }
   }
-
   function OrderLIst(props) {
     const { row } = props;
     let [updateOrder, setUpdateOrder] = useState({
@@ -75,7 +72,9 @@ export default function OrdersManagement() {
       };
       try {
         const response = await fetch("http://localhost:8000/admin", options);
-        window.location.reload(false);
+        if (response.status === 200) {
+          getOrders();
+        }
       } catch (error) {
         console.log(error);
       }
@@ -91,14 +90,15 @@ export default function OrdersManagement() {
             },
           }}
         >
-          <IconButton
-            aria-label="expand row"
-            size="small"
-            onClick={() => setOpen(!open)}
-          >
-            {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-          </IconButton>
-
+          <TableCell>
+            <IconButton
+              aria-label="expand row"
+              size="small"
+              onClick={() => setOpen(!open)}
+            >
+              {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+            </IconButton>
+          </TableCell>
           <TableCell align="right">{formatDate(row.dateCreation)}</TableCell>
           <TableCell align="right">{row.user?.mail}</TableCell>
           <TableCell align="right">
@@ -169,7 +169,7 @@ export default function OrdersManagement() {
               orders
 
                 .filter((orders) => orders.statut.includes("En préparation"))
-                .map((row) => <OrderLIst key={row.idOrder} row={row} />)}
+                .map((row) => <OrderLIst key={row._id} row={row} />)}
           </TableBody>
         </Table>
       </TableContainer>
@@ -192,7 +192,7 @@ export default function OrdersManagement() {
               orders
 
                 .filter((orders) => orders.statut.includes("Commande prêtes"))
-                .map((row) => <OrderLIst key={row.idOrder} row={row} />)}
+                .map((row) => <OrderLIst key={row._id} row={row} />)}
           </TableBody>
         </Table>
       </TableContainer>

@@ -13,37 +13,35 @@ export default function CheckoutSuccess() {
   const history = useHistory();
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    postOrderData();
-    removeItem("cart");
-    dispatch({
-      type: actionTypes.CART_RESET,
-    });
-    redirectHome();
-  }, []);
-
-  const redirectHome = () => {
-    setTimeout(() => history.push("/"), 3000);
-  };
-
   //Token
   const token = userToken;
   const decodedToken = jwt_decode(token);
 
+  useEffect(() => {
+    postOrderData(); // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   //Add order post
   async function postOrderData() {
-    try {
-      const options = {
-        method: "POST",
-        body: JSON.stringify({ cart, decodedToken }),
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "content-type": "application/json",
-        },
-      };
+    const options = {
+      method: "POST",
+      body: JSON.stringify({ cart, decodedToken }),
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "content-type": "application/json",
+      },
+    };
 
-      // Waiting for the response from the api//
+    // Waiting for the response from the api//
+    try {
       const response = await fetch("http://localhost:8000/order", options);
+      if (response.status === 200) {
+        dispatch({
+          type: actionTypes.CART_RESET,
+        });
+        setTimeout(() => history.push("/"), 3000);
+        removeItem("cart");
+      }
     } catch (error) {
       console.log(error);
     }
@@ -53,9 +51,7 @@ export default function CheckoutSuccess() {
     <>
       <h1 className="successTitle">Merci pour votre commande!</h1>
       <section>
-        <p>
-          We appreciate your business! If you have any questions, please email
-        </p>
+        <p>Votre paiement a bien était pris compte, merci.</p>
       </section>
     </>
   );

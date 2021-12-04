@@ -46,9 +46,8 @@ function Navbar() {
             <li className="navbarLinkItem ">Mes commandes</li>
           </NavLink>
           <li
-            className="navbarLinkContainer"
+            className="navbarLinkContainer navbarLinkItem"
             onClick={handleLogout}
-            className="navbarLinkItem "
           >
             <button onClick={handleLogout} className="navbarBouttonLogout ">
               Déconnexion
@@ -73,9 +72,8 @@ function Navbar() {
           </NavLink>
 
           <li
-            className="navbarLinkContainer"
+            className="navbarLinkContainer navbarLinkItem"
             onClick={handleLogout}
-            className="navbarLinkItem "
           >
             <button onClick={handleLogout} className="navbarBouttonLogout ">
               Déconnexion

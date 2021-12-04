@@ -11,9 +11,10 @@ import DeleteIcon from "@mui/icons-material/Delete";
 
 export default function CartPage() {
   const { cart } = useSelector((state) => ({ ...state.cart }));
+
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cart));
-  }, []);
+  }, [cart]);
 
   const dispatch = useDispatch();
   const storeState = useSelector((state) => state);
@@ -101,7 +102,7 @@ export default function CartPage() {
                   </div>
                 </td>
                 <td data-label="total" width="200">
-                  {item.total} €
+                  {item.total.toFixed(2)} €
                 </td>
               </tr>
             ))}

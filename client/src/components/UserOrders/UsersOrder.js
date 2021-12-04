@@ -22,35 +22,32 @@ export default function UserOrders() {
   const [orders, setOrders] = useState([]);
 
   useEffect(() => {
-    getOrders();
-  }, []);
-
-  const userId = getItem("userId");
-  const token = getItem("token");
-
-  async function getOrders() {
-    try {
-      if (token != null) {
-        const options = {
-          method: "POST",
-          body: JSON.stringify({ userId }),
-          headers: {
-            "content-type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        };
-
-        const response = await fetch(
-          "http://localhost:8000/ordersUser",
-          options
-        );
-        const ordersData = await response.json();
-        setOrders(ordersData.myOrders);
+    const userId = getItem("userId");
+    const token = getItem("token");
+    if (token != null) {
+      const options = {
+        method: "POST",
+        body: JSON.stringify({ userId }),
+        headers: {
+          "content-type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      };
+      async function fetchData() {
+        try {
+          const response = await fetch(
+            "http://localhost:8000/ordersUser",
+            options
+          );
+          const ordersData = await response.json();
+          setOrders(ordersData.myOrders);
+        } catch (error) {
+          console.log(error);
+        }
       }
-    } catch (error) {
-      console.log(error);
+      fetchData();
     }
-  }
+  }, []);
 
   function OrderLIst(props) {
     const { row } = props;
@@ -66,19 +63,21 @@ export default function UserOrders() {
             },
           }}
         >
-          <IconButton
-            aria-label="expand row"
-            size="small"
-            onClick={() => setOpen(!open)}
-          >
-            {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-          </IconButton>
+          <TableCell>
+            <IconButton
+              aria-label="expand row"
+              size="small"
+              onClick={() => setOpen(!open)}
+            >
+              {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+            </IconButton>
+          </TableCell>
           <TableCell align="left">{row.idOrder}</TableCell>
-          <TableCell align="right">{formatDate(row.dateCreation)}</TableCell>
-          <TableCell align="right">
+          <TableCell align="left">{formatDate(row.dateCreation)}</TableCell>
+          <TableCell align="left">
             {row.isFinalize === false ? "En préparation" : "Commande prête"}
           </TableCell>
-          <TableCell align="right">{totalPrice(row.items) + "€"}</TableCell>
+          <TableCell align="left">{totalPrice(row.items) + "€"}</TableCell>
         </TableRow>
         <TableRow>
           <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
@@ -93,10 +92,10 @@ export default function UserOrders() {
                       <TableCell>
                         <strong>Quantité</strong>
                       </TableCell>
-                      <TableCell align="right">
+                      <TableCell align="left">
                         <strong>Prix unitaire (€)</strong>
                       </TableCell>
-                      <TableCell align="right">
+                      <TableCell align="left">
                         <strong>Total price (€)</strong>
                       </TableCell>
                     </TableRow>
@@ -108,10 +107,10 @@ export default function UserOrders() {
                         <TableCell component="th" scope="row">
                           {historyRow.qty}
                         </TableCell>
-                        <TableCell align="right">
+                        <TableCell align="left">
                           {historyRow.price + "€"}
                         </TableCell>
-                        <TableCell align="right">
+                        <TableCell align="left">
                           {historyRow.total + "€"}
                         </TableCell>
                       </TableRow>
@@ -136,14 +135,14 @@ export default function UserOrders() {
               <TableCell align="left">
                 <strong>Numéro de comande</strong>
               </TableCell>
-              <TableCell align="right">
+              <TableCell align="left">
                 <strong>Date</strong>
               </TableCell>
-              <TableCell align="right">
+              <TableCell align="left">
                 <strong>Statut</strong>
               </TableCell>
-              <TableCell align="right">
-                <strong>Total </strong>
+              <TableCell align="left">
+                <strong>Total</strong>
               </TableCell>
             </TableRow>
           </TableHead>

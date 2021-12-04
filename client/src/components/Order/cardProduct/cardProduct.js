@@ -27,7 +27,7 @@ export default function CardProduct(props) {
 
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cart));
-  }, []);
+  }, [cart]);
 
   //Message info client
   const addingInfo = useRef();
