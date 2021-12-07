@@ -26,25 +26,22 @@ export default function OfferBlock() {
       </div>
       {/* Image One */}
       <div className="offerBlockItem1 offerContainerImage">
-        <img className="offerImage" src={burger1} alt="burger" />{" "}
+        <img className="offerImage" src={burger1} alt="burger" />
       </div>
 
       {/* Image Two */}
       <div className="offerBlockItem2 offerContainerImage">
-        {" "}
-        <img className="offerImage" src={burger2} alt="burger" />{" "}
+        <img className="offerImage" src={burger2} alt="burger" />
       </div>
 
       {/* Image Three */}
       <div className="offerBlockItem3 offerContainerImage">
-        {" "}
-        <img className="offerImage" src={burger3} alt="burger" />{" "}
+        <img className="offerImage" src={burger3} alt="burger" />
       </div>
 
       {/* Image Four */}
       <div className="offerBlockItem4  offerContainerImage">
-        {" "}
-        <img className="offerImage" src={burger4} alt="burger" />{" "}
+        <img className="offerImage" src={burger4} alt="burger" />
       </div>
     </section>
   );

@@ -19,6 +19,10 @@ var ordersUserRouter = require("./routes/ordersUser");
 //Module db
 const dbConfig = require("./config/db.config");
 
+const DB =
+  process.env.DB ||
+  `mongodb://${dbConfig.HOST}:${dbConfig.PORT}/${dbConfig.DB}`;
+
 //Mongoose : connection db
 const mongoose = require("mongoose");
 mongoose.connect(`mongodb://${dbConfig.HOST}:${dbConfig.PORT}/${dbConfig.DB}`, {
