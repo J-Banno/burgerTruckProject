@@ -1,1 +1,5 @@
-export const Config = { apiUrl: "http://localhost:8000/" };
+export const Config = {
+  apiUrl:
+    "https://dashboard.scalingo.com/apps/osc-fr1/burgertruck/" ||
+    "http://localhost:8000/",
+};

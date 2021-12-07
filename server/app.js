@@ -25,7 +25,7 @@ const DB =
 
 //Mongoose : connection db
 const mongoose = require("mongoose");
-mongoose.connect(`mongodb://${dbConfig.HOST}:${dbConfig.PORT}/${dbConfig.DB}`, {
+mongoose.connect(DB, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
